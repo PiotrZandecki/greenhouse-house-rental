@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import type { Dictionary } from "@/data/dictionaries";
@@ -14,6 +15,7 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const navigation = [
@@ -23,6 +25,17 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
     { href: "/booking", label: dictionary.nav.booking },
     { href: "/contact", label: dictionary.nav.contact },
   ];
+
+  function isActivePath(href: string) {
+    const localizedHref = `/${locale}${href}`;
+    return (
+      pathname === localizedHref || pathname.startsWith(`${localizedHref}/`)
+    );
+  }
+
+  function closeMobileMenu() {
+    setIsOpen(false);
+  }
 
   return (
     <header className="site-header">
@@ -37,7 +50,12 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
 
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navigation.map((item) => (
-            <LocalizedLink href={item.href} key={item.href} locale={locale}>
+            <LocalizedLink
+              className={isActivePath(item.href) ? "nav-link-active" : ""}
+              href={item.href}
+              key={item.href}
+              locale={locale}
+            >
               {item.label}
             </LocalizedLink>
           ))}
@@ -82,10 +100,13 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
             <nav className="mobile-nav-links" aria-label="Mobile navigation">
               {navigation.map((item) => (
                 <LocalizedLink
-                  className="mobile-nav-link"
+                  className={`mobile-nav-link ${
+                    isActivePath(item.href) ? "mobile-nav-link-active" : ""
+                  }`}
                   href={item.href}
                   key={item.href}
                   locale={locale}
+                  onClick={closeMobileMenu}
                 >
                   {item.label}
                 </LocalizedLink>
@@ -104,6 +125,26 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
           </div>
         </div>
       ) : null}
+
+      <style>{`
+        .desktop-nav .nav-link-active {
+          background: var(--primary);
+          color: white;
+        }
+
+        .desktop-nav .nav-link-active:hover {
+          background: var(--primary);
+          color: white;
+        }
+
+        .mobile-nav-link-active {
+          background:
+            linear-gradient(135deg, var(--primary-soft), transparent),
+            var(--surface-strong);
+          color: var(--primary-strong);
+          box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 34%, var(--border));
+        }
+      `}</style>
     </header>
   );
 }

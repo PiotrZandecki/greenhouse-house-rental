@@ -27,7 +27,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      <section className="hero-section">
+      <section className="hero-section greenhouse-home-hero">
         <div className="site-shell hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">{dictionary.home.eyebrow}</p>
@@ -59,13 +59,7 @@ export default async function HomePage({ params }: HomePageProps) {
             </div>
           </div>
 
-          <div
-            className="hero-visual"
-            aria-hidden="true"
-            style={{
-              background: "none",
-            }}
-          >
+          <div className="hero-visual home-photo-hero" aria-hidden="true">
             <Image
               alt=""
               fill
@@ -78,30 +72,9 @@ export default async function HomePage({ params }: HomePageProps) {
               }}
             />
 
-            <span
-              style={{
-                position: "absolute",
-                inset: 0,
-                zIndex: 1,
-                background:
-                  "linear-gradient(135deg, rgba(12, 24, 16, 0.18), rgba(12, 24, 16, 0.62))",
-              }}
-            />
+            <span className="home-hero-shade" />
 
-            <div
-              style={{
-                position: "absolute",
-                top: "32px",
-                right: "32px",
-                zIndex: 3,
-                width: "min(42%, 260px)",
-                aspectRatio: "4 / 3",
-                overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.38)",
-                borderRadius: "28px",
-                boxShadow: "0 24px 70px rgba(0,0,0,0.24)",
-              }}
-            >
+            <div className="home-hero-mini home-hero-mini-top">
               <Image
                 alt=""
                 fill
@@ -113,27 +86,26 @@ export default async function HomePage({ params }: HomePageProps) {
               />
             </div>
 
-            <div
-              className="hero-card hero-card-main"
-              style={{
-                zIndex: 4,
-              }}
-            >
+            <div className="home-hero-mini home-hero-mini-bottom">
+              <Image
+                alt=""
+                fill
+                sizes="230px"
+                src="/images/fern-house/fern-bedroom-01.webp"
+                style={{
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+
+            <div className="hero-card hero-card-main home-hero-card">
               <span>Greenhouse</span>
               <strong>House Rental</strong>
             </div>
 
-            <div
-              className="hero-card hero-card-floating"
-              style={{
-                left: "32px",
-                right: "auto",
-                top: "32px",
-                zIndex: 4,
-              }}
-            >
+            <div className="hero-card hero-card-floating home-hero-rating">
               <span>★★★★★</span>
-              <strong>Review-ready</strong>
+              <strong>Guest-loved stays</strong>
             </div>
           </div>
         </div>
@@ -207,6 +179,94 @@ export default async function HomePage({ params }: HomePageProps) {
           </LocalizedLink>
         </div>
       </section>
+
+      <style>{`
+        .greenhouse-home-hero {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .greenhouse-home-hero::before {
+          position: absolute;
+          top: 12%;
+          right: -14rem;
+          width: 34rem;
+          height: 34rem;
+          content: "";
+          border-radius: 50%;
+          background: radial-gradient(circle, var(--primary-soft), transparent 70%);
+          pointer-events: none;
+        }
+
+        .home-photo-hero {
+          background: none;
+        }
+
+        .home-photo-hero::before,
+        .home-photo-hero::after {
+          display: none;
+        }
+
+        .home-hero-shade {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          background:
+            radial-gradient(circle at 20% 20%, rgba(255,255,255,0.22), transparent 20rem),
+            linear-gradient(135deg, rgba(12, 24, 16, 0.12), rgba(12, 24, 16, 0.66));
+        }
+
+        .home-hero-mini {
+          position: absolute;
+          z-index: 3;
+          overflow: hidden;
+          border: 1px solid rgba(255,255,255,0.42);
+          border-radius: 28px;
+          box-shadow: 0 24px 70px rgba(0,0,0,0.24);
+        }
+
+        .home-hero-mini-top {
+          top: 30px;
+          right: 30px;
+          width: min(42%, 270px);
+          aspect-ratio: 4 / 3;
+        }
+
+        .home-hero-mini-bottom {
+          right: 52px;
+          bottom: 150px;
+          width: min(34%, 230px);
+          aspect-ratio: 4 / 3;
+        }
+
+        .home-hero-card {
+          z-index: 4;
+        }
+
+        .home-hero-rating {
+          left: 30px;
+          right: auto;
+          top: 30px;
+          z-index: 4;
+        }
+
+        @media (max-width: 760px) {
+          .home-hero-mini-top {
+            top: 18px;
+            right: 18px;
+            width: 42%;
+          }
+
+          .home-hero-mini-bottom {
+            display: none;
+          }
+
+          .home-hero-rating {
+            left: 18px;
+            top: 18px;
+          }
+        }
+      `}</style>
     </>
   );
 }

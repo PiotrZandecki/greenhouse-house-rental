@@ -1,24 +1,14 @@
 import Link from "next/link";
+import type { ComponentProps } from "react";
 
 import type { Locale } from "@/types/site";
 import { localizePath } from "@/lib/i18n";
 
-type LocalizedLinkProps = {
-  locale: Locale;
+type LocalizedLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
   href: string;
-  className?: string;
-  children: React.ReactNode;
+  locale: Locale;
 };
 
-export function LocalizedLink({
-  locale,
-  href,
-  className,
-  children,
-}: LocalizedLinkProps) {
-  return (
-    <Link className={className} href={localizePath(locale, href)}>
-      {children}
-    </Link>
-  );
+export function LocalizedLink({ href, locale, ...props }: LocalizedLinkProps) {
+  return <Link href={localizePath(locale, href)} {...props} />;
 }

@@ -17,7 +17,7 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const navigation = [
-    { href: "/", label: dictionary.nav.home },
+    { href: "/home", label: dictionary.nav.home },
     { href: "/houses", label: dictionary.nav.houses },
     { href: "/gallery", label: dictionary.nav.gallery },
     { href: "/booking", label: dictionary.nav.booking },
@@ -27,7 +27,7 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   return (
     <header className="site-header">
       <div className="site-shell header-inner">
-        <LocalizedLink className="brand-link" href="/" locale={locale}>
+        <LocalizedLink className="brand-link" href="/home" locale={locale}>
           <span className="brand-mark">G</span>
           <span>
             <strong>Greenhouse</strong>
@@ -82,10 +82,10 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
             <nav className="mobile-nav-links" aria-label="Mobile navigation">
               {navigation.map((item) => (
                 <LocalizedLink
+                  className="mobile-nav-link"
                   href={item.href}
                   key={item.href}
                   locale={locale}
-                  className="mobile-nav-link"
                 >
                   {item.label}
                 </LocalizedLink>

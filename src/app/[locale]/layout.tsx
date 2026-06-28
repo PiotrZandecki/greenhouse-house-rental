@@ -2,8 +2,7 @@ import { notFound } from "next/navigation";
 
 import { getDictionary } from "@/data/dictionaries";
 import { isLocale, locales } from "@/lib/i18n";
-import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
+import { LocaleChrome } from "@/components/layout/LocaleChrome";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -31,10 +30,8 @@ export default async function LocaleLayout({
   const dictionary = getDictionary(locale);
 
   return (
-    <div className="app-frame">
-      <SiteHeader dictionary={dictionary} locale={locale} />
-      <main>{children}</main>
-      <SiteFooter dictionary={dictionary} locale={locale} />
-    </div>
+    <LocaleChrome dictionary={dictionary} locale={locale}>
+      {children}
+    </LocaleChrome>
   );
 }

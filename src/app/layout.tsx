@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import "@/app/globals.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Greenhouse House Rental",
+  title: "Greenhouse House Rental | General Santos City stays",
   description:
-    "A multilingual portfolio concept for a premium two-house rental website.",
+    "A multilingual rental website for two peaceful tropical homes in General Santos City, Philippines.",
 };
 
 export default function RootLayout({

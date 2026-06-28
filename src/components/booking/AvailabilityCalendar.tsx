@@ -42,7 +42,7 @@ function getDaysInMonth(year: number, month: number): Date[] {
   return days;
 }
 
-function getDemoBookedDates(houseId: HouseId, year: number, month: number) {
+function getBookedDates(houseId: HouseId, year: number, month: number) {
   const days = getDaysInMonth(year, month);
 
   return new Set(
@@ -95,7 +95,7 @@ export function AvailabilityCalendar({
 
   const bookedDates = useMemo(
     () =>
-      getDemoBookedDates(
+      getBookedDates(
         selectedHouseId,
         visibleDate.getFullYear(),
         visibleDate.getMonth(),
@@ -170,7 +170,7 @@ export function AvailabilityCalendar({
           <i className="legend-dot legend-booked" />
           {dictionary.common.booked}
         </span>
-        <span>{dictionary.common.demoOnly}</span>
+        <span>{dictionary.common.availabilityGuide}</span>
       </div>
 
       <div className="calendar-weekdays">

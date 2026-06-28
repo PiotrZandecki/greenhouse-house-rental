@@ -8,58 +8,59 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ locale, dictionary }: SiteFooterProps) {
+  const quickLinks = [
+    { href: "/home", label: dictionary.nav.home },
+    { href: "/houses", label: dictionary.nav.houses },
+    { href: "/gallery", label: dictionary.nav.gallery },
+    { href: "/contact", label: dictionary.nav.contact },
+  ];
+
+  const bookingLinks = [
+    { href: "/booking", label: dictionary.common.bookNow },
+    { href: "/houses", label: dictionary.common.viewHouses },
+    { href: "/gallery", label: dictionary.common.viewGallery },
+  ];
+
   return (
     <footer className="site-footer">
       <div className="site-shell footer-grid">
         <div className="footer-brand">
-          <div className="brand-link brand-link-footer">
+          <LocalizedLink
+            className="brand-link brand-link-footer"
+            href="/home"
+            locale={locale}
+          >
             <span className="brand-mark">G</span>
             <span>
               <strong>Greenhouse</strong>
               <small>House Rental</small>
             </span>
-          </div>
+          </LocalizedLink>
+
           <p>{dictionary.footer.description}</p>
           <span className="demo-note">{dictionary.footer.legalNote}</span>
         </div>
 
         <div>
           <h3>{dictionary.footer.quickLinks}</h3>
-          <div className="footer-links">
-            <LocalizedLink href="/" locale={locale}>
-              {dictionary.nav.home}
-            </LocalizedLink>
-            <LocalizedLink href="/houses" locale={locale}>
-              {dictionary.nav.houses}
-            </LocalizedLink>
-            <LocalizedLink href="/gallery" locale={locale}>
-              {dictionary.nav.gallery}
-            </LocalizedLink>
-            <LocalizedLink href="/booking" locale={locale}>
-              {dictionary.nav.booking}
-            </LocalizedLink>
-            <LocalizedLink href="/contact" locale={locale}>
-              {dictionary.nav.contact}
-            </LocalizedLink>
-          </div>
+          <nav className="footer-links">
+            {quickLinks.map((link) => (
+              <LocalizedLink href={link.href} key={link.href} locale={locale}>
+                {link.label}
+              </LocalizedLink>
+            ))}
+          </nav>
         </div>
 
         <div>
           <h3>{dictionary.footer.bookingLinks}</h3>
-          <div className="footer-links">
-            <a href="https://www.booking.com" rel="noreferrer" target="_blank">
-              Booking.com
-            </a>
-            <a href="https://www.agoda.com" rel="noreferrer" target="_blank">
-              Agoda
-            </a>
-            <a href="https://www.airbnb.com" rel="noreferrer" target="_blank">
-              Airbnb
-            </a>
-            <a href="https://www.facebook.com" rel="noreferrer" target="_blank">
-              Facebook
-            </a>
-          </div>
+          <nav className="footer-links">
+            {bookingLinks.map((link) => (
+              <LocalizedLink href={link.href} key={link.href} locale={locale}>
+                {link.label}
+              </LocalizedLink>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

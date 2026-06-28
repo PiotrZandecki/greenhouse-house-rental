@@ -13,7 +13,7 @@ export type Dictionary = {
     contact: string;
   };
   common: {
-    portfolioDemo: string;
+    stayTagline: string;
     language: string;
     theme: string;
     bookNow: string;
@@ -23,7 +23,7 @@ export type Dictionary = {
     learnMore: string;
     available: string;
     booked: string;
-    demoOnly: string;
+    availabilityGuide: string;
     guests: string;
     bedrooms: string;
     bathrooms: string;
@@ -116,7 +116,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | General Santos City stays",
       description:
-        "A multilingual rental website concept for two fictional homes in General Santos City, Philippines.",
+        "A multilingual rental website for two peaceful tropical homes in General Santos City, Philippines.",
     },
     nav: {
       home: "Home",
@@ -126,7 +126,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Contact",
     },
     common: {
-      portfolioDemo: "Portfolio demo",
+      stayTagline: "Private tropical stays",
       language: "Language",
       theme: "Theme",
       bookNow: "Book now",
@@ -136,7 +136,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "Learn more",
       available: "Available",
       booked: "Booked",
-      demoOnly: "Demo availability",
+      availabilityGuide: "Availability guide",
       guests: "Guests",
       bedrooms: "Bedrooms",
       bathrooms: "Bathrooms",
@@ -148,27 +148,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Private stays in General Santos City",
       title: "Two peaceful homes designed for slow mornings and easy stays.",
       description:
-        "Greenhouse House Rental is a polished portfolio concept for a premium rental brand in General Santos City, with multilingual content, availability browsing, review integration structure and conversion-focused UX.",
+        "Greenhouse House Rental brings together warm Mindanao hospitality, calm tropical gardens and carefully prepared spaces for guests who want a private, comfortable stay in General Santos City.",
       primaryCta: "Check availability",
       secondaryCta: "Explore the homes",
       heroBadgeOne: "2 rental homes",
-      heroBadgeTwo: "Google & Facebook reviews ready",
-      heroBadgeThree: "Booking inquiry flow",
+      heroBadgeTwo: "Guest reviews",
+      heroBadgeThree: "Direct booking inquiry",
       housesTitle: "Choose your stay",
       housesDescription:
         "Each house has its own atmosphere, gallery, amenities, map location and booking path.",
       galleryTitle: "A visual-first gallery",
       galleryDescription:
-        "Prepared for large photo collections divided by property and room type.",
-      reviewsTitle: "Guest trust, prepared for real reviews",
+        "Explore the spaces, details and tropical atmosphere of both homes before choosing your stay.",
+      reviewsTitle: "Guest trust built on real experiences",
       reviewsDescription:
-        "The foundation is ready for Google Reviews, Facebook Reviews or approved third-party widgets.",
+        "Guest impressions help future visitors understand the comfort, atmosphere and direct-booking experience.",
       bookingTitle: "Availability-first booking",
       bookingDescription:
-        "A clear calendar experience helps guests understand available dates before contacting the host.",
-      ctaTitle: "Ready to turn this concept into a live rental brand?",
+        "A clear calendar helps guests understand available dates before contacting the host.",
+      ctaTitle: "Ready to plan your stay in General Santos City?",
       ctaDescription:
-        "This portfolio version uses fictional homes, but the structure is production-oriented.",
+        "Choose your preferred home, check availability and contact us directly for your next tropical stay.",
     },
     housesPage: {
       eyebrow: "The properties",
@@ -183,7 +183,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Gallery",
       title: "Browse the houses by space and mood.",
       description:
-        "The gallery is structured for generated images and later real photography.",
+        "Discover the atmosphere of each home through interiors, outdoor spaces, details and garden views.",
       all: "All",
       exterior: "Exterior",
       interior: "Interior",
@@ -195,15 +195,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "Booking",
-      title: "Check demo availability before sending an inquiry.",
+      title: "Check availability before sending an inquiry.",
       description:
-        "This page is prepared for a future booking engine, availability API or manual calendar sync.",
+        "Browse the calendar, choose a home and contact us directly to confirm your preferred dates.",
       calendarTitle: "Availability calendar",
       calendarDescription:
         "Switch between houses and browse monthly availability.",
       inquiryTitle: "Send a booking inquiry",
       inquiryDescription:
-        "For now, the CTA opens WhatsApp. Later we can connect a backend form or booking provider.",
+        "Use WhatsApp for quick questions, date checks and direct booking requests.",
       selectedHouse: "Selected house",
       previousMonth: "Previous month",
       nextMonth: "Next month",
@@ -213,7 +213,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Contact",
       title: "One place for all guest actions.",
       description:
-        "WhatsApp, Facebook and booking platforms are grouped into a simple conversion-focused contact page.",
+        "WhatsApp, Facebook and booking platforms are grouped into a simple contact page for quick guest decisions.",
       whatsappTitle: "WhatsApp",
       whatsappDescription:
         "Best for quick questions, date checks and direct booking inquiries.",
@@ -222,24 +222,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Use this for social proof, announcements and guest communication.",
       platformsTitle: "Booking platforms",
       platformsDescription:
-        "Prepared for Agoda, Booking.com, Airbnb and other external channels.",
+        "Find us on Agoda, Booking.com, Airbnb and other external channels.",
       directContactTitle: "Direct inquiry",
       directContactDescription:
-        "A future form can collect guest details, dates and preferred property.",
+        "Share your travel dates, preferred house and guest details so we can help you plan your stay.",
     },
     reviews: {
-      googleReady: "Google Reviews ready",
-      facebookReady: "Facebook Reviews ready",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "Demo reviews are displayed now. The layout is prepared for official APIs or approved widgets.",
+        "Guest reviews are gathered from trusted channels to help visitors choose the right stay with confidence.",
     },
     footer: {
       description:
-        "Greenhouse House Rental is a fictional portfolio project showing a premium multilingual rental website for General Santos City stays.",
+        "Greenhouse House Rental offers two peaceful tropical homes in General Santos City, prepared for private stays, slow mornings and direct guest communication.",
       quickLinks: "Quick links",
       bookingLinks: "Booking links",
       legalNote:
-        "Portfolio demo. The houses, reviews, map pins and availability shown here are fictional.",
+        "Private stays in General Santos City with direct inquiries, guest reviews and external booking options.",
     },
   },
 
@@ -247,7 +247,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | General Santos City stays",
       description:
-        "Multilingual rental website concept para sa duha ka fictional homes sa General Santos City, Philippines.",
+        "Multilingual rental website para sa duha ka malinawon nga balay sa General Santos City, Philippines.",
     },
     nav: {
       home: "Home",
@@ -257,7 +257,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Contact",
     },
     common: {
-      portfolioDemo: "Portfolio demo",
+      stayTagline: "Private tropical stays",
       language: "Pinulongan",
       theme: "Theme",
       bookNow: "Mag-book",
@@ -267,7 +267,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "Hibal-i pa",
       available: "Available",
       booked: "Na-book",
-      demoOnly: "Demo availability",
+      availabilityGuide: "Availability guide",
       guests: "Guests",
       bedrooms: "Bedrooms",
       bathrooms: "Bathrooms",
@@ -280,27 +280,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title:
         "Duha ka malinawon nga balay para sa hinay nga buntag ug komportable nga stay.",
       description:
-        "Ang Greenhouse House Rental usa ka polished portfolio concept para sa premium rental brand sa General Santos City, nga naay multilingual content, availability browsing, review integration structure ug conversion-focused UX.",
+        "Ang Greenhouse House Rental nagdala sa kainit sa Mindanao hospitality, malinawon nga tropical gardens ug maayo nga spaces para sa guests nga gusto og private ug comfortable stay sa General Santos City.",
       primaryCta: "Tan-awa ang availability",
       secondaryCta: "I-explore ang mga balay",
       heroBadgeOne: "2 rental homes",
-      heroBadgeTwo: "Ready for Google & Facebook reviews",
-      heroBadgeThree: "Booking inquiry flow",
+      heroBadgeTwo: "Guest reviews",
+      heroBadgeThree: "Direct booking inquiry",
       housesTitle: "Pili-a imong stay",
       housesDescription:
         "Matag balay naay kaugalingong atmosphere, gallery, amenities, map location ug booking path.",
       galleryTitle: "Visual-first gallery",
       galleryDescription:
-        "Andam para sa daghang photos nga gibahin by property ug room type.",
-      reviewsTitle: "Guest trust nga ready para sa real reviews",
+        "Tan-awa ang spaces, details ug tropical atmosphere sa duha ka balay before ka mopili sa imong stay.",
+      reviewsTitle: "Guest trust nga gikan sa tinuod nga experiences",
       reviewsDescription:
-        "Ready ang foundation para sa Google Reviews, Facebook Reviews o approved third-party widgets.",
+        "Ang guest impressions makatabang sa future visitors nga masabtan ang comfort, atmosphere ug direct-booking experience.",
       bookingTitle: "Availability-first booking",
       bookingDescription:
         "Clear calendar experience para masabtan sa guests ang available dates before sila mo-contact sa host.",
-      ctaTitle: "Ready na ba himuon nga live rental brand ning concept?",
+      ctaTitle: "Ready na ba ka mo-plan sa imong stay sa General Santos City?",
       ctaDescription:
-        "Fictional homes ang gamit sa portfolio version, pero production-oriented ang structure.",
+        "Pili-a imong preferred home, tan-awa ang availability ug kontaka mi directly para sa imong next tropical stay.",
     },
     housesPage: {
       eyebrow: "Properties",
@@ -315,7 +315,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Gallery",
       title: "Tan-awa ang mga balay by space ug mood.",
       description:
-        "Ang gallery gi-structure para sa generated images ug future real photography.",
+        "Discover ang atmosphere sa matag balay through interiors, outdoor spaces, details ug garden views.",
       all: "All",
       exterior: "Exterior",
       interior: "Interior",
@@ -327,15 +327,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "Booking",
-      title: "Tan-awa ang demo availability before mag-send og inquiry.",
+      title: "Tan-awa ang availability before mag-send og inquiry.",
       description:
-        "Kini nga page ready para sa future booking engine, availability API o manual calendar sync.",
+        "Tan-awa ang calendar, pili og balay ug kontaka mi directly para ma-confirm ang imong preferred dates.",
       calendarTitle: "Availability calendar",
       calendarDescription:
         "Pag-switch sa mga balay ug tan-awa ang monthly availability.",
       inquiryTitle: "Send booking inquiry",
       inquiryDescription:
-        "Sa karon, ang CTA mo-open og WhatsApp. Later pwede nato i-connect ang backend form o booking provider.",
+        "Gamiton ang WhatsApp para sa quick questions, date checks ug direct booking requests.",
       selectedHouse: "Selected house",
       previousMonth: "Previous month",
       nextMonth: "Next month",
@@ -345,7 +345,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Contact",
       title: "Usa ka lugar para sa tanang guest actions.",
       description:
-        "WhatsApp, Facebook ug booking platforms gi-group sa simple conversion-focused contact page.",
+        "WhatsApp, Facebook ug booking platforms gi-group sa simple contact page para dali ang guest decisions.",
       whatsappTitle: "WhatsApp",
       whatsappDescription:
         "Best para sa quick questions, date checks ug direct booking inquiries.",
@@ -354,24 +354,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Para sa social proof, announcements ug guest communication.",
       platformsTitle: "Booking platforms",
       platformsDescription:
-        "Prepared for Agoda, Booking.com, Airbnb ug other external channels.",
+        "Makita mi sa Agoda, Booking.com, Airbnb ug other external channels.",
       directContactTitle: "Direct inquiry",
       directContactDescription:
-        "Future form pwede mo-collect og guest details, dates ug preferred property.",
+        "I-share ang imong travel dates, preferred house ug guest details para makatabang mi sa pag-plan sa imong stay.",
     },
     reviews: {
-      googleReady: "Ready for Google Reviews",
-      facebookReady: "Ready for Facebook Reviews",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "Demo reviews ang displayed karon. Ready ang layout para sa official APIs o approved widgets.",
+        "Ang guest reviews gikan sa trusted channels para makatabang sa visitors nga mopili og stay with confidence.",
     },
     footer: {
       description:
-        "Ang Greenhouse House Rental usa ka fictional portfolio project nga nagpakita og premium multilingual rental website para sa General Santos City stays.",
+        "Ang Greenhouse House Rental nagtanyag og duha ka malinawon nga tropical homes sa General Santos City para sa private stays, hinay nga buntag ug direct guest communication.",
       quickLinks: "Quick links",
       bookingLinks: "Booking links",
       legalNote:
-        "Portfolio demo. Fictional ang houses, reviews, map pins ug availability nga gipakita diri.",
+        "Private stays sa General Santos City with direct inquiries, guest reviews ug external booking options.",
     },
   },
 
@@ -379,7 +379,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | General Santos City stays",
       description:
-        "Multilingual portfolio concept para sa dalawang premium rental homes sa General Santos City, Philippines.",
+        "Multilingual rental website para sa dalawang peaceful homes sa General Santos City, Philippines.",
     },
     nav: {
       home: "Home",
@@ -389,7 +389,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Contact",
     },
     common: {
-      portfolioDemo: "Portfolio demo",
+      stayTagline: "Private tropical stays",
       language: "Wika",
       theme: "Theme",
       bookNow: "Mag-book",
@@ -399,7 +399,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "Alamin pa",
       available: "Available",
       booked: "Booked",
-      demoOnly: "Demo availability",
+      availabilityGuide: "Availability guide",
       guests: "Guests",
       bedrooms: "Bedrooms",
       bathrooms: "Bathrooms",
@@ -412,27 +412,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title:
         "Dalawang tahimik na bahay para sa slow mornings at komportableng stay.",
       description:
-        "Ang Greenhouse House Rental ay portfolio concept para sa premium rental brand sa General Santos City na may multilingual content, availability browsing, review integration structure at conversion-focused UX.",
+        "Pinagsasama ng Greenhouse House Rental ang init ng Mindanao hospitality, calm tropical gardens at carefully prepared spaces para sa guests na gusto ng private at comfortable stay sa General Santos City.",
       primaryCta: "Tingnan ang availability",
       secondaryCta: "I-explore ang homes",
       heroBadgeOne: "2 rental homes",
-      heroBadgeTwo: "Ready for Google & Facebook reviews",
-      heroBadgeThree: "Booking inquiry flow",
+      heroBadgeTwo: "Guest reviews",
+      heroBadgeThree: "Direct booking inquiry",
       housesTitle: "Piliin ang iyong stay",
       housesDescription:
         "Bawat bahay ay may sariling mood, gallery, amenities, map location at booking path.",
       galleryTitle: "Visual-first gallery",
       galleryDescription:
-        "Ready para sa maraming photos na nakaayos by property at room type.",
-      reviewsTitle: "Guest trust na ready para sa real reviews",
+        "I-explore ang spaces, details at tropical atmosphere ng dalawang homes bago pumili ng stay.",
+      reviewsTitle: "Guest trust built on real experiences",
       reviewsDescription:
-        "Ready ang foundation para sa Google Reviews, Facebook Reviews o approved widgets.",
+        "Guest impressions help future visitors understand the comfort, atmosphere and direct-booking experience.",
       bookingTitle: "Availability-first booking",
       bookingDescription:
         "Clear calendar para makita ng guests ang available dates bago mag-message.",
-      ctaTitle: "Ready gawing live rental brand ang concept na ito?",
+      ctaTitle: "Ready ka na bang i-plan ang stay mo sa General Santos City?",
       ctaDescription:
-        "Fictional homes ang gamit sa portfolio version, pero production-oriented ang structure.",
+        "Piliin ang preferred home, tingnan ang availability at mag-contact directly for your next tropical stay.",
     },
     housesPage: {
       eyebrow: "Properties",
@@ -447,7 +447,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Gallery",
       title: "Browse homes by space and mood.",
       description:
-        "Ready ang gallery para sa generated images at future real photos.",
+        "Discover the atmosphere of each home through interiors, outdoor spaces, details and garden views.",
       all: "All",
       exterior: "Exterior",
       interior: "Interior",
@@ -459,15 +459,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "Booking",
-      title: "Tingnan muna ang demo availability bago mag-inquire.",
+      title: "Tingnan ang availability bago mag-inquire.",
       description:
-        "Prepared ang page para sa future booking engine, availability API o manual calendar sync.",
+        "Browse the calendar, choose a home and contact us directly to confirm your preferred dates.",
       calendarTitle: "Availability calendar",
       calendarDescription:
         "Mag-switch ng houses at tingnan ang monthly availability.",
       inquiryTitle: "Send booking inquiry",
       inquiryDescription:
-        "Sa ngayon, WhatsApp ang bubuksan ng CTA. Later pwede nating ikabit ang backend form o booking provider.",
+        "Use WhatsApp for quick questions, date checks and direct booking requests.",
       selectedHouse: "Selected house",
       previousMonth: "Previous month",
       nextMonth: "Next month",
@@ -477,7 +477,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Contact",
       title: "Isang lugar para sa lahat ng guest actions.",
       description:
-        "WhatsApp, Facebook at booking platforms are grouped in a simple conversion-focused contact page.",
+        "WhatsApp, Facebook at booking platforms are grouped in a simple contact page for quick guest decisions.",
       whatsappTitle: "WhatsApp",
       whatsappDescription:
         "Best for quick questions, date checks at direct booking inquiries.",
@@ -486,24 +486,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Para sa social proof, announcements at guest communication.",
       platformsTitle: "Booking platforms",
       platformsDescription:
-        "Prepared for Agoda, Booking.com, Airbnb and other external channels.",
+        "Find us on Agoda, Booking.com, Airbnb and other external channels.",
       directContactTitle: "Direct inquiry",
       directContactDescription:
-        "Future form can collect guest details, dates and preferred property.",
+        "Share your travel dates, preferred house and guest details so we can help you plan your stay.",
     },
     reviews: {
-      googleReady: "Ready for Google Reviews",
-      facebookReady: "Ready for Facebook Reviews",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "Demo reviews muna ang displayed. Ready ang layout for official APIs or approved widgets.",
+        "Guest reviews are gathered from trusted channels to help visitors choose the right stay with confidence.",
     },
     footer: {
       description:
-        "Greenhouse House Rental is a fictional portfolio project for a premium multilingual rental website in General Santos City.",
+        "Greenhouse House Rental offers two peaceful tropical homes in General Santos City for private stays, slow mornings and direct guest communication.",
       quickLinks: "Quick links",
       bookingLinks: "Booking links",
       legalNote:
-        "Portfolio demo. Fictional ang houses, reviews, map pins at availability shown here.",
+        "Private stays in General Santos City with direct inquiries, guest reviews and external booking options.",
     },
   },
 
@@ -511,7 +511,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | 제너럴 산토스 시티 숙소",
       description:
-        "필리핀 제너럴 산토스 시티의 두 가상 숙소를 소개하는 다국어 렌탈 웹사이트 콘셉트입니다.",
+        "필리핀 제너럴 산토스 시티의 두 평화로운 숙소를 소개하는 다국어 렌탈 웹사이트입니다.",
     },
     nav: {
       home: "홈",
@@ -521,7 +521,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "문의",
     },
     common: {
-      portfolioDemo: "포트폴리오 데모",
+      stayTagline: "프라이빗 열대 숙소",
       language: "언어",
       theme: "테마",
       bookNow: "예약하기",
@@ -531,7 +531,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "더 보기",
       available: "가능",
       booked: "예약됨",
-      demoOnly: "데모 일정",
+      availabilityGuide: "가능 일정 안내",
       guests: "게스트",
       bedrooms: "침실",
       bathrooms: "욕실",
@@ -543,27 +543,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "제너럴 산토스 시티 프라이빗 숙소",
       title: "느린 아침과 편안한 머무름을 위한 두 개의 조용한 숙소.",
       description:
-        "Greenhouse House Rental은 제너럴 산토스 시티의 프리미엄 렌탈 브랜드를 위한 포트폴리오 콘셉트로, 다국어 콘텐츠, 예약 가능 일정, 리뷰 연동 구조, 전환 중심 UX를 갖추고 있습니다.",
+        "Greenhouse House Rental은 Mindanao의 따뜻한 환대, 차분한 열대 정원, 그리고 제너럴 산토스 시티에서 프라이빗하고 편안한 시간을 원하는 게스트를 위한 세심한 공간을 함께 담았습니다.",
       primaryCta: "가능 일정 확인",
       secondaryCta: "숙소 둘러보기",
       heroBadgeOne: "2개의 렌탈 숙소",
-      heroBadgeTwo: "Google/Facebook 리뷰 준비",
-      heroBadgeThree: "예약 문의 흐름",
+      heroBadgeTwo: "게스트 리뷰",
+      heroBadgeThree: "직접 예약 문의",
       housesTitle: "머무를 숙소 선택",
       housesDescription:
         "각 숙소는 고유한 분위기, 갤러리, 편의시설, 지도 위치, 예약 경로를 갖습니다.",
       galleryTitle: "비주얼 중심 갤러리",
       galleryDescription:
-        "숙소와 공간 유형별로 많은 이미지를 정리할 수 있도록 설계되었습니다.",
-      reviewsTitle: "실제 리뷰 연동을 위한 신뢰 구조",
+        "숙소를 선택하기 전, 공간과 디테일, 열대 분위기를 먼저 둘러보세요.",
+      reviewsTitle: "실제 경험을 바탕으로 쌓이는 게스트 신뢰",
       reviewsDescription:
-        "Google Reviews, Facebook Reviews 또는 승인된 외부 위젯을 위한 기반입니다.",
+        "게스트의 인상은 다음 방문객이 숙소의 편안함, 분위기, 직접 예약 경험을 이해하는 데 도움이 됩니다.",
       bookingTitle: "가능 일정 중심 예약",
       bookingDescription:
         "명확한 캘린더는 게스트가 문의 전 가능한 날짜를 이해하도록 도와줍니다.",
-      ctaTitle: "이 콘셉트를 실제 렌탈 브랜드로 만들 준비가 되었나요?",
+      ctaTitle: "제너럴 산토스 시티에서의 숙박을 계획할 준비가 되었나요?",
       ctaDescription:
-        "이 포트폴리오 버전은 가상의 숙소를 사용하지만 구조는 프로덕션을 고려했습니다.",
+        "원하는 숙소를 선택하고 가능 일정을 확인한 뒤 다음 열대 휴식을 위해 직접 문의하세요.",
     },
     housesPage: {
       eyebrow: "숙소",
@@ -578,7 +578,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "갤러리",
       title: "공간과 분위기별로 숙소를 둘러보세요.",
       description:
-        "갤러리는 생성 이미지와 향후 실제 사진을 모두 고려해 구성되었습니다.",
+        "인테리어, 야외 공간, 디테일, 정원 전망을 통해 각 숙소의 분위기를 확인하세요.",
       all: "전체",
       exterior: "외부",
       interior: "인테리어",
@@ -590,14 +590,14 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "예약",
-      title: "문의 전 데모 가능 일정을 확인하세요.",
+      title: "문의 전 가능 일정을 확인하세요.",
       description:
-        "이 페이지는 향후 예약 엔진, 가능 일정 API 또는 수동 캘린더 동기화를 위해 준비되었습니다.",
+        "캘린더를 확인하고 숙소를 선택한 뒤 원하는 날짜를 직접 문의해 주세요.",
       calendarTitle: "가능 일정 캘린더",
       calendarDescription: "숙소를 전환하고 월별 일정을 확인하세요.",
       inquiryTitle: "예약 문의 보내기",
       inquiryDescription:
-        "현재 CTA는 WhatsApp을 엽니다. 이후 폼 백엔드나 예약 서비스를 연결할 수 있습니다.",
+        "빠른 질문, 날짜 확인, 직접 예약 요청은 WhatsApp을 이용해 주세요.",
       selectedHouse: "선택된 숙소",
       previousMonth: "이전 달",
       nextMonth: "다음 달",
@@ -607,7 +607,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "문의",
       title: "게스트 액션을 위한 하나의 허브.",
       description:
-        "WhatsApp, Facebook, 예약 플랫폼 링크를 전환 중심 페이지에 모았습니다.",
+        "WhatsApp, Facebook, 예약 플랫폼 링크를 게스트가 쉽게 결정할 수 있도록 모았습니다.",
       whatsappTitle: "WhatsApp",
       whatsappDescription:
         "빠른 질문, 일정 확인, 직접 예약 문의에 가장 적합합니다.",
@@ -616,24 +616,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "소셜 증거, 공지, 게스트 커뮤니케이션을 위한 채널입니다.",
       platformsTitle: "예약 플랫폼",
       platformsDescription:
-        "Agoda, Booking.com, Airbnb 등 외부 채널을 위한 준비 구조입니다.",
+        "Agoda, Booking.com, Airbnb 등 외부 채널에서 확인할 수 있습니다.",
       directContactTitle: "직접 문의",
       directContactDescription:
-        "향후 폼에서 게스트 정보, 날짜, 선호 숙소를 받을 수 있습니다.",
+        "여행 날짜, 선호 숙소, 게스트 정보를 공유해 주시면 숙박 계획을 도와드립니다.",
     },
     reviews: {
-      googleReady: "Google Reviews 준비",
-      facebookReady: "Facebook Reviews 준비",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "현재는 데모 리뷰가 표시됩니다. 공식 API 또는 승인된 위젯 연결을 위한 레이아웃입니다.",
+        "신뢰할 수 있는 채널의 게스트 리뷰를 통해 방문객이 더 확신을 가지고 숙소를 선택할 수 있습니다.",
     },
     footer: {
       description:
-        "Greenhouse House Rental은 제너럴 산토스 시티 숙소를 위한 프리미엄 다국어 렌탈 웹사이트를 보여주는 가상 포트폴리오 프로젝트입니다.",
+        "Greenhouse House Rental은 제너럴 산토스 시티에서 프라이빗한 숙박, 느린 아침, 직접 게스트 소통을 위한 두 개의 평화로운 열대 숙소를 제공합니다.",
       quickLinks: "빠른 링크",
       bookingLinks: "예약 링크",
       legalNote:
-        "포트폴리오 데모입니다. 표시된 숙소, 리뷰, 지도 핀, 가능 일정은 가상입니다.",
+        "제너럴 산토스 시티의 프라이빗 숙소, 직접 문의, 게스트 리뷰, 외부 예약 옵션.",
     },
   },
 
@@ -641,7 +641,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | Estancias en General Santos City",
       description:
-        "Concepto multilingüe de portfolio para dos casas ficticias en General Santos City, Filipinas.",
+        "Sitio multilingüe de alquiler para dos casas tranquilas en General Santos City, Filipinas.",
     },
     nav: {
       home: "Inicio",
@@ -651,7 +651,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Contacto",
     },
     common: {
-      portfolioDemo: "Demo portfolio",
+      stayTagline: "Estancias tropicales privadas",
       language: "Idioma",
       theme: "Tema",
       bookNow: "Reservar",
@@ -661,7 +661,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "Más información",
       available: "Disponible",
       booked: "Ocupado",
-      demoOnly: "Disponibilidad demo",
+      availabilityGuide: "Guía de disponibilidad",
       guests: "Huéspedes",
       bedrooms: "Dormitorios",
       bathrooms: "Baños",
@@ -674,27 +674,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title:
         "Dos casas tranquilas diseñadas para mañanas lentas y estancias cómodas.",
       description:
-        "Greenhouse House Rental es un concepto portfolio premium para una marca de alquiler en General Santos City, con contenido multilingüe, disponibilidad, estructura de reseñas y UX enfocada en conversión.",
+        "Greenhouse House Rental combina la calidez de la hospitalidad de Mindanao, jardines tropicales tranquilos y espacios preparados con cuidado para huéspedes que buscan una estancia privada y cómoda en General Santos City.",
       primaryCta: "Ver disponibilidad",
       secondaryCta: "Explorar casas",
       heroBadgeOne: "2 casas en alquiler",
-      heroBadgeTwo: "Preparado para Google y Facebook Reviews",
-      heroBadgeThree: "Flujo de consulta de reserva",
+      heroBadgeTwo: "Reseñas de huéspedes",
+      heroBadgeThree: "Consulta directa de reserva",
       housesTitle: "Elige tu estancia",
       housesDescription:
         "Cada casa tiene su propia atmósfera, galería, servicios, ubicación en mapa y ruta de reserva.",
       galleryTitle: "Una galería visual",
       galleryDescription:
-        "Preparada para grandes colecciones de fotos por propiedad y tipo de espacio.",
-      reviewsTitle: "Confianza preparada para reseñas reales",
+        "Explora los espacios, detalles y la atmósfera tropical de ambas casas antes de elegir tu estancia.",
+      reviewsTitle: "Confianza construida sobre experiencias reales",
       reviewsDescription:
-        "La base está lista para Google Reviews, Facebook Reviews o widgets aprobados.",
+        "Las impresiones de los huéspedes ayudan a entender la comodidad, el ambiente y la experiencia de reserva directa.",
       bookingTitle: "Reserva basada en disponibilidad",
       bookingDescription:
         "Un calendario claro ayuda a los huéspedes a entender las fechas disponibles antes de contactar.",
-      ctaTitle: "¿Listo para convertir este concepto en una marca real?",
+      ctaTitle: "¿Listo para planificar tu estancia en General Santos City?",
       ctaDescription:
-        "Esta versión portfolio usa casas ficticias, pero la estructura está pensada para producción.",
+        "Elige tu casa preferida, consulta disponibilidad y contáctanos directamente para tu próxima estancia tropical.",
     },
     housesPage: {
       eyebrow: "Propiedades",
@@ -709,7 +709,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Galería",
       title: "Explora las casas por espacio y ambiente.",
       description:
-        "La galería está lista para imágenes generadas y futuras fotografías reales.",
+        "Descubre la atmósfera de cada casa a través de interiores, exteriores, detalles y vistas al jardín.",
       all: "Todo",
       exterior: "Exterior",
       interior: "Interior",
@@ -721,14 +721,14 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "Reserva",
-      title: "Consulta la disponibilidad demo antes de enviar una solicitud.",
+      title: "Consulta la disponibilidad antes de enviar una solicitud.",
       description:
-        "Esta página está preparada para un motor de reservas, API de disponibilidad o sincronización manual.",
+        "Revisa el calendario, elige una casa y contáctanos directamente para confirmar tus fechas.",
       calendarTitle: "Calendario de disponibilidad",
       calendarDescription: "Cambia de casa y revisa la disponibilidad por mes.",
       inquiryTitle: "Enviar consulta de reserva",
       inquiryDescription:
-        "Por ahora, el botón abre WhatsApp. Más tarde podemos conectar un formulario o proveedor.",
+        "Usa WhatsApp para preguntas rápidas, fechas y solicitudes directas de reserva.",
       selectedHouse: "Casa seleccionada",
       previousMonth: "Mes anterior",
       nextMonth: "Mes siguiente",
@@ -738,7 +738,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Contacto",
       title: "Un lugar para todas las acciones del huésped.",
       description:
-        "WhatsApp, Facebook y plataformas de reserva agrupadas en una página simple.",
+        "WhatsApp, Facebook y plataformas de reserva agrupadas en una página sencilla para decisiones rápidas.",
       whatsappTitle: "WhatsApp",
       whatsappDescription:
         "Ideal para preguntas rápidas, fechas y consultas directas.",
@@ -747,24 +747,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Para prueba social, anuncios y comunicación con huéspedes.",
       platformsTitle: "Plataformas de reserva",
       platformsDescription:
-        "Preparado para Agoda, Booking.com, Airbnb y otros canales.",
+        "Encuéntranos en Agoda, Booking.com, Airbnb y otros canales.",
       directContactTitle: "Consulta directa",
       directContactDescription:
-        "Un futuro formulario puede recoger fechas, datos y propiedad preferida.",
+        "Comparte tus fechas, casa preferida y datos de huéspedes para ayudarte a planificar la estancia.",
     },
     reviews: {
-      googleReady: "Preparado para Google Reviews",
-      facebookReady: "Preparado para Facebook Reviews",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "Ahora se muestran reseñas demo. El diseño está preparado para APIs oficiales o widgets aprobados.",
+        "Las reseñas de huéspedes de canales confiables ayudan a elegir la estancia adecuada con confianza.",
     },
     footer: {
       description:
-        "Greenhouse House Rental es un proyecto portfolio ficticio de una web premium de alquiler multilingüe para General Santos City.",
+        "Greenhouse House Rental ofrece dos casas tropicales tranquilas en General Santos City, preparadas para estancias privadas, mañanas lentas y comunicación directa.",
       quickLinks: "Enlaces rápidos",
       bookingLinks: "Enlaces de reserva",
       legalNote:
-        "Demo portfolio. Las casas, reseñas, pines de mapa y disponibilidad mostradas son ficticias.",
+        "Estancias privadas en General Santos City con consultas directas, reseñas y opciones externas de reserva.",
     },
   },
 
@@ -772,7 +772,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | Séjours à General Santos City",
       description:
-        "Concept multilingue de portfolio pour deux maisons fictives à General Santos City, Philippines.",
+        "Site multilingue de location pour deux maisons paisibles à General Santos City, Philippines.",
     },
     nav: {
       home: "Accueil",
@@ -782,7 +782,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Contact",
     },
     common: {
-      portfolioDemo: "Démo portfolio",
+      stayTagline: "Séjours tropicaux privés",
       language: "Langue",
       theme: "Thème",
       bookNow: "Réserver",
@@ -792,7 +792,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "En savoir plus",
       available: "Disponible",
       booked: "Réservé",
-      demoOnly: "Disponibilité démo",
+      availabilityGuide: "Guide de disponibilité",
       guests: "Voyageurs",
       bedrooms: "Chambres",
       bathrooms: "Salles de bain",
@@ -805,27 +805,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title:
         "Deux maisons paisibles pensées pour des matins lents et des séjours faciles.",
       description:
-        "Greenhouse House Rental est un concept portfolio premium pour une marque de location à General Santos City, avec contenu multilingue, calendrier, structure d’avis et UX orientée conversion.",
+        "Greenhouse House Rental réunit la chaleur de l’hospitalité de Mindanao, des jardins tropicaux calmes et des espaces soigneusement préparés pour les voyageurs qui recherchent un séjour privé et confortable à General Santos City.",
       primaryCta: "Vérifier la disponibilité",
       secondaryCta: "Explorer les maisons",
       heroBadgeOne: "2 maisons à louer",
-      heroBadgeTwo: "Prêt pour Google et Facebook Reviews",
-      heroBadgeThree: "Parcours de demande de réservation",
+      heroBadgeTwo: "Avis voyageurs",
+      heroBadgeThree: "Demande directe de réservation",
       housesTitle: "Choisissez votre séjour",
       housesDescription:
         "Chaque maison possède son ambiance, sa galerie, ses équipements, sa carte et son chemin de réservation.",
       galleryTitle: "Une galerie pensée pour l’image",
       galleryDescription:
-        "Préparée pour de grandes collections de photos par propriété et type d’espace.",
-      reviewsTitle: "Confiance client prête pour de vrais avis",
+        "Explorez les espaces, les détails et l’atmosphère tropicale des deux maisons avant de choisir votre séjour.",
+      reviewsTitle: "Confiance construite sur des expériences réelles",
       reviewsDescription:
-        "La base est prête pour Google Reviews, Facebook Reviews ou des widgets approuvés.",
+        "Les impressions des voyageurs aident à comprendre le confort, l’ambiance et l’expérience de réservation directe.",
       bookingTitle: "Réservation centrée sur la disponibilité",
       bookingDescription:
         "Un calendrier clair aide les voyageurs à comprendre les dates disponibles avant de contacter l’hôte.",
-      ctaTitle: "Prêt à transformer ce concept en marque de location réelle ?",
+      ctaTitle: "Prêt à planifier votre séjour à General Santos City ?",
       ctaDescription:
-        "Cette version portfolio utilise des maisons fictives, mais sa structure est orientée production.",
+        "Choisissez votre maison, vérifiez la disponibilité et contactez-nous directement pour votre prochain séjour tropical.",
     },
     housesPage: {
       eyebrow: "Les propriétés",
@@ -840,7 +840,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Galerie",
       title: "Parcourez les maisons par espace et ambiance.",
       description:
-        "La galerie est prête pour des images générées puis pour de vraies photos.",
+        "Découvrez l’atmosphère de chaque maison à travers les intérieurs, les extérieurs, les détails et les vues jardin.",
       all: "Tout",
       exterior: "Extérieur",
       interior: "Intérieur",
@@ -852,15 +852,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "Réservation",
-      title: "Vérifiez la disponibilité démo avant d’envoyer une demande.",
+      title: "Vérifiez la disponibilité avant d’envoyer une demande.",
       description:
-        "Cette page est prête pour un futur moteur de réservation, une API ou une synchronisation manuelle.",
+        "Consultez le calendrier, choisissez une maison et contactez-nous directement pour confirmer vos dates.",
       calendarTitle: "Calendrier de disponibilité",
       calendarDescription:
         "Changez de maison et consultez les disponibilités par mois.",
       inquiryTitle: "Envoyer une demande",
       inquiryDescription:
-        "Pour l’instant, le bouton ouvre WhatsApp. Plus tard, nous pourrons connecter un formulaire ou un fournisseur.",
+        "Utilisez WhatsApp pour les questions rapides, les dates et les demandes directes.",
       selectedHouse: "Maison sélectionnée",
       previousMonth: "Mois précédent",
       nextMonth: "Mois suivant",
@@ -879,24 +879,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Pour la preuve sociale, les annonces et la communication avec les voyageurs.",
       platformsTitle: "Plateformes de réservation",
       platformsDescription:
-        "Préparé pour Agoda, Booking.com, Airbnb et d’autres canaux.",
+        "Retrouvez-nous sur Agoda, Booking.com, Airbnb et d’autres canaux.",
       directContactTitle: "Demande directe",
       directContactDescription:
-        "Un futur formulaire pourra collecter les dates, les coordonnées et la maison préférée.",
+        "Partagez vos dates, votre maison préférée et les informations voyageurs pour planifier votre séjour.",
     },
     reviews: {
-      googleReady: "Prêt pour Google Reviews",
-      facebookReady: "Prêt pour Facebook Reviews",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "Les avis affichés sont fictifs. La mise en page est prête pour des API officielles ou widgets approuvés.",
+        "Les avis voyageurs issus de canaux fiables aident les visiteurs à choisir leur séjour en confiance.",
     },
     footer: {
       description:
-        "Greenhouse House Rental est un projet portfolio fictif pour un site de location premium multilingue à General Santos City.",
+        "Greenhouse House Rental propose deux maisons tropicales paisibles à General Santos City, préparées pour des séjours privés, des matins lents et une communication directe.",
       quickLinks: "Liens rapides",
       bookingLinks: "Liens de réservation",
       legalNote:
-        "Démo portfolio. Les maisons, avis, repères de carte et disponibilités affichés sont fictifs.",
+        "Séjours privés à General Santos City avec demandes directes, avis voyageurs et options de réservation externes.",
     },
   },
 
@@ -904,7 +904,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | Aufenthalte in General Santos City",
       description:
-        "Ein mehrsprachiges Portfolio-Konzept für zwei fiktive Ferienhäuser in General Santos City, Philippinen.",
+        "Mehrsprachige Vermietungswebsite für zwei ruhige Häuser in General Santos City, Philippinen.",
     },
     nav: {
       home: "Start",
@@ -914,7 +914,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Kontakt",
     },
     common: {
-      portfolioDemo: "Portfolio-Demo",
+      stayTagline: "Private tropische Aufenthalte",
       language: "Sprache",
       theme: "Design",
       bookNow: "Jetzt buchen",
@@ -924,7 +924,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "Mehr erfahren",
       available: "Verfügbar",
       booked: "Gebucht",
-      demoOnly: "Demo-Verfügbarkeit",
+      availabilityGuide: "Verfügbarkeitsübersicht",
       guests: "Gäste",
       bedrooms: "Schlafzimmer",
       bathrooms: "Bäder",
@@ -937,28 +937,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title:
         "Zwei ruhige Häuser für langsame Morgen und entspannte Aufenthalte.",
       description:
-        "Greenhouse House Rental ist ein ausgearbeitetes Portfolio-Konzept für eine Premium-Vermietungsmarke in General Santos City, mit mehrsprachigen Inhalten, Verfügbarkeitsansicht, Bewertungsstruktur und conversion-orientierter UX.",
+        "Greenhouse House Rental verbindet die Wärme der Mindanao-Gastfreundschaft, ruhige tropische Gärten und sorgfältig vorbereitete Räume für Gäste, die einen privaten und komfortablen Aufenthalt in General Santos City suchen.",
       primaryCta: "Verfügbarkeit prüfen",
       secondaryCta: "Häuser entdecken",
       heroBadgeOne: "2 Ferienhäuser",
-      heroBadgeTwo: "Bereit für Google & Facebook Reviews",
-      heroBadgeThree: "Buchungsanfrage-Flow",
+      heroBadgeTwo: "Gästebewertungen",
+      heroBadgeThree: "Direkte Buchungsanfrage",
       housesTitle: "Wähle deinen Aufenthalt",
       housesDescription:
         "Jedes Haus hat eine eigene Atmosphäre, Galerie, Ausstattung, Kartenposition und Buchungsstrecke.",
       galleryTitle: "Eine visuell starke Galerie",
       galleryDescription:
-        "Vorbereitet für große Fotosammlungen nach Objekt und Raumtyp.",
-      reviewsTitle: "Gästevertrauen, vorbereitet für echte Bewertungen",
+        "Entdecke die Räume, Details und tropische Atmosphäre beider Häuser, bevor du deinen Aufenthalt auswählst.",
+      reviewsTitle: "Gästevertrauen aus echten Erfahrungen",
       reviewsDescription:
-        "Die Basis ist bereit für Google Reviews, Facebook Reviews oder genehmigte externe Widgets.",
+        "Gästeeindrücke helfen zukünftigen Besuchern, Komfort, Atmosphäre und direkte Buchung besser einzuschätzen.",
       bookingTitle: "Buchung mit Fokus auf Verfügbarkeit",
       bookingDescription:
         "Ein klarer Kalender hilft Gästen, verfügbare Daten vor der Kontaktaufnahme zu verstehen.",
-      ctaTitle:
-        "Bereit, dieses Konzept in eine echte Vermietungsmarke zu verwandeln?",
+      ctaTitle: "Bereit, deinen Aufenthalt in General Santos City zu planen?",
       ctaDescription:
-        "Diese Portfolio-Version nutzt fiktive Häuser, ist aber produktionsorientiert aufgebaut.",
+        "Wähle dein bevorzugtes Haus, prüfe die Verfügbarkeit und kontaktiere uns direkt für deinen nächsten tropischen Aufenthalt.",
     },
     housesPage: {
       eyebrow: "Die Objekte",
@@ -973,7 +972,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Galerie",
       title: "Durchsuche die Häuser nach Raum und Stimmung.",
       description:
-        "Die Galerie ist für generierte Bilder und spätere echte Fotografie vorbereitet.",
+        "Entdecke die Atmosphäre jedes Hauses durch Innenräume, Außenbereiche, Details und Gartenblicke.",
       all: "Alle",
       exterior: "Außenbereich",
       interior: "Innenbereich",
@@ -985,15 +984,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "Buchung",
-      title: "Prüfe die Demo-Verfügbarkeit vor deiner Anfrage.",
+      title: "Prüfe die Verfügbarkeit vor deiner Anfrage.",
       description:
-        "Diese Seite ist für eine zukünftige Buchungsengine, Verfügbarkeits-API oder manuelle Kalendersynchronisierung vorbereitet.",
+        "Sieh dir den Kalender an, wähle ein Haus und kontaktiere uns direkt, um deine Wunschdaten zu bestätigen.",
       calendarTitle: "Verfügbarkeitskalender",
       calendarDescription:
         "Wechsle zwischen den Häusern und prüfe die monatliche Verfügbarkeit.",
       inquiryTitle: "Buchungsanfrage senden",
       inquiryDescription:
-        "Aktuell öffnet der Button WhatsApp. Später können wir ein Formular-Backend oder einen Buchungsanbieter verbinden.",
+        "Nutze WhatsApp für schnelle Fragen, Datumschecks und direkte Buchungsanfragen.",
       selectedHouse: "Ausgewähltes Haus",
       previousMonth: "Vorheriger Monat",
       nextMonth: "Nächster Monat",
@@ -1003,7 +1002,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Kontakt",
       title: "Ein Ort für alle Gästeaktionen.",
       description:
-        "WhatsApp, Facebook und Buchungsplattformen sind auf einer einfachen, conversion-orientierten Kontaktseite gebündelt.",
+        "WhatsApp, Facebook und Buchungsplattformen sind auf einer einfachen Kontaktseite gebündelt.",
       whatsappTitle: "WhatsApp",
       whatsappDescription:
         "Ideal für schnelle Fragen, Datumschecks und direkte Buchungsanfragen.",
@@ -1012,24 +1011,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Für Social Proof, Ankündigungen und Kommunikation mit Gästen.",
       platformsTitle: "Buchungsplattformen",
       platformsDescription:
-        "Vorbereitet für Agoda, Booking.com, Airbnb und weitere externe Kanäle.",
+        "Finde uns auf Agoda, Booking.com, Airbnb und weiteren externen Kanälen.",
       directContactTitle: "Direkte Anfrage",
       directContactDescription:
-        "Ein zukünftiges Formular kann Gästedaten, Reisedaten und bevorzugtes Objekt sammeln.",
+        "Teile deine Reisedaten, dein bevorzugtes Haus und Gästeinformationen, damit wir deinen Aufenthalt planen können.",
     },
     reviews: {
-      googleReady: "Bereit für Google Reviews",
-      facebookReady: "Bereit für Facebook Reviews",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "Aktuell werden Demo-Bewertungen angezeigt. Das Layout ist für offizielle APIs oder genehmigte Widgets vorbereitet.",
+        "Gästebewertungen aus vertrauenswürdigen Kanälen helfen Besuchern, den passenden Aufenthalt sicher zu wählen.",
     },
     footer: {
       description:
-        "Greenhouse House Rental ist ein fiktives Portfolio-Projekt für eine mehrsprachige Premium-Vermietungswebsite in General Santos City.",
+        "Greenhouse House Rental bietet zwei ruhige tropische Häuser in General Santos City für private Aufenthalte, langsame Morgen und direkte Gästekommunikation.",
       quickLinks: "Schnellzugriff",
       bookingLinks: "Buchungslinks",
       legalNote:
-        "Portfolio-Demo. Die gezeigten Häuser, Bewertungen, Kartenpins und Verfügbarkeiten sind fiktiv.",
+        "Private Aufenthalte in General Santos City mit direkten Anfragen, Gästebewertungen und externen Buchungsoptionen.",
     },
   },
 
@@ -1037,7 +1036,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     meta: {
       title: "Greenhouse House Rental | Pobyt w General Santos City",
       description:
-        "Wielojęzyczna koncepcja portfolio dla strony prezentującej dwa fikcyjne domy na wynajem w General Santos City na Filipinach.",
+        "Wielojęzyczna strona wynajmu prezentująca dwa spokojne domy w General Santos City na Filipinach.",
     },
     nav: {
       home: "Start",
@@ -1047,7 +1046,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       contact: "Kontakt",
     },
     common: {
-      portfolioDemo: "Demo portfolio",
+      stayTagline: "Prywatne tropikalne pobyty",
       language: "Język",
       theme: "Motyw",
       bookNow: "Rezerwuj",
@@ -1057,7 +1056,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       learnMore: "Dowiedz się więcej",
       available: "Dostępne",
       booked: "Zajęte",
-      demoOnly: "Dostępność demo",
+      availabilityGuide: "Podgląd dostępności",
       guests: "Goście",
       bedrooms: "Sypialnie",
       bathrooms: "Łazienki",
@@ -1070,27 +1069,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
       title:
         "Dwa spokojne domy stworzone do wolnych poranków i wygodnego pobytu.",
       description:
-        "Greenhouse House Rental to dopracowana koncepcja portfolio dla marki wynajmu domów w General Santos City: wielojęzyczna treść, dostępność, struktura pod opinie i UX nastawiony na konwersję.",
+        "Greenhouse House Rental łączy ciepło gościnności Mindanao, spokojne tropikalne ogrody i starannie przygotowane przestrzenie dla gości, którzy szukają prywatnego, wygodnego pobytu w General Santos City.",
       primaryCta: "Sprawdź dostępność",
       secondaryCta: "Poznaj domy",
       heroBadgeOne: "2 domy na wynajem",
-      heroBadgeTwo: "Gotowe pod Google i Facebook Reviews",
-      heroBadgeThree: "Ścieżka zapytania rezerwacyjnego",
+      heroBadgeTwo: "Opinie gości",
+      heroBadgeThree: "Bezpośrednie zapytanie rezerwacyjne",
       housesTitle: "Wybierz swój pobyt",
       housesDescription:
         "Każdy dom ma własny klimat, galerię, udogodnienia, lokalizację na mapie i ścieżkę rezerwacji.",
       galleryTitle: "Galeria nastawiona na zdjęcia",
       galleryDescription:
-        "Przygotowana pod duże kolekcje zdjęć z podziałem na obiekt i typ pomieszczenia.",
-      reviewsTitle: "Zaufanie gości przygotowane pod prawdziwe opinie",
+        "Poznaj przestrzenie, detale i tropikalny klimat obu domów, zanim wybierzesz swój pobyt.",
+      reviewsTitle: "Zaufanie gości budowane na prawdziwych doświadczeniach",
       reviewsDescription:
-        "Fundament jest gotowy pod Google Reviews, Facebook Reviews albo zatwierdzone widgety zewnętrzne.",
+        "Wrażenia gości pomagają kolejnym odwiedzającym poznać komfort, atmosferę i doświadczenie bezpośredniej rezerwacji.",
       bookingTitle: "Rezerwacja oparta o dostępność",
       bookingDescription:
         "Czytelny kalendarz pomaga gościom zrozumieć dostępne terminy przed kontaktem z gospodarzem.",
-      ctaTitle: "Gotowy zamienić tę koncepcję w działającą markę wynajmu?",
+      ctaTitle: "Gotowy zaplanować pobyt w General Santos City?",
       ctaDescription:
-        "Ta wersja portfolio używa fikcyjnych domów, ale struktura jest przygotowana produkcyjnie.",
+        "Wybierz preferowany dom, sprawdź dostępność i skontaktuj się z nami bezpośrednio w sprawie swojego następnego tropikalnego pobytu.",
     },
     housesPage: {
       eyebrow: "Obiekty",
@@ -1105,7 +1104,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Galeria",
       title: "Przeglądaj domy według przestrzeni i nastroju.",
       description:
-        "Galeria jest przygotowana pod wygenerowane obrazy oraz późniejsze prawdziwe zdjęcia.",
+        "Poznaj atmosferę każdego domu poprzez wnętrza, przestrzenie zewnętrzne, detale i widoki na ogród.",
       all: "Wszystko",
       exterior: "Z zewnątrz",
       interior: "Wnętrze",
@@ -1117,15 +1116,15 @@ export const dictionaries: Record<Locale, Dictionary> = {
     },
     bookingPage: {
       eyebrow: "Rezerwacja",
-      title: "Sprawdź dostępność demo przed wysłaniem zapytania.",
+      title: "Sprawdź dostępność przed wysłaniem zapytania.",
       description:
-        "Ta podstrona jest przygotowana pod przyszły silnik rezerwacji, API dostępności albo ręczną synchronizację kalendarza.",
+        "Przejrzyj kalendarz, wybierz dom i skontaktuj się bezpośrednio, aby potwierdzić preferowane terminy.",
       calendarTitle: "Kalendarz dostępności",
       calendarDescription:
         "Przełączaj domy i sprawdzaj dostępność miesiąc po miesiącu.",
       inquiryTitle: "Wyślij zapytanie rezerwacyjne",
       inquiryDescription:
-        "Na ten moment CTA otwiera WhatsApp. Później możemy podpiąć backend formularza albo dostawcę rezerwacji.",
+        "Użyj WhatsAppa do szybkich pytań, sprawdzania terminów i bezpośrednich zapytań rezerwacyjnych.",
       selectedHouse: "Wybrany dom",
       previousMonth: "Poprzedni miesiąc",
       nextMonth: "Następny miesiąc",
@@ -1135,7 +1134,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       eyebrow: "Kontakt",
       title: "Jedno miejsce dla wszystkich działań gościa.",
       description:
-        "WhatsApp, Facebook i platformy rezerwacyjne są zebrane w prostą stronę nastawioną na konwersję.",
+        "WhatsApp, Facebook i platformy rezerwacyjne są zebrane w prostą stronę ułatwiającą szybki kontakt.",
       whatsappTitle: "WhatsApp",
       whatsappDescription:
         "Najlepszy do szybkich pytań, sprawdzania terminów i bezpośrednich zapytań rezerwacyjnych.",
@@ -1144,24 +1143,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Do budowania zaufania, publikowania aktualności i komunikacji z gośćmi.",
       platformsTitle: "Platformy rezerwacyjne",
       platformsDescription:
-        "Przygotowane pod Agoda, Booking.com, Airbnb i inne zewnętrzne kanały.",
+        "Znajdziesz nas na Agoda, Booking.com, Airbnb i innych zewnętrznych kanałach.",
       directContactTitle: "Zapytanie bezpośrednie",
       directContactDescription:
-        "Przyszły formularz może zbierać dane gościa, daty i preferowany obiekt.",
+        "Podaj daty podróży, preferowany dom i dane gości, abyśmy mogli pomóc zaplanować pobyt.",
     },
     reviews: {
-      googleReady: "Gotowe pod Google Reviews",
-      facebookReady: "Gotowe pod Facebook Reviews",
+      googleReady: "Google Reviews",
+      facebookReady: "Facebook Reviews",
       apiNote:
-        "Teraz wyświetlamy opinie demo. Layout jest przygotowany pod oficjalne API albo zatwierdzone widgety.",
+        "Opinie gości z zaufanych kanałów pomagają odwiedzającym wybrać odpowiedni pobyt z większą pewnością.",
     },
     footer: {
       description:
-        "Greenhouse House Rental to fikcyjny projekt portfolio pokazujący premium wielojęzyczną stronę wynajmu w General Santos City.",
+        "Greenhouse House Rental oferuje dwa spokojne tropikalne domy w General Santos City, przygotowane pod prywatne pobyty, wolne poranki i bezpośrednią komunikację z gośćmi.",
       quickLinks: "Szybkie linki",
       bookingLinks: "Linki rezerwacyjne",
       legalNote:
-        "Demo portfolio. Domy, opinie, pinezki na mapie i dostępność pokazane na stronie są fikcyjne.",
+        "Prywatne pobyty w General Santos City z bezpośrednimi zapytaniami, opiniami gości i zewnętrznymi opcjami rezerwacji.",
     },
   },
 };

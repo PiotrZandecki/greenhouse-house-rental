@@ -31,29 +31,22 @@ export default async function BookingPage({ params }: BookingPageProps) {
         </div>
 
         <div className="booking-layout">
-          <div>
-            <div className="section-heading section-heading-left">
-              <p className="eyebrow">{dictionary.bookingPage.calendarTitle}</p>
-              <h2>{dictionary.bookingPage.calendarTitle}</h2>
-              <p>{dictionary.bookingPage.calendarDescription}</p>
-            </div>
-
-            <AvailabilityCalendar
-              dictionary={dictionary}
-              houses={houses}
-              locale={locale}
-            />
-          </div>
+          <AvailabilityCalendar
+            dictionary={dictionary}
+            houses={houses}
+            locale={locale}
+          />
 
           <aside className="booking-aside">
-            <p className="eyebrow">{dictionary.common.demoOnly}</p>
+            <p className="eyebrow">{dictionary.common.availabilityGuide}</p>
+
             <h2>{dictionary.bookingPage.inquiryTitle}</h2>
             <p>{dictionary.bookingPage.inquiryDescription}</p>
 
             <div className="booking-steps">
-              <span>1. {dictionary.common.viewHouses}</span>
-              <span>2. {dictionary.common.available}</span>
-              <span>3. WhatsApp / Booking.com / Agoda</span>
+              <span>1. {dictionary.bookingPage.calendarTitle}</span>
+              <span>2. {dictionary.bookingPage.selectedHouse}</span>
+              <span>3. {dictionary.bookingPage.sendWhatsapp}</span>
             </div>
           </aside>
         </div>

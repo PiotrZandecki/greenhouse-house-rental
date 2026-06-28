@@ -1,4 +1,4 @@
-export type Locale = "pl" | "en" | "fr" | "es" | "ko" | "tl";
+export type Locale = "en" | "ceb" | "tl" | "ko" | "es" | "fr" | "de" | "pl";
 
 export type PlatformLink = {
   label: string;
@@ -18,6 +18,10 @@ export type House = {
   subtitle: LocalizedString;
   description: LocalizedString;
   location: LocalizedString;
+  address: LocalizedString;
+  mapCta: LocalizedString;
+  mapUrl: string;
+  mapEmbedUrl: string;
   capacity: number;
   bedrooms: number;
   bathrooms: number;

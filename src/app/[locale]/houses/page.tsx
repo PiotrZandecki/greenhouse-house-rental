@@ -3,18 +3,15 @@ import { notFound } from "next/navigation";
 import { getDictionary } from "@/data/dictionaries";
 import { getHouses } from "@/data/houses";
 import { isLocale } from "@/lib/i18n";
-import { GalleryPreview } from "@/components/sections/GalleryPreview";
-import { HouseCard } from "@/components/sections/HouseCard";
 import { LocalizedLink } from "@/components/ui/LocalizedLink";
-import { ReviewsSection } from "@/components/sections/ReviewsSection";
 
-type HomePageProps = {
+type HousesPageProps = {
   params: Promise<{
     locale: string;
   }>;
 };
 
-export default async function HomePage({ params }: HomePageProps) {
+export default async function HousesPage({ params }: HousesPageProps) {
   const { locale } = await params;
 
   if (!isLocale(locale)) {
@@ -25,117 +22,140 @@ export default async function HomePage({ params }: HomePageProps) {
   const houses = getHouses();
 
   return (
-    <>
-      <section className="hero-section">
-        <div className="site-shell hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow">{dictionary.home.eyebrow}</p>
-            <h1>{dictionary.home.title}</h1>
-            <p>{dictionary.home.description}</p>
-
-            <div className="hero-actions">
-              <LocalizedLink
-                className="button button-primary"
-                href="/booking"
-                locale={locale}
-              >
-                {dictionary.home.primaryCta}
-              </LocalizedLink>
-              <LocalizedLink
-                className="button button-ghost"
-                href="/houses"
-                locale={locale}
-              >
-                {dictionary.home.secondaryCta}
-              </LocalizedLink>
-            </div>
-
-            <div className="hero-badges">
-              <span>{dictionary.home.heroBadgeOne}</span>
-              <span>{dictionary.home.heroBadgeTwo}</span>
-              <span>{dictionary.home.heroBadgeThree}</span>
-            </div>
-          </div>
-
-          <div className="hero-visual" aria-hidden="true">
-            <div className="hero-card hero-card-main">
-              <span>Greenhouse</span>
-              <strong>House Rental</strong>
-            </div>
-            <div className="hero-card hero-card-floating">
-              <span>★★★★★</span>
-              <strong>Review-ready</strong>
-            </div>
-          </div>
+    <section className="page-section">
+      <div className="site-shell">
+        <div className="page-heading">
+          <p className="eyebrow">{dictionary.housesPage.eyebrow}</p>
+          <h1>{dictionary.housesPage.title}</h1>
+          <p>{dictionary.housesPage.description}</p>
         </div>
-      </section>
 
-      <section className="section">
-        <div className="site-shell">
-          <div className="section-heading section-heading-row">
-            <div>
-              <p className="eyebrow">{dictionary.housesPage.eyebrow}</p>
-              <h2>{dictionary.home.housesTitle}</h2>
-              <p>{dictionary.home.housesDescription}</p>
-            </div>
-
-            <LocalizedLink
-              className="button button-secondary"
-              href="/houses"
-              locale={locale}
+        <div className="property-list">
+          {houses.map((house) => (
+            <article
+              className={`property-panel property-panel-${house.id}`}
+              key={house.id}
             >
-              {dictionary.common.viewHouses}
-            </LocalizedLink>
-          </div>
+              <div className="property-image">
+                <span>{house.name}</span>
+              </div>
 
-          <div className="houses-grid">
-            {houses.map((house) => (
-              <HouseCard
-                dictionary={dictionary}
-                house={house}
-                key={house.id}
-                locale={locale}
-              />
-            ))}
-          </div>
+              <div className="property-content">
+                <p className="eyebrow">{house.location[locale]}</p>
+                <h2>{house.name}</h2>
+                <p>{house.description[locale]}</p>
+
+                <div className="house-facts house-facts-large">
+                  <span>
+                    {house.capacity} {dictionary.common.guests}
+                  </span>
+                  <span>
+                    {house.bedrooms} {dictionary.common.bedrooms}
+                  </span>
+                  <span>
+                    {house.bathrooms} {dictionary.common.bathrooms}
+                  </span>
+                  <span>
+                    {dictionary.common.area}: {house.area}
+                  </span>
+                  <span>
+                    {dictionary.common.from} {house.priceFrom}/
+                    {dictionary.common.night}
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    border: "1px solid var(--border)",
+                    borderRadius: "var(--radius-lg)",
+                    background: "var(--surface-strong)",
+                    marginTop: "24px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <iframe
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={house.mapEmbedUrl}
+                    style={{
+                      border: 0,
+                      display: "block",
+                      minHeight: "280px",
+                      width: "100%",
+                    }}
+                    title={`${house.name} map`}
+                  />
+
+                  <div style={{ padding: "18px" }}>
+                    <p className="eyebrow" style={{ marginBottom: "8px" }}>
+                      {house.location[locale]}
+                    </p>
+                    <p style={{ marginTop: 0 }}>{house.address[locale]}</p>
+                    <a
+                      className="button button-secondary"
+                      href={house.mapUrl}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {house.mapCta[locale]}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="property-columns">
+                  <div>
+                    <h3>{dictionary.housesPage.highlights}</h3>
+                    <ul className="check-list">
+                      {house.highlights[locale].map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3>{dictionary.housesPage.amenities}</h3>
+                    <ul className="check-list">
+                      {house.amenities[locale].map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="platform-row">
+                  {house.platforms.map((platform) => (
+                    <a
+                      href={platform.href}
+                      key={platform.label}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {platform.label}
+                    </a>
+                  ))}
+                </div>
+
+                <div className="property-actions">
+                  <LocalizedLink
+                    className="button button-primary"
+                    href="/booking"
+                    locale={locale}
+                  >
+                    {dictionary.common.bookNow}
+                  </LocalizedLink>
+                  <LocalizedLink
+                    className="button button-secondary"
+                    href="/gallery"
+                    locale={locale}
+                  >
+                    {dictionary.common.viewGallery}
+                  </LocalizedLink>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-      </section>
-
-      <section className="section section-split">
-        <div className="site-shell split-card">
-          <div>
-            <p className="eyebrow">{dictionary.bookingPage.eyebrow}</p>
-            <h2>{dictionary.home.bookingTitle}</h2>
-            <p>{dictionary.home.bookingDescription}</p>
-          </div>
-          <LocalizedLink
-            className="button button-primary"
-            href="/booking"
-            locale={locale}
-          >
-            {dictionary.common.bookNow}
-          </LocalizedLink>
-        </div>
-      </section>
-
-      <GalleryPreview dictionary={dictionary} locale={locale} />
-
-      <ReviewsSection dictionary={dictionary} locale={locale} />
-
-      <section className="section">
-        <div className="site-shell final-cta">
-          <p className="eyebrow">{dictionary.common.portfolioDemo}</p>
-          <h2>{dictionary.home.ctaTitle}</h2>
-          <p>{dictionary.home.ctaDescription}</p>
-          <LocalizedLink
-            className="button button-primary"
-            href="/contact"
-            locale={locale}
-          >
-            {dictionary.common.contactUs}
-          </LocalizedLink>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

@@ -1,6 +1,11 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import { getDictionary } from "@/data/dictionaries";
 import { getHouses } from "@/data/houses";
-import { defaultLocale } from "@/lib/i18n";
+import { defaultLocale, getLocaleFromBrowserLanguage } from "@/lib/i18n";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { GalleryPreview } from "@/components/sections/GalleryPreview";
@@ -9,9 +14,22 @@ import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { LocalizedLink } from "@/components/ui/LocalizedLink";
 
 export default function RootPage() {
+  const router = useRouter();
   const locale = defaultLocale;
   const dictionary = getDictionary(locale);
   const houses = getHouses();
+
+  useEffect(() => {
+    const primaryBrowserLanguage =
+      window.navigator.languages?.[0] ?? window.navigator.language;
+    const preferredLocale = getLocaleFromBrowserLanguage(
+      primaryBrowserLanguage,
+    );
+
+    if (preferredLocale !== defaultLocale) {
+      router.replace(`/${preferredLocale}`);
+    }
+  }, [router]);
 
   return (
     <div className="app-frame">

@@ -1,25 +1,49 @@
 import type { Locale } from "@/types/site";
 
-export const locales: Locale[] = ["pl", "en", "fr", "es", "ko", "tl"];
+export const locales: Locale[] = [
+  "en",
+  "ceb",
+  "tl",
+  "ko",
+  "es",
+  "fr",
+  "de",
+  "pl",
+];
 
 export const defaultLocale: Locale = "en";
 
 export const localeLabels: Record<Locale, string> = {
-  pl: "Polski",
   en: "English",
-  fr: "Français",
-  es: "Español",
-  ko: "한국어",
+  ceb: "Bisaya",
   tl: "Tagalog",
+  ko: "한국어",
+  es: "Español",
+  fr: "Français",
+  de: "Deutsch",
+  pl: "Polski",
 };
 
 export const localeShortLabels: Record<Locale, string> = {
-  pl: "PL",
   en: "EN",
-  fr: "FR",
-  es: "ES",
-  ko: "KR",
+  ceb: "CEB",
   tl: "TL",
+  ko: "KR",
+  es: "ES",
+  fr: "FR",
+  de: "DE",
+  pl: "PL",
+};
+
+export const localeFlags: Record<Locale, string> = {
+  en: "🇬🇧",
+  ceb: "🇵🇭",
+  tl: "🇵🇭",
+  ko: "🇰🇷",
+  es: "🇪🇸",
+  fr: "🇫🇷",
+  de: "🇩🇪",
+  pl: "🇵🇱",
 };
 
 export function isLocale(value: string): value is Locale {
@@ -50,4 +74,51 @@ export function replaceLocaleInPath(
   }
 
   return `/${nextLocale}/${segments.join("/")}`;
+}
+
+export function getLocaleFromBrowserLanguage(language?: string): Locale {
+  if (!language) {
+    return defaultLocale;
+  }
+
+  const normalizedLanguage = language.toLowerCase();
+  const baseLanguage = normalizedLanguage.split("-")[0];
+
+  if (
+    baseLanguage === "ceb" ||
+    baseLanguage === "bis" ||
+    baseLanguage === "vis"
+  ) {
+    return "ceb";
+  }
+
+  if (baseLanguage === "fil" || baseLanguage === "tl") {
+    return "tl";
+  }
+
+  if (baseLanguage === "ko") {
+    return "ko";
+  }
+
+  if (baseLanguage === "es") {
+    return "es";
+  }
+
+  if (baseLanguage === "fr") {
+    return "fr";
+  }
+
+  if (baseLanguage === "de") {
+    return "de";
+  }
+
+  if (baseLanguage === "pl") {
+    return "pl";
+  }
+
+  if (isLocale(baseLanguage)) {
+    return baseLanguage;
+  }
+
+  return defaultLocale;
 }

@@ -13,11 +13,13 @@ type AvailabilityCalendarProps = {
 
 const weekDays: Record<Locale, string[]> = {
   en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-  pl: ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Nd"],
-  fr: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
-  es: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-  ko: ["월", "화", "수", "목", "금", "토", "일"],
+  ceb: ["Lun", "Mar", "Miy", "Huweb", "Biy", "Sab", "Dom"],
   tl: ["Lun", "Mar", "Miy", "Huweb", "Biy", "Sab", "Ling"],
+  ko: ["월", "화", "수", "목", "금", "토", "일"],
+  es: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+  fr: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+  de: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
+  pl: ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Nd"],
 };
 
 function toIsoDate(date: Date): string {

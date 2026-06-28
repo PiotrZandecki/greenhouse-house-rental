@@ -44,22 +44,29 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
         </nav>
 
         <div className="header-actions">
-          <LanguageSwitcher
-            currentLocale={locale}
-            label={dictionary.common.language}
-          />
+          <div className="desktop-language-wrapper">
+            <LanguageSwitcher
+              currentLocale={locale}
+              label={dictionary.common.language}
+            />
+          </div>
+
           <ThemeToggle label={dictionary.common.theme} />
+
           <LocalizedLink
-            className="button button-small button-primary"
+            className="button button-small button-primary desktop-booking-button"
             href="/booking"
             locale={locale}
           >
             {dictionary.common.bookNow}
           </LocalizedLink>
+
           <button
             aria-expanded={isOpen}
-            aria-label="Open menu"
-            className="mobile-menu-button"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            className={`mobile-menu-button ${
+              isOpen ? "mobile-menu-button-open" : ""
+            }`}
             onClick={() => setIsOpen((current) => !current)}
             type="button"
           >
@@ -72,16 +79,28 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
       {isOpen ? (
         <div className="mobile-nav">
           <div className="site-shell mobile-nav-inner">
-            {navigation.map((item) => (
-              <LocalizedLink
-                href={item.href}
-                key={item.href}
-                locale={locale}
-                className="mobile-nav-link"
-              >
-                {item.label}
-              </LocalizedLink>
-            ))}
+            <nav className="mobile-nav-links" aria-label="Mobile navigation">
+              {navigation.map((item) => (
+                <LocalizedLink
+                  href={item.href}
+                  key={item.href}
+                  locale={locale}
+                  className="mobile-nav-link"
+                >
+                  {item.label}
+                </LocalizedLink>
+              ))}
+            </nav>
+
+            <div className="mobile-language-panel">
+              <p className="mobile-language-title">
+                {dictionary.common.language}
+              </p>
+              <LanguageSwitcher
+                currentLocale={locale}
+                label={dictionary.common.language}
+              />
+            </div>
           </div>
         </div>
       ) : null}

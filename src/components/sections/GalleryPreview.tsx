@@ -1,18 +1,26 @@
+import Image from "next/image";
+
 import type { Dictionary } from "@/data/dictionaries";
 import type { Locale } from "@/types/site";
 import { galleryItems } from "@/data/gallery";
 import { LocalizedLink } from "@/components/ui/LocalizedLink";
 
 type GalleryPreviewProps = {
-  locale: Locale;
   dictionary: Dictionary;
+  locale: Locale;
 };
 
-export function GalleryPreview({ locale, dictionary }: GalleryPreviewProps) {
-  const previewItems = galleryItems.slice(0, 6);
+const previewItems = [
+  "fern-exterior-01",
+  "olive-interior-01",
+  "olive-details-01",
+];
+
+export function GalleryPreview({ dictionary, locale }: GalleryPreviewProps) {
+  const items = galleryItems.filter((item) => previewItems.includes(item.id));
 
   return (
-    <section className="section">
+    <section className="section section-muted">
       <div className="site-shell">
         <div className="section-heading section-heading-row">
           <div>
@@ -30,14 +38,56 @@ export function GalleryPreview({ locale, dictionary }: GalleryPreviewProps) {
           </LocalizedLink>
         </div>
 
-        <div className="gallery-grid gallery-grid-preview">
-          {previewItems.map((item) => (
-            <article className="gallery-card" key={item.id}>
-              <div className={`gallery-placeholder gallery-${item.houseId}`}>
-                <span>{item.imagePlaceholder}</span>
+        <div className="gallery-grid">
+          {items.map((item, index) => (
+            <article
+              className={`gallery-card ${
+                index === 0 ? "gallery-card-large" : ""
+              }`}
+              key={item.id}
+            >
+              <div
+                className={`gallery-placeholder gallery-${item.houseId}`}
+                style={{
+                  position: "relative",
+                }}
+              >
+                <Image
+                  alt={item.title[locale]}
+                  fill
+                  sizes={
+                    index === 0
+                      ? "(max-width: 760px) 100vw, 40vw"
+                      : "(max-width: 760px) 100vw, 30vw"
+                  }
+                  src={item.imageSrc}
+                  style={{
+                    objectFit: "cover",
+                    zIndex: 0,
+                  }}
+                />
+
+                <span
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    zIndex: 1,
+                    background:
+                      "linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.5))",
+                  }}
+                />
+
+                <span
+                  style={{
+                    position: "relative",
+                    zIndex: 2,
+                  }}
+                >
+                  {item.title[locale]}
+                </span>
               </div>
+
               <div>
-                <p className="eyebrow">{item.category}</p>
                 <h3>{item.title[locale]}</h3>
                 <p>{item.description[locale]}</p>
               </div>

@@ -5,6 +5,7 @@ export const galleryItems: GalleryItem[] = [
     id: "fern-exterior-01",
     houseId: "fern-house",
     category: "exterior",
+    imageSrc: "/images/fern-house/fern-exterior-01.webp",
     imagePlaceholder: "Soft green exterior with tropical plants",
     title: {
       en: "Fern House garden entrance",
@@ -31,6 +32,7 @@ export const galleryItems: GalleryItem[] = [
     id: "fern-bedroom-01",
     houseId: "fern-house",
     category: "bedroom",
+    imageSrc: "/images/fern-house/fern-bedroom-01.webp",
     imagePlaceholder: "Bright bedroom with linen textures",
     title: {
       en: "Soft linen bedroom",
@@ -57,6 +59,7 @@ export const galleryItems: GalleryItem[] = [
     id: "fern-kitchen-01",
     houseId: "fern-house",
     category: "kitchen",
+    imageSrc: "/images/fern-house/fern-kitchen-01.webp",
     imagePlaceholder: "Small kitchenette with coffee corner",
     title: {
       en: "Compact coffee kitchen",
@@ -83,6 +86,7 @@ export const galleryItems: GalleryItem[] = [
     id: "fern-terrace-01",
     houseId: "fern-house",
     category: "terrace",
+    imageSrc: "/images/fern-house/fern-terrace-01.webp",
     imagePlaceholder: "Private terrace with warm lights",
     title: {
       en: "Private evening terrace",
@@ -109,6 +113,7 @@ export const galleryItems: GalleryItem[] = [
     id: "olive-exterior-01",
     houseId: "olive-house",
     category: "exterior",
+    imageSrc: "/images/olive-house/olive-exterior-01.webp",
     imagePlaceholder: "Larger house exterior with bright garden path",
     title: {
       en: "Olive House garden path",
@@ -135,6 +140,7 @@ export const galleryItems: GalleryItem[] = [
     id: "olive-interior-01",
     houseId: "olive-house",
     category: "interior",
+    imageSrc: "/images/olive-house/olive-interior-01.webp",
     imagePlaceholder: "Open living room with natural materials",
     title: {
       en: "Open living room",
@@ -161,6 +167,7 @@ export const galleryItems: GalleryItem[] = [
     id: "olive-bedroom-01",
     houseId: "olive-house",
     category: "bedroom",
+    imageSrc: "/images/olive-house/olive-bedroom-01.webp",
     imagePlaceholder: "Large family bedroom with warm lamps",
     title: {
       en: "Family bedroom",
@@ -187,6 +194,7 @@ export const galleryItems: GalleryItem[] = [
     id: "olive-bathroom-01",
     houseId: "olive-house",
     category: "bathroom",
+    imageSrc: "/images/olive-house/olive-bathroom-01.webp",
     imagePlaceholder: "Clean bathroom with stone textures",
     title: {
       en: "Stone texture bathroom",
@@ -213,6 +221,7 @@ export const galleryItems: GalleryItem[] = [
     id: "olive-details-01",
     houseId: "olive-house",
     category: "details",
+    imageSrc: "/images/olive-house/olive-details-01.webp",
     imagePlaceholder: "Natural decor details with plants",
     title: {
       en: "Natural details",

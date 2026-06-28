@@ -1,7 +1,10 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { galleryItems } from "@/data/gallery";
+import type { GalleryItem, Locale } from "@/types/site";
 import { getDictionary } from "@/data/dictionaries";
+import { galleryItems } from "@/data/gallery";
+import { getHouses } from "@/data/houses";
 import { isLocale } from "@/lib/i18n";
 
 type GalleryPageProps = {
@@ -9,6 +12,12 @@ type GalleryPageProps = {
     locale: string;
   }>;
 };
+
+function getCategoryLabel(item: GalleryItem, locale: Locale): string {
+  const dictionary = getDictionary(locale);
+
+  return dictionary.galleryPage[item.category];
+}
 
 export default async function GalleryPage({ params }: GalleryPageProps) {
   const { locale } = await params;
@@ -18,17 +27,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   }
 
   const dictionary = getDictionary(locale);
-
-  const categories = [
-    "all",
-    "exterior",
-    "interior",
-    "bedroom",
-    "kitchen",
-    "bathroom",
-    "terrace",
-    "details",
-  ] as const;
+  const houses = getHouses();
 
   return (
     <section className="page-section">
@@ -40,38 +39,83 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
         </div>
 
         <div className="filter-pills">
-          {categories.map((category) => (
-            <a
-              href={category === "all" ? "#gallery" : `#${category}`}
-              key={category}
-            >
-              {dictionary.galleryPage[category]}
-            </a>
-          ))}
+          <a href="#all">{dictionary.galleryPage.all}</a>
+          <a href="#fern-house">Fern House</a>
+          <a href="#olive-house">Olive House</a>
+          <a href="#exterior">{dictionary.galleryPage.exterior}</a>
+          <a href="#interior">{dictionary.galleryPage.interior}</a>
+          <a href="#bedroom">{dictionary.galleryPage.bedroom}</a>
+          <a href="#kitchen">{dictionary.galleryPage.kitchen}</a>
+          <a href="#bathroom">{dictionary.galleryPage.bathroom}</a>
+          <a href="#terrace">{dictionary.galleryPage.terrace}</a>
+          <a href="#details">{dictionary.galleryPage.details}</a>
         </div>
 
-        <div className="gallery-group" id="gallery">
-          <div className="gallery-grid">
-            {galleryItems.map((item) => (
+        <div className="gallery-grid" id="all">
+          {galleryItems.map((item, index) => {
+            const house = houses.find((entry) => entry.id === item.houseId);
+            const categoryLabel = getCategoryLabel(item, locale);
+
+            return (
               <article
-                className="gallery-card gallery-card-large"
-                id={item.category}
+                className={`gallery-card ${
+                  index % 4 === 0 ? "gallery-card-large" : ""
+                }`}
+                id={item.id}
                 key={item.id}
               >
-                <div className={`gallery-placeholder gallery-${item.houseId}`}>
-                  <span>{item.imagePlaceholder}</span>
+                <div
+                  className={`gallery-placeholder gallery-${item.houseId}`}
+                  style={{
+                    position: "relative",
+                  }}
+                >
+                  <Image
+                    alt={item.title[locale]}
+                    fill
+                    priority={index < 2}
+                    sizes={
+                      index % 4 === 0
+                        ? "(max-width: 760px) 100vw, 42vw"
+                        : "(max-width: 760px) 100vw, 30vw"
+                    }
+                    src={item.imageSrc}
+                    style={{
+                      objectFit: "cover",
+                      zIndex: 0,
+                    }}
+                  />
+
+                  <span
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      zIndex: 1,
+                      background:
+                        "linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.5))",
+                    }}
+                  />
+
+                  <span
+                    style={{
+                      position: "relative",
+                      zIndex: 2,
+                    }}
+                  >
+                    {item.title[locale]}
+                  </span>
                 </div>
+
                 <div>
-                  <p className="eyebrow">
-                    {item.houseId.replace("-", " ")} /{" "}
-                    {dictionary.galleryPage[item.category]}
+                  <p className="eyebrow" id={item.category}>
+                    {house?.name ?? "Greenhouse"} · {categoryLabel}
                   </p>
-                  <h2>{item.title[locale]}</h2>
+                  <h3>{item.title[locale]}</h3>
                   <p>{item.description[locale]}</p>
                 </div>
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

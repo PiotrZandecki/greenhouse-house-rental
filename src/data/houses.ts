@@ -59,6 +59,7 @@ export const houses: House[] = [
       "https://www.google.com/maps/search/?api=1&query=Barangay%20Calumpang%2C%20General%20Santos%20City%2C%20South%20Cotabato%2C%20Philippines",
     mapEmbedUrl:
       "https://www.google.com/maps?q=Barangay%20Calumpang%2C%20General%20Santos%20City%2C%20South%20Cotabato%2C%20Philippines&output=embed",
+    coverImage: "/images/fern-house/fern-exterior-01.webp",
     capacity: 4,
     bedrooms: 2,
     bathrooms: 1,
@@ -240,6 +241,7 @@ export const houses: House[] = [
       "https://www.google.com/maps/search/?api=1&query=Dadiangas%20North%2C%20General%20Santos%20City%2C%20South%20Cotabato%2C%20Philippines",
     mapEmbedUrl:
       "https://www.google.com/maps?q=Dadiangas%20North%2C%20General%20Santos%20City%2C%20South%20Cotabato%2C%20Philippines&output=embed",
+    coverImage: "/images/olive-house/olive-exterior-01.webp",
     capacity: 6,
     bedrooms: 3,
     bathrooms: 2,

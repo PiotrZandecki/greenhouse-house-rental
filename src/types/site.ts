@@ -22,6 +22,7 @@ export type House = {
   mapCta: LocalizedString;
   mapUrl: string;
   mapEmbedUrl: string;
+  coverImage: string;
   capacity: number;
   bedrooms: number;
   bathrooms: number;
@@ -47,6 +48,7 @@ export type GalleryItem = {
   title: LocalizedString;
   description: LocalizedString;
   imagePlaceholder: string;
+  imageSrc: string;
 };
 
 export type ReviewSource = "google" | "facebook";

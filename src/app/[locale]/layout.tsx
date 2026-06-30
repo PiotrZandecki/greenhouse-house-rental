@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getDictionary } from "@/data/dictionaries";
 import { isLocale, locales } from "@/lib/i18n";
+import { buildMetadata } from "@/lib/seo";
 import { LocaleChrome } from "@/components/layout/LocaleChrome";
 
 type LocaleLayoutProps = {
@@ -15,6 +17,20 @@ export function generateStaticParams() {
   return locales.map((locale) => ({
     locale,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!isLocale(locale)) {
+    return {};
+  }
+
+  return buildMetadata(locale, "story");
 }
 
 export default async function LocaleLayout({

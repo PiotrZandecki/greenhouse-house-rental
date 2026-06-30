@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 import type { Dictionary } from "@/data/dictionaries";
@@ -24,14 +25,21 @@ export function LocaleChrome({
 
   const isStoryScreen = normalizedPathname === `/${locale}`;
 
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   if (isStoryScreen) {
     return <>{children}</>;
   }
 
   return (
     <div className="app-frame">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <SiteHeader dictionary={dictionary} locale={locale} />
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
       <SiteFooter dictionary={dictionary} locale={locale} />
     </div>
   );

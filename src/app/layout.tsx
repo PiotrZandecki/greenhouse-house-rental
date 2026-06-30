@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 
+import { GlobalPolish } from "@/components/layout/GlobalPolish";
+import { buildWelcomeMetadata } from "@/lib/seo";
+
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Greenhouse House Rental | General Santos City stays",
-  description:
-    "A multilingual rental website for two peaceful tropical homes in General Santos City, Philippines.",
-};
+export const metadata: Metadata = buildWelcomeMetadata();
 
 const themeScript = `
 (function () {
@@ -36,7 +35,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <GlobalPolish />
+        {children}
+      </body>
     </html>
   );
 }

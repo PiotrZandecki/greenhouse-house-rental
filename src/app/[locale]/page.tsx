@@ -230,11 +230,15 @@ export default async function LocaleStoryPage({ params }: StoryPageProps) {
         }
 
         .story-card h1 {
-          max-width: 1040px;
+          max-width: 920px;
           margin: 0;
-          font-size: clamp(2.8rem, 6.6vw, 6.4rem);
-          letter-spacing: -0.08em;
-          line-height: 0.92;
+          font-size: clamp(2.45rem, 5.2vw, 5.15rem);
+          letter-spacing: -0.074em;
+          line-height: 0.98;
+        }
+
+        .story-card h1 + p {
+          margin-top: clamp(24px, 2.8vw, 42px);
         }
 
         .story-card p {
@@ -246,7 +250,7 @@ export default async function LocaleStoryPage({ params }: StoryPageProps) {
 
         .story-signature {
           width: fit-content;
-          margin-top: 26px;
+          margin-top: 28px;
           border: 1px solid var(--border);
           border-radius: var(--radius-pill);
           background: var(--surface);
@@ -270,6 +274,10 @@ export default async function LocaleStoryPage({ params }: StoryPageProps) {
 
           .story-visual {
             min-height: 520px;
+          }
+
+          .story-card h1 {
+            font-size: clamp(2.7rem, 9vw, 4.7rem);
           }
         }
 
@@ -304,7 +312,13 @@ export default async function LocaleStoryPage({ params }: StoryPageProps) {
           }
 
           .story-card h1 {
-            font-size: clamp(2.7rem, 14vw, 4.3rem);
+            font-size: clamp(2.25rem, 10.8vw, 3.45rem);
+            line-height: 1.02;
+            letter-spacing: -0.068em;
+          }
+
+          .story-card h1 + p {
+            margin-top: 24px;
           }
 
           .story-action {

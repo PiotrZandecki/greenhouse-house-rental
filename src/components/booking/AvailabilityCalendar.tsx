@@ -13,6 +13,12 @@ type AvailabilityCalendarProps = {
 
 type BookingStep = "dates" | "details" | "review" | "confirmation";
 
+type FieldErrors = {
+  dates?: string;
+  guestName?: string;
+  guestEmail?: string;
+};
+
 type BookingCopy = {
   plannerEyebrow: string;
   plannerTitle: string;
@@ -21,6 +27,7 @@ type BookingCopy = {
   checkOut: string;
   chooseDates: string;
   resetDates: string;
+  edit: string;
   guestName: string;
   guestEmail: string;
   guestPhone: string;
@@ -48,6 +55,12 @@ type BookingCopy = {
   reviewStep: string;
   confirmationStep: string;
   requiredHint: string;
+  nameRequired: string;
+  emailRequired: string;
+  emailInvalid: string;
+  datesRequired: string;
+  reviewTitle: string;
+  reviewDescription: string;
 };
 
 const bookingCopy: Record<Locale, BookingCopy> = {
@@ -60,6 +73,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "Check-out",
     chooseDates: "Choose dates",
     resetDates: "Reset dates",
+    edit: "Edit",
     guestName: "Your name",
     guestEmail: "Email address",
     guestPhone: "Phone number",
@@ -91,6 +105,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "Review",
     confirmationStep: "Confirmation",
     requiredHint: "Name and email are required to continue.",
+    nameRequired: "Please enter your name.",
+    emailRequired: "Please enter your email address.",
+    emailInvalid: "Please enter a valid email address.",
+    datesRequired: "Please select check-in and check-out dates first.",
+    reviewTitle: "Review your stay request",
+    reviewDescription:
+      "Check the selected house, dates, guest details and estimated total before confirming.",
   },
   ceb: {
     plannerEyebrow: "Booking planner",
@@ -101,6 +122,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "Check-out",
     chooseDates: "Pili og dates",
     resetDates: "Reset dates",
+    edit: "Edit",
     guestName: "Imong ngalan",
     guestEmail: "Email address",
     guestPhone: "Phone number",
@@ -132,6 +154,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "Review",
     confirmationStep: "Confirmation",
     requiredHint: "Kinahanglan ang name ug email para makapadayon.",
+    nameRequired: "Ibutang imong ngalan.",
+    emailRequired: "Ibutang imong email address.",
+    emailInvalid: "Ibutang ang valid nga email address.",
+    datesRequired: "Pili una og check-in ug check-out dates.",
+    reviewTitle: "Review your stay request",
+    reviewDescription:
+      "Tan-awa ang selected house, dates, guest details ug estimated total before confirmation.",
   },
   tl: {
     plannerEyebrow: "Booking planner",
@@ -142,6 +171,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "Check-out",
     chooseDates: "Pumili ng dates",
     resetDates: "Reset dates",
+    edit: "Edit",
     guestName: "Pangalan mo",
     guestEmail: "Email address",
     guestPhone: "Phone number",
@@ -173,6 +203,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "Review",
     confirmationStep: "Confirmation",
     requiredHint: "Name and email are required to continue.",
+    nameRequired: "Please enter your name.",
+    emailRequired: "Please enter your email address.",
+    emailInvalid: "Please enter a valid email address.",
+    datesRequired: "Please select check-in and check-out dates first.",
+    reviewTitle: "Review your stay request",
+    reviewDescription:
+      "Check the selected house, dates, guest details and estimated total before confirming.",
   },
   ko: {
     plannerEyebrow: "예약 플래너",
@@ -183,6 +220,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "체크아웃",
     chooseDates: "날짜 선택",
     resetDates: "날짜 초기화",
+    edit: "수정",
     guestName: "이름",
     guestEmail: "이메일 주소",
     guestPhone: "전화번호",
@@ -214,6 +252,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "검토",
     confirmationStep: "확인",
     requiredHint: "계속하려면 이름과 이메일이 필요합니다.",
+    nameRequired: "이름을 입력해 주세요.",
+    emailRequired: "이메일 주소를 입력해 주세요.",
+    emailInvalid: "올바른 이메일 주소를 입력해 주세요.",
+    datesRequired: "먼저 체크인과 체크아웃 날짜를 선택하세요.",
+    reviewTitle: "숙박 요청 검토",
+    reviewDescription:
+      "확인 전 숙소, 날짜, 게스트 정보와 예상 합계를 확인하세요.",
   },
   es: {
     plannerEyebrow: "Planificador de reserva",
@@ -224,6 +269,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "Check-out",
     chooseDates: "Elegir fechas",
     resetDates: "Restablecer fechas",
+    edit: "Editar",
     guestName: "Tu nombre",
     guestEmail: "Correo electrónico",
     guestPhone: "Teléfono",
@@ -255,6 +301,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "Revisión",
     confirmationStep: "Confirmación",
     requiredHint: "Nombre y correo electrónico son necesarios para continuar.",
+    nameRequired: "Introduce tu nombre.",
+    emailRequired: "Introduce tu correo electrónico.",
+    emailInvalid: "Introduce un correo electrónico válido.",
+    datesRequired: "Selecciona primero check-in y check-out.",
+    reviewTitle: "Revisa tu solicitud de estancia",
+    reviewDescription:
+      "Comprueba la casa, fechas, datos del huésped y total estimado antes de confirmar.",
   },
   fr: {
     plannerEyebrow: "Planificateur de réservation",
@@ -266,6 +319,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "Départ",
     chooseDates: "Choisir les dates",
     resetDates: "Réinitialiser",
+    edit: "Modifier",
     guestName: "Votre nom",
     guestEmail: "Adresse email",
     guestPhone: "Téléphone",
@@ -297,6 +351,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "Vérification",
     confirmationStep: "Confirmation",
     requiredHint: "Le nom et l’email sont nécessaires pour continuer.",
+    nameRequired: "Indiquez votre nom.",
+    emailRequired: "Indiquez votre adresse email.",
+    emailInvalid: "Indiquez une adresse email valide.",
+    datesRequired: "Sélectionnez d’abord les dates d’arrivée et de départ.",
+    reviewTitle: "Vérifiez votre demande de séjour",
+    reviewDescription:
+      "Vérifiez la maison, les dates, les informations voyageurs et le total estimé avant confirmation.",
   },
   de: {
     plannerEyebrow: "Buchungsplaner",
@@ -307,6 +368,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "Check-out",
     chooseDates: "Daten wählen",
     resetDates: "Daten zurücksetzen",
+    edit: "Bearbeiten",
     guestName: "Dein Name",
     guestEmail: "E-Mail-Adresse",
     guestPhone: "Telefonnummer",
@@ -338,6 +400,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "Prüfung",
     confirmationStep: "Bestätigung",
     requiredHint: "Name und E-Mail sind erforderlich, um fortzufahren.",
+    nameRequired: "Bitte gib deinen Namen ein.",
+    emailRequired: "Bitte gib deine E-Mail-Adresse ein.",
+    emailInvalid: "Bitte gib eine gültige E-Mail-Adresse ein.",
+    datesRequired: "Bitte wähle zuerst Check-in und Check-out.",
+    reviewTitle: "Aufenthaltsanfrage prüfen",
+    reviewDescription:
+      "Prüfe Haus, Daten, Gästeinformationen und geschätzten Gesamtpreis vor der Bestätigung.",
   },
   pl: {
     plannerEyebrow: "Planer rezerwacji",
@@ -348,6 +417,7 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     checkOut: "Wymeldowanie",
     chooseDates: "Wybierz daty",
     resetDates: "Zresetuj daty",
+    edit: "Edytuj",
     guestName: "Twoje imię",
     guestEmail: "Adres email",
     guestPhone: "Numer telefonu",
@@ -379,6 +449,13 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewStep: "Podsumowanie",
     confirmationStep: "Potwierdzenie",
     requiredHint: "Imię i email są wymagane, aby przejść dalej.",
+    nameRequired: "Podaj swoje imię.",
+    emailRequired: "Podaj adres email.",
+    emailInvalid: "Podaj poprawny adres email.",
+    datesRequired: "Najpierw wybierz datę zameldowania i wymeldowania.",
+    reviewTitle: "Sprawdź zapytanie o pobyt",
+    reviewDescription:
+      "Sprawdź wybrany dom, daty, dane gościa i szacowaną kwotę przed potwierdzeniem.",
   },
 };
 
@@ -521,6 +598,10 @@ function isDateInSelectedRange(
   return isoDate > checkIn && isoDate < checkOut;
 }
 
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function createRequestCode(houseId: HouseId) {
   const prefix = houseId === "fern-house" ? "FERN" : "OLIVE";
   const code = Math.floor(100000 + Math.random() * 900000);
@@ -550,6 +631,7 @@ export function AvailabilityCalendar({
   const [guestMessage, setGuestMessage] = useState("");
   const [bookingStep, setBookingStep] = useState<BookingStep>("dates");
   const [requestCode, setRequestCode] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const selectedHouse =
     houses.find((house) => house.id === selectedHouseId) ?? houses[0];
@@ -577,7 +659,16 @@ export function AvailabilityCalendar({
   const estimatedTotal = formatPeso(nightlyPrice * nights);
   const hasSelectedRange = Boolean(checkIn && checkOut && nights > 0);
   const hasGuestDetails =
-    guestName.trim().length > 0 && guestEmail.trim().length > 0;
+    guestName.trim().length > 0 &&
+    guestEmail.trim().length > 0 &&
+    isValidEmail(guestEmail.trim());
+
+  const progressPercent = {
+    dates: 25,
+    details: 50,
+    review: 75,
+    confirmation: 100,
+  }[bookingStep];
 
   const processSteps = [
     { id: "dates", label: copy.datesStep },
@@ -594,11 +685,16 @@ export function AvailabilityCalendar({
     });
   }
 
+  function clearRequestState() {
+    setRangeError("");
+    setRequestCode("");
+    setFieldErrors({});
+  }
+
   function resetDates() {
     setCheckIn(undefined);
     setCheckOut(undefined);
-    setRangeError("");
-    setRequestCode("");
+    clearRequestState();
     setBookingStep("dates");
   }
 
@@ -612,6 +708,7 @@ export function AvailabilityCalendar({
     setGuestPhone("");
     setGuestMessage("");
     setRequestCode("");
+    setFieldErrors({});
     setBookingStep("dates");
   }
 
@@ -619,15 +716,13 @@ export function AvailabilityCalendar({
     setSelectedHouseId(houseId);
     setCheckIn(undefined);
     setCheckOut(undefined);
-    setRangeError("");
-    setRequestCode("");
+    clearRequestState();
     setBookingStep("dates");
   }
 
   function selectDate(date: Date) {
     const isoDate = toIsoDate(date);
-    setRangeError("");
-    setRequestCode("");
+    clearRequestState();
 
     if (!checkIn || (checkIn && checkOut)) {
       setCheckIn(isoDate);
@@ -651,25 +746,84 @@ export function AvailabilityCalendar({
     setCheckOut(isoDate);
   }
 
+  function validateDates() {
+    if (!hasSelectedRange) {
+      setFieldErrors((current) => ({
+        ...current,
+        dates: copy.datesRequired,
+      }));
+      return false;
+    }
+
+    setFieldErrors((current) => ({
+      ...current,
+      dates: undefined,
+    }));
+    return true;
+  }
+
+  function validateDetails() {
+    const nextErrors: FieldErrors = {};
+
+    if (!guestName.trim()) {
+      nextErrors.guestName = copy.nameRequired;
+    }
+
+    if (!guestEmail.trim()) {
+      nextErrors.guestEmail = copy.emailRequired;
+    } else if (!isValidEmail(guestEmail.trim())) {
+      nextErrors.guestEmail = copy.emailInvalid;
+    }
+
+    setFieldErrors((current) => ({
+      ...current,
+      ...nextErrors,
+    }));
+
+    return Object.keys(nextErrors).length === 0;
+  }
+
   function continueToDetails() {
-    if (hasSelectedRange) {
+    if (validateDates()) {
       setBookingStep("details");
     }
   }
 
   function continueToReview() {
-    if (hasSelectedRange && hasGuestDetails) {
+    const datesAreValid = validateDates();
+    const detailsAreValid = validateDetails();
+
+    if (datesAreValid && detailsAreValid) {
       setBookingStep("review");
     }
   }
 
   function confirmRequest() {
-    if (!hasSelectedRange || !hasGuestDetails) {
+    const datesAreValid = validateDates();
+    const detailsAreValid = validateDetails();
+
+    if (!datesAreValid || !detailsAreValid) {
       return;
     }
 
     setRequestCode(createRequestCode(selectedHouseId));
     setBookingStep("confirmation");
+  }
+
+  function updateGuestName(value: string) {
+    setGuestName(value);
+
+    if (value.trim()) {
+      setFieldErrors((current) => ({ ...current, guestName: undefined }));
+    }
+  }
+
+  function updateGuestEmail(value: string) {
+    setGuestEmail(value);
+
+    if (isValidEmail(value.trim())) {
+      setFieldErrors((current) => ({ ...current, guestEmail: undefined }));
+    }
   }
 
   function getStepStatus(step: BookingStep) {
@@ -686,6 +840,17 @@ export function AvailabilityCalendar({
     }
 
     return "";
+  }
+
+  function renderSelectedDates() {
+    if (!hasSelectedRange || !checkIn || !checkOut) {
+      return copy.noDates;
+    }
+
+    return `${formatDate(dateFromIso(checkIn), locale)} - ${formatDate(
+      dateFromIso(checkOut),
+      locale,
+    )}`;
   }
 
   return (
@@ -789,6 +954,10 @@ export function AvailabilityCalendar({
             <p className="booking-range-error">{rangeError}</p>
           ) : null}
 
+          {fieldErrors.dates ? (
+            <p className="booking-range-error">{fieldErrors.dates}</p>
+          ) : null}
+
           <div className="calendar-weekdays">
             {weekDays[locale].map((day) => (
               <span key={day}>{day}</span>
@@ -859,6 +1028,10 @@ export function AvailabilityCalendar({
           ))}
         </div>
 
+        <div className="booking-progress-track">
+          <span style={{ width: `${progressPercent}%` }} />
+        </div>
+
         {bookingStep === "confirmation" ? (
           <div className="booking-confirmation-panel">
             <span className="booking-confirmation-mark">✓</span>
@@ -877,14 +1050,7 @@ export function AvailabilityCalendar({
               </div>
               <div>
                 <span>{copy.selectedDates}</span>
-                <strong>
-                  {checkIn && checkOut
-                    ? `${formatDate(dateFromIso(checkIn), locale)} - ${formatDate(
-                        dateFromIso(checkOut),
-                        locale,
-                      )}`
-                    : copy.noDates}
-                </strong>
+                <strong>{renderSelectedDates()}</strong>
               </div>
               <div>
                 <span>{copy.estimatedTotal}</span>
@@ -917,14 +1083,16 @@ export function AvailabilityCalendar({
               </div>
               <div>
                 <span>{copy.selectedDates}</span>
-                <strong>
-                  {hasSelectedRange && checkIn && checkOut
-                    ? `${formatDate(dateFromIso(checkIn), locale)} - ${formatDate(
-                        dateFromIso(checkOut),
-                        locale,
-                      )}`
-                    : copy.noDates}
-                </strong>
+                <strong>{renderSelectedDates()}</strong>
+                {bookingStep !== "dates" ? (
+                  <button
+                    className="booking-inline-edit"
+                    onClick={() => setBookingStep("dates")}
+                    type="button"
+                  >
+                    {copy.edit}
+                  </button>
+                ) : null}
               </div>
               <div>
                 <span>{dictionary.common.guests}</span>
@@ -967,20 +1135,32 @@ export function AvailabilityCalendar({
                 <label>
                   <span>{copy.guestName}</span>
                   <input
+                    aria-invalid={Boolean(fieldErrors.guestName)}
                     value={guestName}
-                    onChange={(event) => setGuestName(event.target.value)}
+                    onChange={(event) => updateGuestName(event.target.value)}
                     placeholder={copy.guestName}
                   />
+                  {fieldErrors.guestName ? (
+                    <small className="booking-field-error">
+                      {fieldErrors.guestName}
+                    </small>
+                  ) : null}
                 </label>
 
                 <label>
                   <span>{copy.guestEmail}</span>
                   <input
+                    aria-invalid={Boolean(fieldErrors.guestEmail)}
                     type="email"
                     value={guestEmail}
-                    onChange={(event) => setGuestEmail(event.target.value)}
+                    onChange={(event) => updateGuestEmail(event.target.value)}
                     placeholder="name@email.com"
                   />
+                  {fieldErrors.guestEmail ? (
+                    <small className="booking-field-error">
+                      {fieldErrors.guestEmail}
+                    </small>
+                  ) : null}
                 </label>
 
                 <label>
@@ -1011,17 +1191,12 @@ export function AvailabilityCalendar({
             {bookingStep === "review" ? (
               <div className="booking-review-panel">
                 <p className="eyebrow">{copy.reviewStep}</p>
-                <h3>{copy.reviewRequest}</h3>
+                <h3>{copy.reviewTitle}</h3>
+                <p>{copy.reviewDescription}</p>
+
                 <ul>
                   <li>{selectedHouse.name}</li>
-                  <li>
-                    {checkIn && checkOut
-                      ? `${formatDate(dateFromIso(checkIn), locale)} - ${formatDate(
-                          dateFromIso(checkOut),
-                          locale,
-                        )}`
-                      : copy.noDates}
-                  </li>
+                  <li>{renderSelectedDates()}</li>
                   <li>
                     {guestCount} {dictionary.common.guests}
                   </li>
@@ -1303,6 +1478,21 @@ export function AvailabilityCalendar({
           color: var(--primary-strong);
         }
 
+        .booking-progress-track {
+          overflow: hidden;
+          height: 8px;
+          border-radius: var(--radius-pill);
+          background: var(--background-soft);
+        }
+
+        .booking-progress-track span {
+          display: block;
+          height: 100%;
+          border-radius: inherit;
+          background: linear-gradient(90deg, var(--primary), var(--accent));
+          transition: width 260ms ease;
+        }
+
         .booking-summary-list {
           display: grid;
           gap: 10px;
@@ -1327,6 +1517,17 @@ export function AvailabilityCalendar({
 
         .booking-summary-list strong {
           line-height: 1.35;
+        }
+
+        .booking-inline-edit {
+          width: fit-content;
+          border: 0;
+          border-radius: var(--radius-pill);
+          background: var(--primary-soft);
+          color: var(--primary-strong);
+          font-size: 0.78rem;
+          font-weight: 950;
+          padding: 8px 10px;
         }
 
         .booking-form-grid {
@@ -1356,8 +1557,19 @@ export function AvailabilityCalendar({
           padding: 13px 14px;
         }
 
+        .booking-form-grid input[aria-invalid="true"] {
+          border-color: color-mix(in srgb, var(--accent) 64%, var(--border));
+          background: var(--accent-soft);
+        }
+
         .booking-form-grid textarea {
           resize: vertical;
+        }
+
+        .booking-field-error {
+          color: var(--accent);
+          font-size: 0.78rem;
+          font-weight: 900;
         }
 
         .booking-review-panel {
@@ -1370,9 +1582,13 @@ export function AvailabilityCalendar({
         }
 
         .booking-review-panel h3 {
-          margin: 0 0 14px;
+          margin: 0 0 10px;
           font-size: 1.35rem;
           letter-spacing: -0.04em;
+        }
+
+        .booking-review-panel p {
+          margin-top: 0;
         }
 
         .booking-review-panel ul {

@@ -19,6 +19,8 @@ type BookingPageCopy = {
   stepTwoDescription: string;
   stepThreeTitle: string;
   stepThreeDescription: string;
+  stepFourTitle: string;
+  stepFourDescription: string;
 };
 
 const bookingPageCopy: Record<Locale, BookingPageCopy> = {
@@ -29,9 +31,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "Add guest details",
     stepTwoDescription:
       "Enter the number of guests and the details needed to prepare your stay request.",
-    stepThreeTitle: "Review and confirm",
+    stepThreeTitle: "Review request",
     stepThreeDescription:
-      "Review the full stay summary, estimated total and guest information before confirming the request.",
+      "Review the full stay summary, estimated total and guest information before confirming.",
+    stepFourTitle: "Confirm request",
+    stepFourDescription:
+      "Receive a request code and keep the summary ready for final host confirmation.",
   },
   ceb: {
     stepOneTitle: "Pili-a ang dates",
@@ -40,9 +45,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "Ibutang ang guest details",
     stepTwoDescription:
       "Ibutang ang number of guests ug details nga kinahanglan para ma-prepare ang stay request.",
-    stepThreeTitle: "Review ug confirm",
+    stepThreeTitle: "Review request",
     stepThreeDescription:
-      "I-review ang full stay summary, estimated total ug guest information before i-confirm ang request.",
+      "I-review ang full stay summary, estimated total ug guest information before i-confirm.",
+    stepFourTitle: "Confirm request",
+    stepFourDescription:
+      "Makakuha og request code ug ready nga summary para sa final host confirmation.",
   },
   tl: {
     stepOneTitle: "Piliin ang dates",
@@ -51,9 +59,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "Ilagay ang guest details",
     stepTwoDescription:
       "Ilagay ang number of guests at details na kailangan para maihanda ang stay request.",
-    stepThreeTitle: "Review and confirm",
+    stepThreeTitle: "Review request",
     stepThreeDescription:
-      "I-review ang full stay summary, estimated total at guest information bago i-confirm ang request.",
+      "I-review ang full stay summary, estimated total at guest information bago i-confirm.",
+    stepFourTitle: "Confirm request",
+    stepFourDescription:
+      "Receive a request code and keep the summary ready for final host confirmation.",
   },
   ko: {
     stepOneTitle: "날짜 선택",
@@ -62,9 +73,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "게스트 정보 입력",
     stepTwoDescription:
       "숙박 요청을 준비하는 데 필요한 게스트 수와 정보를 입력하세요.",
-    stepThreeTitle: "검토 및 확인",
+    stepThreeTitle: "요청 검토",
     stepThreeDescription:
       "숙박 요약, 예상 합계, 게스트 정보를 확인한 뒤 요청을 확정하세요.",
+    stepFourTitle: "요청 확인",
+    stepFourDescription:
+      "요청 코드를 받고 최종 호스트 확인을 위한 요약을 준비하세요.",
   },
   es: {
     stepOneTitle: "Elige tus fechas",
@@ -73,9 +87,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "Añade los datos del huésped",
     stepTwoDescription:
       "Indica el número de huéspedes y los datos necesarios para preparar tu solicitud de estancia.",
-    stepThreeTitle: "Revisa y confirma",
+    stepThreeTitle: "Revisa la solicitud",
     stepThreeDescription:
-      "Revisa el resumen de estancia, total estimado e información del huésped antes de confirmar la solicitud.",
+      "Revisa el resumen de estancia, total estimado e información del huésped antes de confirmar.",
+    stepFourTitle: "Confirma la solicitud",
+    stepFourDescription:
+      "Recibe un código de solicitud y conserva el resumen para la confirmación final.",
   },
   fr: {
     stepOneTitle: "Choisissez vos dates",
@@ -84,9 +101,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "Ajoutez les informations voyageurs",
     stepTwoDescription:
       "Indiquez le nombre de voyageurs et les informations nécessaires pour préparer votre demande de séjour.",
-    stepThreeTitle: "Vérifiez et confirmez",
+    stepThreeTitle: "Vérifiez la demande",
     stepThreeDescription:
-      "Vérifiez le résumé du séjour, le total estimé et les informations voyageurs avant de confirmer la demande.",
+      "Vérifiez le résumé du séjour, le total estimé et les informations voyageurs avant confirmation.",
+    stepFourTitle: "Confirmez la demande",
+    stepFourDescription:
+      "Recevez un code de demande et gardez le résumé prêt pour la confirmation finale.",
   },
   de: {
     stepOneTitle: "Daten auswählen",
@@ -95,9 +115,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "Gästedaten hinzufügen",
     stepTwoDescription:
       "Gib die Gästezahl und die Informationen ein, die zur Vorbereitung deiner Aufenthaltsanfrage benötigt werden.",
-    stepThreeTitle: "Prüfen und bestätigen",
+    stepThreeTitle: "Anfrage prüfen",
     stepThreeDescription:
-      "Prüfe Aufenthaltsübersicht, geschätzten Gesamtpreis und Gästedaten, bevor du die Anfrage bestätigst.",
+      "Prüfe Aufenthaltsübersicht, geschätzten Gesamtpreis und Gästedaten vor der Bestätigung.",
+    stepFourTitle: "Anfrage bestätigen",
+    stepFourDescription:
+      "Erhalte einen Anfragecode und halte die Übersicht für die finale Bestätigung bereit.",
   },
   pl: {
     stepOneTitle: "Wybierz daty",
@@ -106,9 +129,12 @@ const bookingPageCopy: Record<Locale, BookingPageCopy> = {
     stepTwoTitle: "Dodaj dane gościa",
     stepTwoDescription:
       "Podaj liczbę gości oraz dane potrzebne do przygotowania zapytania o pobyt.",
-    stepThreeTitle: "Sprawdź i potwierdź",
+    stepThreeTitle: "Sprawdź zapytanie",
     stepThreeDescription:
-      "Sprawdź podsumowanie pobytu, szacowaną kwotę i dane gościa przed potwierdzeniem zapytania.",
+      "Sprawdź podsumowanie pobytu, szacowaną kwotę i dane gościa przed potwierdzeniem.",
+    stepFourTitle: "Potwierdź zapytanie",
+    stepFourDescription:
+      "Otrzymaj kod zapytania i zachowaj podsumowanie do finalnego potwierdzenia.",
   },
 };
 
@@ -138,6 +164,11 @@ export default async function BookingPage({ params }: BookingPageProps) {
       number: "03",
       title: copy.stepThreeTitle,
       description: copy.stepThreeDescription,
+    },
+    {
+      number: "04",
+      title: copy.stepFourTitle,
+      description: copy.stepFourDescription,
     },
   ];
 
@@ -252,7 +283,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
           z-index: 1;
           display: grid;
           gap: 18px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           margin-bottom: 34px;
         }
 
@@ -288,9 +319,14 @@ export default async function BookingPage({ params }: BookingPageProps) {
           line-height: 1.65;
         }
 
-        @media (max-width: 1180px) {
-          .booking-hero-panel,
+        @media (max-width: 1280px) {
           .booking-flow-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 1180px) {
+          .booking-hero-panel {
             grid-template-columns: 1fr;
           }
         }
@@ -299,6 +335,10 @@ export default async function BookingPage({ params }: BookingPageProps) {
           .booking-hero-panel {
             border-radius: 32px;
             padding: 26px;
+          }
+
+          .booking-flow-grid {
+            grid-template-columns: 1fr;
           }
 
           .booking-flow-card {

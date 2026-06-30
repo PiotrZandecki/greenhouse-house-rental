@@ -7,11 +7,23 @@ type SiteFooterProps = {
   dictionary: Dictionary;
 };
 
+const guideLabels: Record<Locale, string> = {
+  en: "Guide",
+  ceb: "Guide",
+  tl: "Guide",
+  ko: "가이드",
+  es: "Guía",
+  fr: "Guide",
+  de: "Guide",
+  pl: "Przewodnik",
+};
+
 export function SiteFooter({ locale, dictionary }: SiteFooterProps) {
   const quickLinks = [
     { href: "/home", label: dictionary.nav.home },
     { href: "/houses", label: dictionary.nav.houses },
     { href: "/gallery", label: dictionary.nav.gallery },
+    { href: "/guide", label: guideLabels[locale] },
     { href: "/contact", label: dictionary.nav.contact },
   ];
 

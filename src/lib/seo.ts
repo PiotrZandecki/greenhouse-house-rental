@@ -12,7 +12,8 @@ export type SeoPageKey =
   | "houses"
   | "gallery"
   | "booking"
-  | "contact";
+  | "contact"
+  | "guide";
 
 const siteName = "Greenhouse House Rental";
 
@@ -41,6 +42,56 @@ const pagePaths: Record<SeoPageKey, string> = {
   gallery: "/gallery",
   booking: "/booking",
   contact: "/contact",
+  guide: "/guide",
+};
+
+const guideSeoCopy: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  en: {
+    title: "Guide",
+    description:
+      "Guest guide for Greenhouse House Rental with local tips, house rules, FAQ and useful stay information for General Santos City.",
+  },
+  ceb: {
+    title: "Guide",
+    description:
+      "Guest guide para sa Greenhouse House Rental with local tips, house rules, FAQ ug useful stay information sa General Santos City.",
+  },
+  tl: {
+    title: "Guide",
+    description:
+      "Guest guide para sa Greenhouse House Rental with local tips, house rules, FAQ at useful stay information sa General Santos City.",
+  },
+  ko: {
+    title: "가이드",
+    description:
+      "General Santos City에서의 숙박을 위한 Greenhouse House Rental 게스트 가이드, 지역 팁, 숙소 규칙, FAQ와 유용한 정보.",
+  },
+  es: {
+    title: "Guía",
+    description:
+      "Guía para huéspedes de Greenhouse House Rental con consejos locales, normas de la casa, FAQ e información útil para General Santos City.",
+  },
+  fr: {
+    title: "Guide",
+    description:
+      "Guide voyageur de Greenhouse House Rental avec conseils locaux, règles de la maison, FAQ et informations utiles pour General Santos City.",
+  },
+  de: {
+    title: "Guide",
+    description:
+      "Gästeguide für Greenhouse House Rental mit lokalen Tipps, Hausregeln, FAQ und nützlichen Informationen für General Santos City.",
+  },
+  pl: {
+    title: "Przewodnik",
+    description:
+      "Przewodnik dla gości Greenhouse House Rental z lokalnymi wskazówkami, zasadami domu, FAQ i informacjami o pobycie w General Santos City.",
+  },
 };
 
 function getBaseUrl() {
@@ -91,6 +142,7 @@ function getPageTitle(locale: Locale, page: SeoPageKey) {
     gallery: `${dictionary.nav.gallery} | ${siteName}`,
     booking: `${dictionary.nav.booking} | ${siteName}`,
     contact: `${dictionary.nav.contact} | ${siteName}`,
+    guide: `${guideSeoCopy[locale].title} | ${siteName}`,
   };
 
   return titles[page];
@@ -107,6 +159,7 @@ function getPageDescription(locale: Locale, page: SeoPageKey) {
     gallery: dictionary.galleryPage.description,
     booking: dictionary.bookingPage.description,
     contact: dictionary.contactPage.description,
+    guide: guideSeoCopy[locale].description,
   };
 
   return descriptions[page];
@@ -208,6 +261,7 @@ export function getSitemapEntries() {
     "gallery",
     "booking",
     "contact",
+    "guide",
   ];
 
   const houses = getHouses();

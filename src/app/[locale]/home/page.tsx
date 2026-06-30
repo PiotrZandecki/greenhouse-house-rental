@@ -8,11 +8,205 @@ import { GalleryPreview } from "@/components/sections/GalleryPreview";
 import { HouseCard } from "@/components/sections/HouseCard";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { LocalizedLink } from "@/components/ui/LocalizedLink";
+import type { Locale } from "@/types/site";
 
 type HomePageProps = {
   params: Promise<{
     locale: string;
   }>;
+};
+
+type HomeGuideCopy = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: string;
+  cards: {
+    title: string;
+    description: string;
+  }[];
+};
+
+const homeGuideCopy: Record<Locale, HomeGuideCopy> = {
+  en: {
+    eyebrow: "Guest guide",
+    title: "Everything guests need before arriving.",
+    description:
+      "Explore local tips, house rules, stay information and answers to common questions before planning your visit.",
+    cta: "Open guest guide",
+    cards: [
+      {
+        title: "Local orientation",
+        description:
+          "General Santos City, Calumpang and Dadiangas North in one easy guide.",
+      },
+      {
+        title: "House rules",
+        description: "Clear check-in, check-out and stay expectations.",
+      },
+      {
+        title: "FAQ",
+        description: "Fast answers for guests before booking.",
+      },
+    ],
+  },
+  ceb: {
+    eyebrow: "Guest guide",
+    title: "Tanang importanteng info before moabot ang guests.",
+    description:
+      "Tan-awa ang local tips, house rules, stay information ug answers sa common questions before mag-plan sa visit.",
+    cta: "Open guest guide",
+    cards: [
+      {
+        title: "Local orientation",
+        description:
+          "General Santos City, Calumpang ug Dadiangas North in one easy guide.",
+      },
+      {
+        title: "House rules",
+        description: "Clear check-in, check-out ug stay expectations.",
+      },
+      {
+        title: "FAQ",
+        description: "Fast answers para sa guests before booking.",
+      },
+    ],
+  },
+  tl: {
+    eyebrow: "Guest guide",
+    title: "Lahat ng kailangan ng guests bago dumating.",
+    description:
+      "Explore local tips, house rules, stay information at answers sa common questions bago mag-plan ng visit.",
+    cta: "Open guest guide",
+    cards: [
+      {
+        title: "Local orientation",
+        description:
+          "General Santos City, Calumpang at Dadiangas North in one easy guide.",
+      },
+      {
+        title: "House rules",
+        description: "Clear check-in, check-out at stay expectations.",
+      },
+      {
+        title: "FAQ",
+        description: "Fast answers for guests before booking.",
+      },
+    ],
+  },
+  ko: {
+    eyebrow: "게스트 가이드",
+    title: "도착 전 필요한 모든 정보.",
+    description:
+      "방문을 계획하기 전에 지역 팁, 숙소 규칙, 숙박 정보와 자주 묻는 질문을 확인하세요.",
+    cta: "게스트 가이드 열기",
+    cards: [
+      {
+        title: "지역 안내",
+        description:
+          "General Santos City, Calumpang, Dadiangas North를 쉽게 확인하세요.",
+      },
+      {
+        title: "숙소 규칙",
+        description: "체크인, 체크아웃, 숙박 안내를 명확하게 정리했습니다.",
+      },
+      {
+        title: "FAQ",
+        description: "예약 전 자주 묻는 질문에 빠르게 답합니다.",
+      },
+    ],
+  },
+  es: {
+    eyebrow: "Guía para huéspedes",
+    title: "Todo lo que necesitas antes de llegar.",
+    description:
+      "Explora consejos locales, normas de la casa, información de estancia y respuestas a preguntas frecuentes.",
+    cta: "Abrir guía",
+    cards: [
+      {
+        title: "Orientación local",
+        description:
+          "General Santos City, Calumpang y Dadiangas North en una guía sencilla.",
+      },
+      {
+        title: "Normas de la casa",
+        description: "Check-in, check-out y expectativas claras.",
+      },
+      {
+        title: "FAQ",
+        description: "Respuestas rápidas antes de reservar.",
+      },
+    ],
+  },
+  fr: {
+    eyebrow: "Guide voyageur",
+    title: "Tout ce qu’il faut savoir avant d’arriver.",
+    description:
+      "Consultez les conseils locaux, règles de la maison, informations de séjour et réponses aux questions fréquentes.",
+    cta: "Ouvrir le guide",
+    cards: [
+      {
+        title: "Orientation locale",
+        description:
+          "General Santos City, Calumpang et Dadiangas North dans un guide simple.",
+      },
+      {
+        title: "Règles de la maison",
+        description:
+          "Arrivée, départ et attentes de séjour clairement expliqués.",
+      },
+      {
+        title: "FAQ",
+        description: "Réponses rapides avant de réserver.",
+      },
+    ],
+  },
+  de: {
+    eyebrow: "Gästeguide",
+    title: "Alles, was Gäste vor der Ankunft wissen sollten.",
+    description:
+      "Entdecke lokale Tipps, Hausregeln, Aufenthaltsinformationen und Antworten auf häufige Fragen.",
+    cta: "Guide öffnen",
+    cards: [
+      {
+        title: "Lokale Orientierung",
+        description:
+          "General Santos City, Calumpang und Dadiangas North in einem einfachen Guide.",
+      },
+      {
+        title: "Hausregeln",
+        description:
+          "Klare Informationen zu Check-in, Check-out und Aufenthalt.",
+      },
+      {
+        title: "FAQ",
+        description: "Schnelle Antworten vor der Buchung.",
+      },
+    ],
+  },
+  pl: {
+    eyebrow: "Przewodnik dla gości",
+    title: "Wszystko, czego goście potrzebują przed przyjazdem.",
+    description:
+      "Poznaj lokalne wskazówki, zasady domu, informacje o pobycie i odpowiedzi na najczęstsze pytania przed zaplanowaniem wizyty.",
+    cta: "Otwórz przewodnik",
+    cards: [
+      {
+        title: "Orientacja lokalna",
+        description:
+          "General Santos City, Calumpang i Dadiangas North w jednym prostym przewodniku.",
+      },
+      {
+        title: "Zasady domu",
+        description:
+          "Czytelne informacje o zameldowaniu, wymeldowaniu i pobycie.",
+      },
+      {
+        title: "FAQ",
+        description: "Szybkie odpowiedzi dla gości przed rezerwacją.",
+      },
+    ],
+  },
 };
 
 export default async function HomePage({ params }: HomePageProps) {
@@ -24,6 +218,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const dictionary = getDictionary(locale);
   const houses = getHouses();
+  const guideCopy = homeGuideCopy[locale];
 
   return (
     <>
@@ -164,6 +359,34 @@ export default async function HomePage({ params }: HomePageProps) {
 
       <ReviewsSection dictionary={dictionary} locale={locale} />
 
+      <section className="section guide-preview-section">
+        <div className="site-shell guide-preview-card">
+          <div>
+            <p className="eyebrow">{guideCopy.eyebrow}</p>
+            <h2>{guideCopy.title}</h2>
+            <p>{guideCopy.description}</p>
+
+            <LocalizedLink
+              className="button button-primary"
+              href="/guide"
+              locale={locale}
+            >
+              {guideCopy.cta}
+            </LocalizedLink>
+          </div>
+
+          <div className="guide-preview-grid">
+            {guideCopy.cards.map((card) => (
+              <article key={card.title}>
+                <span>✓</span>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section">
         <div className="site-shell final-cta">
           <p className="eyebrow">Greenhouse House Rental</p>
@@ -250,6 +473,78 @@ export default async function HomePage({ params }: HomePageProps) {
           z-index: 4;
         }
 
+        .guide-preview-section {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .guide-preview-card {
+          display: grid;
+          align-items: center;
+          gap: clamp(28px, 5vw, 70px);
+          grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-xl);
+          background:
+            linear-gradient(135deg, var(--primary-soft), transparent),
+            color-mix(in srgb, var(--surface) 96%, transparent);
+          box-shadow: var(--shadow-soft);
+          padding: clamp(30px, 5vw, 68px);
+        }
+
+        .guide-preview-card h2 {
+          margin: 0;
+          font-size: clamp(2.4rem, 4.8vw, 5.2rem);
+          line-height: 1.04;
+          letter-spacing: -0.075em;
+        }
+
+        .guide-preview-card p {
+          color: var(--muted);
+          line-height: 1.75;
+        }
+
+        .guide-preview-grid {
+          display: grid;
+          gap: 16px;
+        }
+
+        .guide-preview-grid article {
+          display: grid;
+          gap: 8px;
+          border: 1px solid var(--border);
+          border-radius: 26px;
+          background: var(--surface);
+          padding: 24px;
+        }
+
+        .guide-preview-grid span {
+          display: grid;
+          width: 44px;
+          height: 44px;
+          place-items: center;
+          border-radius: 16px;
+          background: var(--primary);
+          color: white;
+          font-weight: 950;
+        }
+
+        .guide-preview-grid h3 {
+          margin: 6px 0 0;
+          font-size: 1.28rem;
+          letter-spacing: -0.04em;
+        }
+
+        .guide-preview-grid p {
+          margin: 0;
+        }
+
+        @media (max-width: 980px) {
+          .guide-preview-card {
+            grid-template-columns: 1fr;
+          }
+        }
+
         @media (max-width: 760px) {
           .home-hero-mini-top {
             top: 18px;
@@ -264,6 +559,11 @@ export default async function HomePage({ params }: HomePageProps) {
           .home-hero-rating {
             left: 18px;
             top: 18px;
+          }
+
+          .guide-preview-card {
+            border-radius: 32px;
+            padding: 26px;
           }
         }
       `}</style>

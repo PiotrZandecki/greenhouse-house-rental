@@ -14,6 +14,17 @@ type SiteHeaderProps = {
   dictionary: Dictionary;
 };
 
+const guideLabels: Record<Locale, string> = {
+  en: "Guide",
+  ceb: "Guide",
+  tl: "Guide",
+  ko: "가이드",
+  es: "Guía",
+  fr: "Guide",
+  de: "Guide",
+  pl: "Przewodnik",
+};
+
 export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +34,7 @@ export function SiteHeader({ locale, dictionary }: SiteHeaderProps) {
     { href: "/houses", label: dictionary.nav.houses },
     { href: "/gallery", label: dictionary.nav.gallery },
     { href: "/booking", label: dictionary.nav.booking },
+    { href: "/guide", label: guideLabels[locale] },
     { href: "/contact", label: dictionary.nav.contact },
   ];
 

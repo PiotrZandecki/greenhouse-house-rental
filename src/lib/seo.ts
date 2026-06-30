@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import type { Locale } from "@/types/site";
 import { getDictionary } from "@/data/dictionaries";
+import { getHouses } from "@/data/houses";
 import { locales } from "@/lib/i18n";
 
 export type SeoPageKey =
@@ -55,6 +56,10 @@ export function getCanonicalUrl(locale: Locale | null, page: SeoPageKey) {
 
   const localePrefix = locale ? `/${locale}` : "";
   return new URL(`${localePrefix}${pagePaths[page]}`, baseUrl).toString();
+}
+
+export function getHouseCanonicalUrl(locale: Locale, slug: string) {
+  return new URL(`/${locale}/houses/${slug}`, getBaseUrl()).toString();
 }
 
 function getLanguageAlternates(page: SeoPageKey) {
@@ -205,10 +210,13 @@ export function getSitemapEntries() {
     "contact",
   ];
 
+  const houses = getHouses();
+
   return [
     getCanonicalUrl(null, "welcome"),
-    ...locales.flatMap((locale) =>
-      pages.map((page) => getCanonicalUrl(locale, page)),
-    ),
+    ...locales.flatMap((locale) => [
+      ...pages.map((page) => getCanonicalUrl(locale, page)),
+      ...houses.map((house) => getHouseCanonicalUrl(locale, house.slug)),
+    ]),
   ];
 }

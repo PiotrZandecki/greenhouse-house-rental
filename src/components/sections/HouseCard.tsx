@@ -71,7 +71,7 @@ export function HouseCard({ house, locale, dictionary }: HouseCardProps) {
 
           <LocalizedLink
             className="button button-secondary"
-            href="/houses"
+            href={`/houses/${house.slug}`}
             locale={locale}
           >
             {dictionary.common.learnMore}

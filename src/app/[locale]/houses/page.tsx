@@ -5,11 +5,52 @@ import { getDictionary } from "@/data/dictionaries";
 import { getHouses } from "@/data/houses";
 import { isLocale } from "@/lib/i18n";
 import { LocalizedLink } from "@/components/ui/LocalizedLink";
+import type { Locale } from "@/types/site";
 
 type HousesPageProps = {
   params: Promise<{
     locale: string;
   }>;
+};
+
+type HousesCopy = {
+  viewDetails: string;
+  mapPreview: string;
+};
+
+const housesCopy: Record<Locale, HousesCopy> = {
+  en: {
+    viewDetails: "View house details",
+    mapPreview: "Location preview",
+  },
+  ceb: {
+    viewDetails: "Tan-awa ang house details",
+    mapPreview: "Location preview",
+  },
+  tl: {
+    viewDetails: "Tingnan ang house details",
+    mapPreview: "Location preview",
+  },
+  ko: {
+    viewDetails: "숙소 상세 보기",
+    mapPreview: "위치 미리보기",
+  },
+  es: {
+    viewDetails: "Ver detalles de la casa",
+    mapPreview: "Vista de ubicación",
+  },
+  fr: {
+    viewDetails: "Voir les détails de la maison",
+    mapPreview: "Aperçu de l’emplacement",
+  },
+  de: {
+    viewDetails: "Hausdetails ansehen",
+    mapPreview: "Standortvorschau",
+  },
+  pl: {
+    viewDetails: "Zobacz szczegóły domu",
+    mapPreview: "Podgląd lokalizacji",
+  },
 };
 
 export default async function HousesPage({ params }: HousesPageProps) {
@@ -21,6 +62,7 @@ export default async function HousesPage({ params }: HousesPageProps) {
 
   const dictionary = getDictionary(locale);
   const houses = getHouses();
+  const copy = housesCopy[locale];
 
   return (
     <section className="page-section houses-page-enhanced">
@@ -92,7 +134,7 @@ export default async function HousesPage({ params }: HousesPageProps) {
                   />
 
                   <div>
-                    <p className="eyebrow">{house.location[locale]}</p>
+                    <p className="eyebrow">{copy.mapPreview}</p>
                     <p>{house.address[locale]}</p>
                     <a
                       className="button button-secondary"
@@ -146,11 +188,20 @@ export default async function HousesPage({ params }: HousesPageProps) {
                 <div className="property-actions">
                   <LocalizedLink
                     className="button button-primary"
+                    href={`/houses/${house.slug}`}
+                    locale={locale}
+                  >
+                    {copy.viewDetails}
+                  </LocalizedLink>
+
+                  <LocalizedLink
+                    className="button button-secondary"
                     href="/booking"
                     locale={locale}
                   >
                     {dictionary.common.bookNow}
                   </LocalizedLink>
+
                   <LocalizedLink
                     className="button button-secondary"
                     href="/gallery"

@@ -196,7 +196,7 @@ export default async function HousesPage({ params }: HousesPageProps) {
 
                   <LocalizedLink
                     className="button button-secondary"
-                    href="/booking"
+                    href={`/booking?house=${house.id}`}
                     locale={locale}
                   >
                     {dictionary.common.bookNow}

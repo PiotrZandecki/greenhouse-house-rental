@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 
 import type { Dictionary } from "@/data/dictionaries";
 import type { House, HouseId, Locale } from "@/types/site";
@@ -61,7 +61,13 @@ type BookingCopy = {
   datesRequired: string;
   reviewTitle: string;
   reviewDescription: string;
+  premiumSummaryTitle: string;
+  premiumSummaryDescription: string;
+  guestDetails: string;
+  stayValue: string;
 };
+
+const houseQueryChangeEvent = "greenhouse-house-query-change";
 
 const bookingCopy: Record<Locale, BookingCopy> = {
   en: {
@@ -112,6 +118,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "Review your stay request",
     reviewDescription:
       "Check the selected house, dates, guest details and estimated total before confirming.",
+    premiumSummaryTitle: "Request summary",
+    premiumSummaryDescription:
+      "Keep this summary ready while the host reviews final availability.",
+    guestDetails: "Guest details",
+    stayValue: "Stay value",
   },
   ceb: {
     plannerEyebrow: "Booking planner",
@@ -161,6 +172,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "Review your stay request",
     reviewDescription:
       "Tan-awa ang selected house, dates, guest details ug estimated total before confirmation.",
+    premiumSummaryTitle: "Request summary",
+    premiumSummaryDescription:
+      "Keep this summary ready while the host reviews final availability.",
+    guestDetails: "Guest details",
+    stayValue: "Stay value",
   },
   tl: {
     plannerEyebrow: "Booking planner",
@@ -210,6 +226,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "Review your stay request",
     reviewDescription:
       "Check the selected house, dates, guest details and estimated total before confirming.",
+    premiumSummaryTitle: "Request summary",
+    premiumSummaryDescription:
+      "Keep this summary ready while the host reviews final availability.",
+    guestDetails: "Guest details",
+    stayValue: "Stay value",
   },
   ko: {
     plannerEyebrow: "예약 플래너",
@@ -259,6 +280,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "숙박 요청 검토",
     reviewDescription:
       "확인 전 숙소, 날짜, 게스트 정보와 예상 합계를 확인하세요.",
+    premiumSummaryTitle: "요청 요약",
+    premiumSummaryDescription:
+      "호스트가 최종 가능 여부를 확인하는 동안 이 요약을 보관하세요.",
+    guestDetails: "게스트 정보",
+    stayValue: "숙박 금액",
   },
   es: {
     plannerEyebrow: "Planificador de reserva",
@@ -308,6 +334,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "Revisa tu solicitud de estancia",
     reviewDescription:
       "Comprueba la casa, fechas, datos del huésped y total estimado antes de confirmar.",
+    premiumSummaryTitle: "Resumen de solicitud",
+    premiumSummaryDescription:
+      "Conserva este resumen mientras el anfitrión revisa la disponibilidad final.",
+    guestDetails: "Datos del huésped",
+    stayValue: "Valor de estancia",
   },
   fr: {
     plannerEyebrow: "Planificateur de réservation",
@@ -358,6 +389,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "Vérifiez votre demande de séjour",
     reviewDescription:
       "Vérifiez la maison, les dates, les informations voyageurs et le total estimé avant confirmation.",
+    premiumSummaryTitle: "Résumé de demande",
+    premiumSummaryDescription:
+      "Gardez ce résumé pendant que l’hôte vérifie la disponibilité finale.",
+    guestDetails: "Informations voyageurs",
+    stayValue: "Valeur du séjour",
   },
   de: {
     plannerEyebrow: "Buchungsplaner",
@@ -407,6 +443,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "Aufenthaltsanfrage prüfen",
     reviewDescription:
       "Prüfe Haus, Daten, Gästeinformationen und geschätzten Gesamtpreis vor der Bestätigung.",
+    premiumSummaryTitle: "Anfrageübersicht",
+    premiumSummaryDescription:
+      "Bewahre diese Übersicht auf, während der Gastgeber die finale Verfügbarkeit prüft.",
+    guestDetails: "Gästedaten",
+    stayValue: "Aufenthaltswert",
   },
   pl: {
     plannerEyebrow: "Planer rezerwacji",
@@ -456,6 +497,11 @@ const bookingCopy: Record<Locale, BookingCopy> = {
     reviewTitle: "Sprawdź zapytanie o pobyt",
     reviewDescription:
       "Sprawdź wybrany dom, daty, dane gościa i szacowaną kwotę przed potwierdzeniem.",
+    premiumSummaryTitle: "Podsumowanie zapytania",
+    premiumSummaryDescription:
+      "Zachowaj to podsumowanie, gdy gospodarz sprawdza finalną dostępność.",
+    guestDetails: "Dane gościa",
+    stayValue: "Wartość pobytu",
   },
 };
 
@@ -471,6 +517,60 @@ const weekDays: Record<Locale, string[]> = {
 };
 
 const millisecondsPerDay = 1000 * 60 * 60 * 24;
+
+function subscribeToHouseQuery(callback: () => void) {
+  window.addEventListener("popstate", callback);
+  window.addEventListener(houseQueryChangeEvent, callback);
+
+  return () => {
+    window.removeEventListener("popstate", callback);
+    window.removeEventListener(houseQueryChangeEvent, callback);
+  };
+}
+
+function getHouseQuerySnapshot() {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
+  return new URLSearchParams(window.location.search).get("house") ?? "";
+}
+
+function getHouseQueryServerSnapshot() {
+  return "";
+}
+
+function resolveHouseId(value: string, houseIds: HouseId[]) {
+  return houseIds.includes(value as HouseId) ? (value as HouseId) : undefined;
+}
+
+function updateHouseQuery(houseId: HouseId) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const url = new URL(window.location.href);
+  url.searchParams.set("house", houseId);
+
+  window.history.replaceState(
+    null,
+    "",
+    `${url.pathname}${url.search}${url.hash}`,
+  );
+  window.dispatchEvent(new Event(houseQueryChangeEvent));
+}
+
+function useHouseIdFromQuery(houses: House[]) {
+  const queryValue = useSyncExternalStore(
+    subscribeToHouseQuery,
+    getHouseQuerySnapshot,
+    getHouseQueryServerSnapshot,
+  );
+
+  const houseIds = useMemo(() => houses.map((house) => house.id), [houses]);
+
+  return resolveHouseId(queryValue, houseIds);
+}
 
 function toIsoDate(date: Date): string {
   const year = date.getFullYear();
@@ -616,11 +716,12 @@ export function AvailabilityCalendar({
 }: AvailabilityCalendarProps) {
   const today = new Date();
   const copy = bookingCopy[locale];
+  const queryHouseId = useHouseIdFromQuery(houses);
+  const selectedHouseId = queryHouseId ?? houses[0].id;
 
   const [visibleDate, setVisibleDate] = useState(
     new Date(today.getFullYear(), today.getMonth(), 1),
   );
-  const [selectedHouseId, setSelectedHouseId] = useState<HouseId>(houses[0].id);
   const [checkIn, setCheckIn] = useState<string>();
   const [checkOut, setCheckOut] = useState<string>();
   const [rangeError, setRangeError] = useState("");
@@ -713,7 +814,7 @@ export function AvailabilityCalendar({
   }
 
   function selectHouse(houseId: HouseId) {
-    setSelectedHouseId(houseId);
+    updateHouseQuery(houseId);
     setCheckIn(undefined);
     setCheckOut(undefined);
     clearRequestState();
@@ -776,8 +877,9 @@ export function AvailabilityCalendar({
     }
 
     setFieldErrors((current) => ({
-      ...current,
-      ...nextErrors,
+      dates: current.dates,
+      guestName: nextErrors.guestName,
+      guestEmail: nextErrors.guestEmail,
     }));
 
     return Object.keys(nextErrors).length === 0;
@@ -1039,22 +1141,39 @@ export function AvailabilityCalendar({
             <h2>{copy.requestReady}</h2>
             <p>{copy.requestReadyDescription}</p>
 
-            <div className="booking-summary-list">
+            <div className="booking-premium-summary">
               <div>
-                <span>{copy.requestCode}</span>
-                <strong>{requestCode}</strong>
+                <p className="eyebrow">{copy.premiumSummaryTitle}</p>
+                <h3>{selectedHouse.name}</h3>
+                <p>{copy.premiumSummaryDescription}</p>
               </div>
-              <div>
-                <span>{copy.selectedHouse}</span>
-                <strong>{selectedHouse.name}</strong>
-              </div>
-              <div>
-                <span>{copy.selectedDates}</span>
-                <strong>{renderSelectedDates()}</strong>
-              </div>
-              <div>
-                <span>{copy.estimatedTotal}</span>
-                <strong>{estimatedTotal}</strong>
+
+              <div className="booking-premium-grid">
+                <div>
+                  <span>{copy.requestCode}</span>
+                  <strong>{requestCode}</strong>
+                </div>
+                <div>
+                  <span>{copy.selectedDates}</span>
+                  <strong>{renderSelectedDates()}</strong>
+                </div>
+                <div>
+                  <span>{dictionary.common.guests}</span>
+                  <strong>{guestCount}</strong>
+                </div>
+                <div>
+                  <span>{copy.nights}</span>
+                  <strong>{nights}</strong>
+                </div>
+                <div>
+                  <span>{copy.guestDetails}</span>
+                  <strong>{guestName}</strong>
+                  <small>{guestEmail}</small>
+                </div>
+                <div>
+                  <span>{copy.stayValue}</span>
+                  <strong>{estimatedTotal}</strong>
+                </div>
               </div>
             </div>
 
@@ -1507,7 +1626,8 @@ export function AvailabilityCalendar({
           padding: 14px;
         }
 
-        .booking-summary-list span {
+        .booking-summary-list span,
+        .booking-premium-grid span {
           color: var(--primary);
           font-size: 0.72rem;
           font-weight: 950;
@@ -1515,7 +1635,8 @@ export function AvailabilityCalendar({
           text-transform: uppercase;
         }
 
-        .booking-summary-list strong {
+        .booking-summary-list strong,
+        .booking-premium-grid strong {
           line-height: 1.35;
         }
 
@@ -1572,7 +1693,8 @@ export function AvailabilityCalendar({
           font-weight: 900;
         }
 
-        .booking-review-panel {
+        .booking-review-panel,
+        .booking-premium-summary {
           border: 1px solid var(--border);
           border-radius: 24px;
           background:
@@ -1581,13 +1703,15 @@ export function AvailabilityCalendar({
           padding: 20px;
         }
 
-        .booking-review-panel h3 {
+        .booking-review-panel h3,
+        .booking-premium-summary h3 {
           margin: 0 0 10px;
           font-size: 1.35rem;
           letter-spacing: -0.04em;
         }
 
-        .booking-review-panel p {
+        .booking-review-panel p,
+        .booking-premium-summary p {
           margin-top: 0;
         }
 
@@ -1598,6 +1722,32 @@ export function AvailabilityCalendar({
           padding-left: 18px;
           color: var(--muted);
           line-height: 1.55;
+        }
+
+        .booking-premium-summary {
+          display: grid;
+          gap: 18px;
+        }
+
+        .booking-premium-grid {
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .booking-premium-grid > div {
+          display: grid;
+          gap: 5px;
+          border: 1px solid var(--border);
+          border-radius: 18px;
+          background: var(--surface);
+          padding: 14px;
+        }
+
+        .booking-premium-grid small {
+          color: var(--muted);
+          font-weight: 850;
+          line-height: 1.35;
         }
 
         .booking-actions-panel {
@@ -1672,7 +1822,8 @@ export function AvailabilityCalendar({
           }
 
           .booking-house-selector,
-          .booking-process-steps {
+          .booking-process-steps,
+          .booking-premium-grid {
             grid-template-columns: 1fr;
           }
         }

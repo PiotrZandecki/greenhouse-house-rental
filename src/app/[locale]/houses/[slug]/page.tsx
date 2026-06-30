@@ -494,7 +494,7 @@ export default async function HouseDetailsPage({
           <div className="house-detail-hero-actions">
             <LocalizedLink
               className="button button-primary"
-              href="/booking"
+              href={`/booking?house=${house.id}`}
               locale={locale}
             >
               {copy.bookThisHouse}
@@ -688,7 +688,7 @@ export default async function HouseDetailsPage({
           <div className="hero-actions">
             <LocalizedLink
               className="button button-primary"
-              href="/booking"
+              href={`/booking?house=${house.id}`}
               locale={locale}
             >
               {copy.bookThisHouse}

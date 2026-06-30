@@ -7,6 +7,8 @@ import { isLocale } from "@/lib/i18n";
 import { GalleryPreview } from "@/components/sections/GalleryPreview";
 import { HouseCard } from "@/components/sections/HouseCard";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
+import { StayPathSection } from "@/components/sections/StayPathSection";
+import { WhyGuestsChooseUs } from "@/components/sections/WhyGuestsChooseUs";
 import { LocalizedLink } from "@/components/ui/LocalizedLink";
 import type { Locale } from "@/types/site";
 
@@ -306,6 +308,8 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
+      <StayPathSection dictionary={dictionary} locale={locale} />
+
       <section className="section">
         <div className="site-shell">
           <div className="section-heading section-heading-row">
@@ -337,21 +341,33 @@ export default async function HomePage({ params }: HomePageProps) {
         </div>
       </section>
 
+      <WhyGuestsChooseUs houses={houses} locale={locale} />
+
       <section className="section section-split">
-        <div className="site-shell split-card">
+        <div className="site-shell split-card split-card-polished">
           <div>
             <p className="eyebrow">{dictionary.bookingPage.eyebrow}</p>
             <h2>{dictionary.home.bookingTitle}</h2>
             <p>{dictionary.home.bookingDescription}</p>
           </div>
 
-          <LocalizedLink
-            className="button button-primary"
-            href="/booking"
-            locale={locale}
-          >
-            {dictionary.common.bookNow}
-          </LocalizedLink>
+          <div className="split-card-actions">
+            <LocalizedLink
+              className="button button-primary"
+              href="/booking?house=fern-house"
+              locale={locale}
+            >
+              Fern House
+            </LocalizedLink>
+
+            <LocalizedLink
+              className="button button-secondary"
+              href="/booking?house=olive-house"
+              locale={locale}
+            >
+              Olive House
+            </LocalizedLink>
+          </div>
         </div>
       </section>
 
@@ -388,18 +404,28 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       <section className="section">
-        <div className="site-shell final-cta">
+        <div className="site-shell final-cta final-cta-home-polished">
           <p className="eyebrow">Greenhouse House Rental</p>
           <h2>{dictionary.home.ctaTitle}</h2>
           <p>{dictionary.home.ctaDescription}</p>
 
-          <LocalizedLink
-            className="button button-primary"
-            href="/contact"
-            locale={locale}
-          >
-            {dictionary.common.contactUs}
-          </LocalizedLink>
+          <div className="hero-actions">
+            <LocalizedLink
+              className="button button-primary"
+              href="/booking"
+              locale={locale}
+            >
+              {dictionary.common.bookNow}
+            </LocalizedLink>
+
+            <LocalizedLink
+              className="button button-secondary"
+              href="/contact"
+              locale={locale}
+            >
+              {dictionary.common.contactUs}
+            </LocalizedLink>
+          </div>
         </div>
       </section>
 
@@ -418,6 +444,19 @@ export default async function HomePage({ params }: HomePageProps) {
           content: "";
           border-radius: 50%;
           background: radial-gradient(circle, var(--primary-soft), transparent 70%);
+          pointer-events: none;
+        }
+
+        .greenhouse-home-hero::after {
+          position: absolute;
+          bottom: 4%;
+          left: -18rem;
+          width: 34rem;
+          height: 34rem;
+          content: "";
+          border-radius: 50%;
+          background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+          opacity: 0.62;
           pointer-events: none;
         }
 
@@ -471,6 +510,17 @@ export default async function HomePage({ params }: HomePageProps) {
           right: auto;
           top: 30px;
           z-index: 4;
+        }
+
+        .split-card-polished {
+          align-items: center;
+        }
+
+        .split-card-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: flex-end;
         }
 
         .guide-preview-section {
@@ -539,9 +589,35 @@ export default async function HomePage({ params }: HomePageProps) {
           margin: 0;
         }
 
+        .final-cta-home-polished {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .final-cta-home-polished::before {
+          position: absolute;
+          top: -14rem;
+          right: -14rem;
+          width: 32rem;
+          height: 32rem;
+          content: "";
+          border-radius: 50%;
+          background: radial-gradient(circle, var(--primary-soft), transparent 70%);
+          pointer-events: none;
+        }
+
+        .final-cta-home-polished > * {
+          position: relative;
+          z-index: 1;
+        }
+
         @media (max-width: 980px) {
           .guide-preview-card {
             grid-template-columns: 1fr;
+          }
+
+          .split-card-actions {
+            justify-content: flex-start;
           }
         }
 
@@ -564,6 +640,12 @@ export default async function HomePage({ params }: HomePageProps) {
           .guide-preview-card {
             border-radius: 32px;
             padding: 26px;
+          }
+
+          .split-card-actions,
+          .split-card-actions .button,
+          .final-cta-home-polished .button {
+            width: 100%;
           }
         }
       `}</style>

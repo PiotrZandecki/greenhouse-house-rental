@@ -1,0 +1,17 @@
+{
+  "name": "Greenhouse House Rental",
+  "short_name": "Greenhouse",
+  "description": "Private tropical house rentals in General Santos City.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5efe2",
+  "theme_color": "#1f6f43",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

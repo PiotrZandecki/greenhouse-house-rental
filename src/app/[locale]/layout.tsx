@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { SkipToContent } from "@/components/a11y/SkipToContent";
+import { LocaleChrome } from "@/components/layout/LocaleChrome";
+import { ProductionPolish } from "@/components/layout/ProductionPolish";
 import { getDictionary } from "@/data/dictionaries";
 import { isLocale, locales } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { LocaleChrome } from "@/components/layout/LocaleChrome";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -46,8 +48,13 @@ export default async function LocaleLayout({
   const dictionary = getDictionary(locale);
 
   return (
-    <LocaleChrome dictionary={dictionary} locale={locale}>
-      {children}
-    </LocaleChrome>
+    <>
+      <SkipToContent />
+      <ProductionPolish />
+
+      <LocaleChrome dictionary={dictionary} locale={locale}>
+        <main id="main-content">{children}</main>
+      </LocaleChrome>
+    </>
   );
 }

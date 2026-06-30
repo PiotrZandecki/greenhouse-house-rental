@@ -1,29 +1,76 @@
-import type { Metadata } from "next";
-
-import { GlobalPolish } from "@/components/layout/GlobalPolish";
-import { buildWelcomeMetadata } from "@/lib/seo";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
-export const metadata: Metadata = buildWelcomeMetadata();
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-const themeScript = `
-(function () {
-  try {
-    var storedTheme = window.localStorage.getItem("greenhouse-theme");
-    var theme =
-      storedTheme === "light" || storedTheme === "dark"
-        ? storedTheme
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
-    document.documentElement.dataset.theme = theme;
-  } catch (error) {
-    document.documentElement.dataset.theme = "light";
-  }
-})();
-`;
+export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      "https://greenhouse-house-rental.pages.dev",
+  ),
+  title: {
+    default: "Greenhouse House Rental",
+    template: "%s | Greenhouse House Rental",
+  },
+  description:
+    "Private tropical house rentals in General Santos City, South Cotabato, Philippines.",
+  applicationName: "Greenhouse House Rental",
+  authors: [{ name: "Greenhouse House Rental" }],
+  creator: "Greenhouse House Rental",
+  publisher: "Greenhouse House Rental",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/favicon.ico",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Greenhouse House Rental",
+    title: "Greenhouse House Rental",
+    description:
+      "Private tropical house rentals in General Santos City, South Cotabato, Philippines.",
+    images: [
+      {
+        url: "/images/fern-house/fern-exterior-01.webp",
+        width: 1200,
+        height: 900,
+        alt: "Greenhouse House Rental",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Greenhouse House Rental",
+    description:
+      "Private tropical house rentals in General Santos City, South Cotabato, Philippines.",
+    images: ["/images/fern-house/fern-exterior-01.webp"],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    {
+      media: "(prefers-color-scheme: light)",
+      color: "#f5efe2",
+    },
+    {
+      media: "(prefers-color-scheme: dark)",
+      color: "#07100b",
+    },
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -32,11 +79,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
-      <body>
-        <GlobalPolish />
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
     </html>

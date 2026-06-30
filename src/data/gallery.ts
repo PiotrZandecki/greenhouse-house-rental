@@ -1,247 +1,321 @@
-import type { GalleryItem } from "@/types/site";
+import type { GalleryItem, Locale } from "@/types/site";
 
-export const galleryItems: GalleryItem[] = [
+type GalleryItemInput = Omit<GalleryItem, "imagePlaceholder">;
+
+function text(en: string, pl = en): Record<Locale, string> {
+  return {
+    en,
+    ceb: en,
+    tl: en,
+    ko: en,
+    es: en,
+    fr: en,
+    de: en,
+    pl,
+  };
+}
+
+function createSvgPlaceholder(colorA: string, colorB: string, colorC: string) {
+  const svg = `
+    <svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="900" fill="${colorA}"/>
+      <circle cx="240" cy="180" r="360" fill="${colorB}" opacity="0.7"/>
+      <circle cx="980" cy="720" r="420" fill="${colorC}" opacity="0.62"/>
+      <rect x="0" y="0" width="1200" height="900" fill="url(#grain)" opacity="0.12"/>
+      <defs>
+        <filter id="noiseFilter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+        </filter>
+        <pattern id="grain" patternUnits="userSpaceOnUse" width="1200" height="900">
+          <rect width="1200" height="900" filter="url(#noiseFilter)"/>
+        </pattern>
+      </defs>
+    </svg>
+  `.trim();
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+const fernPlaceholder = createSvgPlaceholder("#294634", "#6f8f68", "#d8b36b");
+const olivePlaceholder = createSvgPlaceholder("#3f4930", "#8d8150", "#d8c98a");
+
+function withPlaceholder(item: GalleryItemInput): GalleryItem {
+  return {
+    ...item,
+    imagePlaceholder:
+      item.houseId === "fern-house" ? fernPlaceholder : olivePlaceholder,
+  };
+}
+
+const items: GalleryItemInput[] = [
   {
     id: "fern-exterior-01",
     houseId: "fern-house",
     category: "exterior",
     imageSrc: "/images/fern-house/fern-exterior-01.webp",
-    imagePlaceholder: "Soft green exterior with tropical plants",
-    title: {
-      en: "Fern House garden entrance",
-      ceb: "Fern House garden entrance",
-      tl: "Fern House garden entrance",
-      ko: "Fern House 가든 입구",
-      es: "Entrada del jardín de Fern House",
-      fr: "Entrée jardin de Fern House",
-      de: "Garteneingang von Fern House",
-      pl: "Wejście ogrodowe Fern House",
-    },
-    description: {
-      en: "A calm first impression surrounded by natural greenery.",
-      ceb: "Malinawon nga first impression nga napalibotan sa natural greenery.",
-      tl: "Tahimik na first impression na napapalibutan ng greenery.",
-      ko: "자연 녹지로 둘러싸인 차분한 첫인상.",
-      es: "Una primera impresión tranquila rodeada de vegetación.",
-      fr: "Une première impression calme entourée de verdure.",
-      de: "Ein ruhiger erster Eindruck, umgeben von natürlichem Grün.",
-      pl: "Spokojne pierwsze wrażenie otoczone naturalną zielenią.",
-    },
+    title: text("Fern House garden arrival", "Wejście do ogrodu Fern House"),
+    description: text(
+      "A calm tropical arrival framed by greenery, warm light and a private residential atmosphere.",
+      "Spokojne tropikalne wejście otoczone zielenią, ciepłym światłem i prywatnym mieszkalnym klimatem.",
+    ),
   },
   {
-    id: "fern-bedroom-01",
+    id: "fern-exterior-02",
     houseId: "fern-house",
-    category: "bedroom",
-    imageSrc: "/images/fern-house/fern-bedroom-01.webp",
-    imagePlaceholder: "Bright bedroom with linen textures",
-    title: {
-      en: "Soft linen bedroom",
-      ceb: "Soft linen bedroom",
-      tl: "Soft linen bedroom",
-      ko: "부드러운 린넨 침실",
-      es: "Dormitorio con lino suave",
-      fr: "Chambre au lin doux",
-      de: "Schlafzimmer mit weichem Leinen",
-      pl: "Sypialnia z miękkim lnem",
-    },
-    description: {
-      en: "Minimal, warm and designed for restful evenings.",
-      ceb: "Minimal, warm ug gi-design para sa restful evenings.",
-      tl: "Minimal, warm at designed for restful evenings.",
-      ko: "미니멀하고 따뜻하며 편안한 저녁을 위해 설계되었습니다.",
-      es: "Minimalista, cálida y pensada para descansar.",
-      fr: "Minimaliste, chaleureuse et pensée pour le repos.",
-      de: "Minimalistisch, warm und für erholsame Abende gestaltet.",
-      pl: "Minimalna, ciepła i zaprojektowana z myślą o spokojnych wieczorach.",
-    },
+    category: "exterior",
+    imageSrc: "/images/fern-house/fern-exterior-02.webp",
+    title: text("Soft morning facade", "Delikatna poranna fasada"),
+    description: text(
+      "The front of Fern House in soft morning light, with garden textures and a quiet tropical street feel.",
+      "Front Fern House w delikatnym porannym świetle, z ogrodową fakturą i spokojnym tropikalnym charakterem ulicy.",
+    ),
+  },
+  {
+    id: "fern-interior-01",
+    houseId: "fern-house",
+    category: "interior",
+    imageSrc: "/images/fern-house/fern-interior-01.webp",
+    title: text("Calm open living space", "Spokojna otwarta część dzienna"),
+    description: text(
+      "A bright living area designed for slow mornings, reading, planning the day and relaxing after exploring General Santos City.",
+      "Jasna część dzienna zaprojektowana na wolne poranki, czytanie, planowanie dnia i odpoczynek po zwiedzaniu General Santos City.",
+    ),
+  },
+  {
+    id: "fern-living-01",
+    houseId: "fern-house",
+    category: "interior",
+    imageSrc: "/images/fern-house/fern-living-01.webp",
+    title: text("Garden-facing lounge", "Salon z widokiem na ogród"),
+    description: text(
+      "A cozy lounge corner with natural textures, soft seating and a direct visual connection to the tropical greenery outside.",
+      "Przytulny narożnik wypoczynkowy z naturalnymi teksturami, miękkim siedziskiem i widokiem na tropikalną zieleń za oknem.",
+    ),
   },
   {
     id: "fern-kitchen-01",
     houseId: "fern-house",
     category: "kitchen",
     imageSrc: "/images/fern-house/fern-kitchen-01.webp",
-    imagePlaceholder: "Small kitchenette with coffee corner",
-    title: {
-      en: "Compact coffee kitchen",
-      ceb: "Compact coffee kitchen",
-      tl: "Compact coffee kitchen",
-      ko: "컴팩트 커피 키친",
-      es: "Cocina compacta con café",
-      fr: "Petite cuisine avec coin café",
-      de: "Kompakte Kaffeeküche",
-      pl: "Kompaktowa kuchnia z kawą",
-    },
-    description: {
-      en: "A practical corner for breakfast and slow coffee.",
-      ceb: "Practical corner para sa breakfast ug slow coffee.",
-      tl: "Practical corner for breakfast and slow coffee.",
-      ko: "아침 식사와 여유로운 커피를 위한 실용적인 코너.",
-      es: "Un rincón práctico para desayunar y tomar café.",
-      fr: "Un coin pratique pour le petit-déjeuner et le café.",
-      de: "Eine praktische Ecke für Frühstück und langsamen Kaffee.",
-      pl: "Praktyczny kącik na śniadanie i powolną kawę.",
-    },
+    title: text("Compact tropical kitchen", "Kompaktowa tropikalna kuchnia"),
+    description: text(
+      "A practical kitchen space prepared for simple breakfasts, fresh fruit, coffee and relaxed home-style meals.",
+      "Praktyczna kuchnia przygotowana na proste śniadania, świeże owoce, kawę i spokojne domowe posiłki.",
+    ),
+  },
+  {
+    id: "fern-bedroom-01",
+    houseId: "fern-house",
+    category: "bedroom",
+    imageSrc: "/images/fern-house/fern-bedroom-01.webp",
+    title: text("Quiet bedroom retreat", "Cicha sypialnia do odpoczynku"),
+    description: text(
+      "A peaceful bedroom with warm natural tones, soft bedding and a restful atmosphere after a humid Mindanao day.",
+      "Spokojna sypialnia w ciepłych naturalnych tonach, z miękką pościelą i atmosferą odpoczynku po wilgotnym dniu na Mindanao.",
+    ),
+  },
+  {
+    id: "fern-bedroom-02",
+    houseId: "fern-house",
+    category: "bedroom",
+    imageSrc: "/images/fern-house/fern-bedroom-02.webp",
+    title: text("Second bedroom detail", "Detal drugiej sypialni"),
+    description: text(
+      "A closer look at the guest bedroom styling, soft fabrics and practical storage for a longer stay.",
+      "Bliższe spojrzenie na styl sypialni gościnnej, miękkie tkaniny i praktyczne miejsce do przechowywania przy dłuższym pobycie.",
+    ),
+  },
+  {
+    id: "fern-bathroom-01",
+    houseId: "fern-house",
+    category: "bathroom",
+    imageSrc: "/images/fern-house/fern-bathroom-01.webp",
+    title: text("Fresh bathroom corner", "Świeży narożnik łazienkowy"),
+    description: text(
+      "A clean bathroom space with simple finishes, warm light and practical daily comfort.",
+      "Czysta łazienka z prostym wykończeniem, ciepłym światłem i praktycznym codziennym komfortem.",
+    ),
   },
   {
     id: "fern-terrace-01",
     houseId: "fern-house",
     category: "terrace",
     imageSrc: "/images/fern-house/fern-terrace-01.webp",
-    imagePlaceholder: "Private terrace with warm lights",
-    title: {
-      en: "Private evening terrace",
-      ceb: "Private evening terrace",
-      tl: "Private evening terrace",
-      ko: "프라이빗 이브닝 테라스",
-      es: "Terraza privada de noche",
-      fr: "Terrasse privée du soir",
-      de: "Private Abendterrasse",
-      pl: "Prywatny wieczorny taras",
-    },
-    description: {
-      en: "A warm outdoor corner for quiet evenings.",
-      ceb: "Warm outdoor corner para sa hilom nga evenings.",
-      tl: "Warm outdoor corner for quiet evenings.",
-      ko: "조용한 저녁을 위한 따뜻한 야외 공간.",
-      es: "Un rincón exterior cálido para noches tranquilas.",
-      fr: "Un coin extérieur chaleureux pour les soirées calmes.",
-      de: "Eine warme Außenecke für ruhige Abende.",
-      pl: "Ciepły zewnętrzny kącik na spokojne wieczory.",
-    },
+    title: text("Private garden terrace", "Prywatny taras ogrodowy"),
+    description: text(
+      "A shaded terrace made for coffee, quiet conversations and slow evenings surrounded by tropical plants.",
+      "Zacieniony taras stworzony do kawy, spokojnych rozmów i wolnych wieczorów wśród tropikalnych roślin.",
+    ),
   },
+  {
+    id: "fern-terrace-02",
+    houseId: "fern-house",
+    category: "terrace",
+    imageSrc: "/images/fern-house/fern-terrace-02.webp",
+    title: text("Evening terrace glow", "Wieczorny blask tarasu"),
+    description: text(
+      "The terrace after sunset, with warm ambient lighting and a relaxed private garden mood.",
+      "Taras po zachodzie słońca, z ciepłym nastrojowym światłem i prywatnym ogrodowym klimatem.",
+    ),
+  },
+  {
+    id: "fern-details-01",
+    houseId: "fern-house",
+    category: "details",
+    imageSrc: "/images/fern-house/fern-details-01.webp",
+    title: text("Natural material details", "Detale naturalnych materiałów"),
+    description: text(
+      "Small details of wood, woven textures and greenery that shape the calm identity of Fern House.",
+      "Drobne detale drewna, plecionych faktur i zieleni, które budują spokojny charakter Fern House.",
+    ),
+  },
+  {
+    id: "fern-details-02",
+    houseId: "fern-house",
+    category: "details",
+    imageSrc: "/images/fern-house/fern-details-02.webp",
+    title: text("Guest-ready touches", "Detale przygotowane dla gości"),
+    description: text(
+      "A close-up of the welcoming details prepared for guests before arrival.",
+      "Zbliżenie na gościnne detale przygotowane przed przyjazdem.",
+    ),
+  },
+
   {
     id: "olive-exterior-01",
     houseId: "olive-house",
     category: "exterior",
     imageSrc: "/images/olive-house/olive-exterior-01.webp",
-    imagePlaceholder: "Larger house exterior with bright garden path",
-    title: {
-      en: "Olive House garden path",
-      ceb: "Olive House garden path",
-      tl: "Olive House garden path",
-      ko: "Olive House 가든 길",
-      es: "Camino del jardín de Olive House",
-      fr: "Allée jardin d’Olive House",
-      de: "Gartenweg von Olive House",
-      pl: "Ścieżka ogrodowa Olive House",
-    },
-    description: {
-      en: "A bright approach to the larger family-friendly home.",
-      ceb: "Bright approach padulong sa mas dako nga family-friendly home.",
-      tl: "Bright approach to the larger family-friendly home.",
-      ko: "가족 친화적인 큰 숙소로 향하는 밝은 길.",
-      es: "Una entrada luminosa hacia la casa familiar.",
-      fr: "Une arrivée lumineuse vers la grande maison familiale.",
-      de: "Ein heller Zugang zum größeren familienfreundlichen Haus.",
-      pl: "Jasne dojście do większego domu rodzinnego.",
-    },
+    title: text(
+      "Olive House street arrival",
+      "Wejście do Olive House od strony ulicy",
+    ),
+    description: text(
+      "A welcoming residential facade in Dadiangas North, designed for guests who prefer central convenience.",
+      "Przyjazna fasada mieszkalna w Dadiangas North, zaprojektowana dla gości ceniących wygodę centralniejszej lokalizacji.",
+    ),
+  },
+  {
+    id: "olive-exterior-02",
+    houseId: "olive-house",
+    category: "exterior",
+    imageSrc: "/images/olive-house/olive-exterior-02.webp",
+    title: text("Bright tropical frontage", "Jasny tropikalny front"),
+    description: text(
+      "A brighter view of Olive House with tropical planting, clean lines and a friendly family-stay character.",
+      "Jaśniejsze ujęcie Olive House z tropikalnymi roślinami, czystymi liniami i przyjaznym rodzinnym charakterem.",
+    ),
   },
   {
     id: "olive-interior-01",
     houseId: "olive-house",
     category: "interior",
     imageSrc: "/images/olive-house/olive-interior-01.webp",
-    imagePlaceholder: "Open living room with natural materials",
-    title: {
-      en: "Open living room",
-      ceb: "Open living room",
-      tl: "Open living room",
-      ko: "오픈 거실",
-      es: "Sala abierta",
-      fr: "Salon ouvert",
-      de: "Offenes Wohnzimmer",
-      pl: "Otwarty salon",
-    },
-    description: {
-      en: "A shared space made for conversations, meals and slow evenings.",
-      ceb: "Shared space para sa conversations, meals ug slow evenings.",
-      tl: "Shared space for conversations, meals and slow evenings.",
-      ko: "대화, 식사, 여유로운 저녁을 위한 공용 공간.",
-      es: "Un espacio común para conversar, comer y relajarse.",
-      fr: "Un espace commun pour discuter, manger et se détendre.",
-      de: "Ein gemeinsamer Raum für Gespräche, Mahlzeiten und ruhige Abende.",
-      pl: "Wspólna przestrzeń do rozmów, posiłków i wolnych wieczorów.",
-    },
+    title: text("Warm central living room", "Ciepły centralny salon"),
+    description: text(
+      "A comfortable living room arranged for families, longer stays and relaxed evenings indoors.",
+      "Wygodny salon przygotowany dla rodzin, dłuższych pobytów i spokojnych wieczorów wewnątrz.",
+    ),
+  },
+  {
+    id: "olive-living-01",
+    houseId: "olive-house",
+    category: "interior",
+    imageSrc: "/images/olive-house/olive-living-01.webp",
+    title: text("Family lounge setup", "Rodzinny układ wypoczynkowy"),
+    description: text(
+      "A practical lounge arrangement with comfortable seating, warm finishes and space for shared time.",
+      "Praktyczny układ salonu z wygodnym siedziskiem, ciepłym wykończeniem i miejscem na wspólne spędzanie czasu.",
+    ),
+  },
+  {
+    id: "olive-dining-01",
+    houseId: "olive-house",
+    category: "interior",
+    imageSrc: "/images/olive-house/olive-dining-01.webp",
+    title: text("Dining and daily planning", "Jadalnia i planowanie dnia"),
+    description: text(
+      "A dining corner made for breakfast, laptop planning, travel notes and casual family meals.",
+      "Kącik jadalniany na śniadanie, planowanie z laptopem, notatki z podróży i swobodne rodzinne posiłki.",
+    ),
+  },
+  {
+    id: "olive-kitchen-01",
+    houseId: "olive-house",
+    category: "kitchen",
+    imageSrc: "/images/olive-house/olive-kitchen-01.webp",
+    title: text("Olive House kitchen", "Kuchnia Olive House"),
+    description: text(
+      "A practical kitchen for everyday meals, simple cooking and longer guest stays.",
+      "Praktyczna kuchnia do codziennych posiłków, prostego gotowania i dłuższych pobytów.",
+    ),
   },
   {
     id: "olive-bedroom-01",
     houseId: "olive-house",
     category: "bedroom",
     imageSrc: "/images/olive-house/olive-bedroom-01.webp",
-    imagePlaceholder: "Large family bedroom with warm lamps",
-    title: {
-      en: "Family bedroom",
-      ceb: "Family bedroom",
-      tl: "Family bedroom",
-      ko: "패밀리 침실",
-      es: "Dormitorio familiar",
-      fr: "Chambre familiale",
-      de: "Familienschlafzimmer",
-      pl: "Rodzinna sypialnia",
-    },
-    description: {
-      en: "More room, warm lighting and comfortable storage.",
-      ceb: "Mas daghang room, warm lighting ug comfortable storage.",
-      tl: "More room, warm lighting and comfortable storage.",
-      ko: "더 넓은 공간, 따뜻한 조명, 편리한 수납.",
-      es: "Más espacio, luz cálida y almacenamiento cómodo.",
-      fr: "Plus d’espace, une lumière chaude et des rangements pratiques.",
-      de: "Mehr Platz, warmes Licht und komfortabler Stauraum.",
-      pl: "Więcej miejsca, ciepłe światło i wygodne przechowywanie.",
-    },
+    title: text("Main bedroom calm", "Spokój głównej sypialni"),
+    description: text(
+      "A restful bedroom with warm light, simple comfort and a calm atmosphere for longer stays.",
+      "Sypialnia do odpoczynku z ciepłym światłem, prostym komfortem i spokojną atmosferą na dłuższy pobyt.",
+    ),
+  },
+  {
+    id: "olive-bedroom-02",
+    houseId: "olive-house",
+    category: "bedroom",
+    imageSrc: "/images/olive-house/olive-bedroom-02.webp",
+    title: text("Flexible guest bedroom", "Elastyczna sypialnia gościnna"),
+    description: text(
+      "A second bedroom prepared for families, friends or guests who need a bit more privacy.",
+      "Druga sypialnia przygotowana dla rodzin, znajomych albo gości potrzebujących więcej prywatności.",
+    ),
   },
   {
     id: "olive-bathroom-01",
     houseId: "olive-house",
     category: "bathroom",
     imageSrc: "/images/olive-house/olive-bathroom-01.webp",
-    imagePlaceholder: "Clean bathroom with stone textures",
-    title: {
-      en: "Stone texture bathroom",
-      ceb: "Stone texture bathroom",
-      tl: "Stone texture bathroom",
-      ko: "스톤 텍스처 욕실",
-      es: "Baño con textura de piedra",
-      fr: "Salle de bain texture pierre",
-      de: "Bad mit Steintextur",
-      pl: "Łazienka z kamienną fakturą",
-    },
-    description: {
-      en: "Clean, practical and easy to maintain for longer stays.",
-      ceb: "Clean, practical ug sayon i-maintain para sa longer stays.",
-      tl: "Clean, practical and good for longer stays.",
-      ko: "깨끗하고 실용적이며 장기 숙박에 적합합니다.",
-      es: "Limpio, práctico y cómodo para estancias largas.",
-      fr: "Propre, pratique et adaptée aux longs séjours.",
-      de: "Sauber, praktisch und leicht zu pflegen für längere Aufenthalte.",
-      pl: "Czysta, praktyczna i wygodna przy dłuższych pobytach.",
-    },
+    title: text("Clean bathroom space", "Czysta przestrzeń łazienkowa"),
+    description: text(
+      "A simple, bright bathroom space focused on daily comfort and easy use.",
+      "Prosta, jasna łazienka skupiona na codziennym komforcie i wygodzie użytkowania.",
+    ),
+  },
+  {
+    id: "olive-terrace-01",
+    houseId: "olive-house",
+    category: "terrace",
+    imageSrc: "/images/olive-house/olive-terrace-01.webp",
+    title: text("Outdoor sitting area", "Zewnętrzna przestrzeń do siedzenia"),
+    description: text(
+      "A casual outdoor spot for morning coffee, evening air and relaxed conversations.",
+      "Swobodne miejsce na zewnątrz na poranną kawę, wieczorne powietrze i spokojne rozmowy.",
+    ),
+  },
+  {
+    id: "olive-terrace-02",
+    houseId: "olive-house",
+    category: "terrace",
+    imageSrc: "/images/olive-house/olive-terrace-02.webp",
+    title: text("Evening outdoor corner", "Wieczorny narożnik na zewnątrz"),
+    description: text(
+      "A warmer evening view of the outdoor area with soft light and a quiet residential mood.",
+      "Cieplejsze wieczorne ujęcie przestrzeni zewnętrznej z miękkim światłem i spokojnym mieszkalnym klimatem.",
+    ),
   },
   {
     id: "olive-details-01",
     houseId: "olive-house",
     category: "details",
     imageSrc: "/images/olive-house/olive-details-01.webp",
-    imagePlaceholder: "Natural decor details with plants",
-    title: {
-      en: "Natural details",
-      ceb: "Natural details",
-      tl: "Natural details",
-      ko: "내추럴 디테일",
-      es: "Detalles naturales",
-      fr: "Détails naturels",
-      de: "Natürliche Details",
-      pl: "Naturalne detale",
-    },
-    description: {
-      en: "Small visual moments that make the brand feel premium.",
-      ceb: "Small visual moments nga naghimo sa brand nga premium ang feel.",
-      tl: "Small visual moments that make the brand feel premium.",
-      ko: "브랜드를 프리미엄하게 느끼게 하는 작은 시각적 순간.",
-      es: "Pequeños momentos visuales que elevan la marca.",
-      fr: "De petits détails visuels qui renforcent le côté premium.",
-      de: "Kleine visuelle Momente, die die Marke hochwertig wirken lassen.",
-      pl: "Małe wizualne momenty, które wzmacniają premium charakter marki.",
-    },
+    title: text("Olive House details", "Detale Olive House"),
+    description: text(
+      "Decorative textures, soft natural accents and small guest-ready touches around the house.",
+      "Dekoracyjne faktury, miękkie naturalne akcenty i drobne detale przygotowane dla gości.",
+    ),
   },
 ];
+
+export const galleryItems: GalleryItem[] = items.map(withPlaceholder);

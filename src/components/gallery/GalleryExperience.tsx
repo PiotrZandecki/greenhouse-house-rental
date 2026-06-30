@@ -1,7 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 
 import type { Dictionary } from "@/data/dictionaries";
 import type { GalleryItem, House, HouseId, Locale } from "@/types/site";
@@ -27,6 +34,8 @@ type GalleryCopy = {
   filterByHouse: string;
   filterBySpace: string;
   showing: string;
+  selectedFilter: string;
+  imageCounter: string;
 };
 
 const galleryCopy: Record<Locale, GalleryCopy> = {
@@ -41,6 +50,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "Filter by house",
     filterBySpace: "Filter by space",
     showing: "Showing",
+    selectedFilter: "Selected filter",
+    imageCounter: "Image",
   },
   ceb: {
     photo: "photo",
@@ -53,6 +64,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "Filter by house",
     filterBySpace: "Filter by space",
     showing: "Showing",
+    selectedFilter: "Selected filter",
+    imageCounter: "Image",
   },
   tl: {
     photo: "photo",
@@ -65,6 +78,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "Filter by house",
     filterBySpace: "Filter by space",
     showing: "Showing",
+    selectedFilter: "Selected filter",
+    imageCounter: "Image",
   },
   ko: {
     photo: "사진",
@@ -77,6 +92,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "숙소별 필터",
     filterBySpace: "공간별 필터",
     showing: "표시 중",
+    selectedFilter: "선택된 필터",
+    imageCounter: "이미지",
   },
   es: {
     photo: "foto",
@@ -89,6 +106,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "Filtrar por casa",
     filterBySpace: "Filtrar por espacio",
     showing: "Mostrando",
+    selectedFilter: "Filtro seleccionado",
+    imageCounter: "Imagen",
   },
   fr: {
     photo: "photo",
@@ -101,6 +120,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "Filtrer par maison",
     filterBySpace: "Filtrer par espace",
     showing: "Affichage",
+    selectedFilter: "Filtre sélectionné",
+    imageCounter: "Image",
   },
   de: {
     photo: "Foto",
@@ -113,6 +134,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "Nach Haus filtern",
     filterBySpace: "Nach Bereich filtern",
     showing: "Angezeigt",
+    selectedFilter: "Ausgewählter Filter",
+    imageCounter: "Bild",
   },
   pl: {
     photo: "zdjęcie",
@@ -125,6 +148,8 @@ const galleryCopy: Record<Locale, GalleryCopy> = {
     filterByHouse: "Filtruj według domu",
     filterBySpace: "Filtruj według przestrzeni",
     showing: "Wyświetlane",
+    selectedFilter: "Wybrany filtr",
+    imageCounter: "Zdjęcie",
   },
 };
 
@@ -138,6 +163,15 @@ const categories: GalleryCategory[] = [
   "details",
 ];
 
+const focusableSelector = [
+  "a[href]",
+  "button:not([disabled])",
+  "textarea:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
 function isCategoryFilter(filter: GalleryFilter): filter is GalleryCategory {
   return categories.includes(filter as GalleryCategory);
 }
@@ -150,6 +184,14 @@ function getCategoryLabel(dictionary: Dictionary, category: GalleryCategory) {
   return dictionary.galleryPage[category];
 }
 
+function getFocusableElements(container: HTMLElement | null) {
+  if (!container) {
+    return [];
+  }
+
+  return Array.from(container.querySelectorAll<HTMLElement>(focusableSelector));
+}
+
 export function GalleryExperience({
   dictionary,
   galleryItems,
@@ -160,6 +202,10 @@ export function GalleryExperience({
 
   const [activeFilter, setActiveFilter] = useState<GalleryFilter>("all");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const lightboxRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   const filteredItems = useMemo(() => {
     if (activeFilter === "all") {
@@ -183,43 +229,82 @@ export function GalleryExperience({
   const currentNumber = activeIndex !== null ? activeIndex + 1 : 0;
   const totalNumber = filteredItems.length;
 
-  function openLightbox(index: number) {
+  function openLightbox(
+    index: number,
+    trigger: HTMLButtonElement | null = null,
+  ) {
+    lastTriggerRef.current = trigger;
     setActiveIndex(index);
   }
 
-  function closeLightbox() {
+  const closeLightbox = useCallback(() => {
     setActiveIndex(null);
-  }
+  }, []);
 
-  function showPrevious() {
+  const showPrevious = useCallback(() => {
     setActiveIndex((current) => {
-      if (current === null) {
+      if (current === null || filteredItems.length === 0) {
         return current;
       }
 
       return current === 0 ? filteredItems.length - 1 : current - 1;
     });
-  }
+  }, [filteredItems.length]);
 
-  function showNext() {
+  const showNext = useCallback(() => {
     setActiveIndex((current) => {
-      if (current === null) {
+      if (current === null || filteredItems.length === 0) {
         return current;
       }
 
       return current === filteredItems.length - 1 ? 0 : current + 1;
     });
-  }
+  }, [filteredItems.length]);
 
   function selectFilter(filter: GalleryFilter) {
     setActiveFilter(filter);
     setActiveIndex(null);
   }
 
+  function handleLightboxKeyDown(event: ReactKeyboardEvent<HTMLDivElement>) {
+    if (event.key !== "Tab") {
+      return;
+    }
+
+    const focusableElements = getFocusableElements(lightboxRef.current);
+
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+      return;
+    }
+
+    if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  }
+
+  useEffect(() => {
+    if (activeIndex === null) {
+      lastTriggerRef.current?.focus();
+    }
+  }, [activeIndex]);
+
   useEffect(() => {
     if (activeIndex === null) {
       return;
     }
+
+    const previousOverflow = document.body.style.overflow;
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -237,20 +322,26 @@ export function GalleryExperience({
 
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [activeIndex, filteredItems.length]);
+  }, [activeIndex, closeLightbox, showNext, showPrevious]);
 
   return (
     <>
       <div className="gallery-controls-panel">
         <div>
           <p className="eyebrow">{copy.filterByHouse}</p>
-          <div className="gallery-filter-row">
+          <div
+            aria-label={copy.filterByHouse}
+            className="gallery-filter-row"
+            role="group"
+          >
             <button
+              aria-pressed={activeFilter === "all"}
               className={activeFilter === "all" ? "gallery-filter-active" : ""}
               onClick={() => selectFilter("all")}
               type="button"
@@ -260,6 +351,7 @@ export function GalleryExperience({
 
             {houses.map((house) => (
               <button
+                aria-pressed={activeFilter === house.id}
                 className={
                   activeFilter === house.id ? "gallery-filter-active" : ""
                 }
@@ -275,9 +367,14 @@ export function GalleryExperience({
 
         <div>
           <p className="eyebrow">{copy.filterBySpace}</p>
-          <div className="gallery-filter-row">
+          <div
+            aria-label={copy.filterBySpace}
+            className="gallery-filter-row"
+            role="group"
+          >
             {categories.map((category) => (
               <button
+                aria-pressed={activeFilter === category}
                 className={
                   activeFilter === category ? "gallery-filter-active" : ""
                 }
@@ -291,7 +388,7 @@ export function GalleryExperience({
           </div>
         </div>
 
-        <div className="gallery-count-card">
+        <div className="gallery-count-card" role="status">
           <span>{copy.showing}</span>
           <strong>{filteredItems.length}</strong>
           <small>{filteredItems.length === 1 ? copy.photo : copy.photos}</small>
@@ -310,17 +407,19 @@ export function GalleryExperience({
                 index + 1
               }`}
               key={item.id}
-              onClick={() => openLightbox(index)}
+              onClick={(event) => openLightbox(index, event.currentTarget)}
               type="button"
             >
               <Image
                 alt={item.title[locale]}
                 fill
-                priority={index < 2}
+                priority={index === 0}
+                placeholder="blur"
+                blurDataURL={item.imagePlaceholder}
                 sizes={
                   index === 0
-                    ? "(max-width: 760px) 100vw, 50vw"
-                    : "(max-width: 760px) 100vw, 24vw"
+                    ? "(max-width: 760px) 100vw, (max-width: 1180px) 100vw, 46vw"
+                    : "(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 24vw"
                 }
                 src={item.imageSrc}
                 style={{
@@ -352,14 +451,16 @@ export function GalleryExperience({
               aria-label={`${copy.openPhoto}: ${item.title[locale]}`}
               className="gallery-complete-card"
               key={item.id}
-              onClick={() => openLightbox(index)}
+              onClick={(event) => openLightbox(index, event.currentTarget)}
               type="button"
             >
               <div className="gallery-complete-image">
                 <Image
                   alt={item.title[locale]}
                   fill
-                  sizes="(max-width: 760px) 100vw, 30vw"
+                  placeholder="blur"
+                  blurDataURL={item.imagePlaceholder}
+                  sizes="(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 31vw"
                   src={item.imageSrc}
                   style={{
                     objectFit: "cover",
@@ -382,19 +483,24 @@ export function GalleryExperience({
 
       {activeItem ? (
         <div
+          aria-describedby="gallery-lightbox-description"
+          aria-labelledby="gallery-lightbox-title"
           aria-modal="true"
           className="gallery-lightbox"
           onClick={closeLightbox}
+          onKeyDown={handleLightboxKeyDown}
           role="dialog"
         >
           <div
             className="gallery-lightbox-inner"
             onClick={(event) => event.stopPropagation()}
+            ref={lightboxRef}
           >
             <button
               aria-label={copy.close}
               className="gallery-lightbox-close"
               onClick={closeLightbox}
+              ref={closeButtonRef}
               type="button"
             >
               ×
@@ -405,6 +511,8 @@ export function GalleryExperience({
                 alt={activeItem.title[locale]}
                 fill
                 priority
+                placeholder="blur"
+                blurDataURL={activeItem.imagePlaceholder}
                 sizes="100vw"
                 src={activeItem.imageSrc}
                 style={{
@@ -419,13 +527,15 @@ export function GalleryExperience({
                   {activeHouse?.name ?? "Greenhouse"} ·{" "}
                   {getCategoryLabel(dictionary, activeItem.category)}
                 </p>
-                <h2>{activeItem.title[locale]}</h2>
-                <p>{activeItem.description[locale]}</p>
+                <h2 id="gallery-lightbox-title">{activeItem.title[locale]}</h2>
+                <p id="gallery-lightbox-description">
+                  {activeItem.description[locale]}
+                </p>
               </div>
 
               <div className="gallery-lightbox-meta">
-                <span>
-                  {currentNumber} / {totalNumber}
+                <span aria-live="polite">
+                  {copy.imageCounter} {currentNumber} / {totalNumber}
                 </span>
 
                 <div className="gallery-lightbox-actions">
@@ -474,6 +584,7 @@ export function GalleryExperience({
           cursor: pointer;
           font-size: 0.82rem;
           font-weight: 950;
+          min-height: 42px;
           padding: 10px 14px;
           transition:
             transform 180ms ease,
@@ -812,6 +923,16 @@ export function GalleryExperience({
             padding: 12px;
           }
 
+          .gallery-filter-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .gallery-filter-row button {
+            justify-content: center;
+            min-height: 46px;
+          }
+
           .gallery-featured-grid,
           .gallery-complete-grid {
             grid-template-columns: 1fr;
@@ -847,8 +968,24 @@ export function GalleryExperience({
             min-height: 48vh;
           }
 
+          .gallery-lightbox-content {
+            padding: 22px;
+          }
+
           .gallery-lightbox-actions {
             grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .gallery-filter-row {
+            grid-template-columns: 1fr;
+          }
+
+          .gallery-featured-card,
+          .gallery-featured-card-1,
+          .gallery-featured-card-4 {
+            min-height: 280px;
           }
         }
       `}</style>

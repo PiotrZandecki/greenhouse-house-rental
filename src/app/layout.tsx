@@ -30,7 +30,18 @@ export const metadata: Metadata = {
   publisher: "Greenhouse House Rental",
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      {
+        url: "/favicon.svg?v=2",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/favicon.ico?v=2",
+        sizes: "any",
+      },
+    ],
+    shortcut: "/favicon.svg?v=2",
+    apple: "/favicon.svg?v=2",
   },
   openGraph: {
     type: "website",

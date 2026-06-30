@@ -65,6 +65,12 @@ type BookingCopy = {
   premiumSummaryDescription: string;
   guestDetails: string;
   stayValue: string;
+  selected: string;
+  unavailable: string;
+  availableDate: string;
+  bookedDate: string;
+  currentStep: string;
+  bookingStatus: string;
 };
 
 const houseQueryChangeEvent = "greenhouse-house-query-change";
@@ -123,6 +129,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "Keep this summary ready while the host reviews final availability.",
     guestDetails: "Guest details",
     stayValue: "Stay value",
+    selected: "Selected",
+    unavailable: "Unavailable",
+    availableDate: "Available date",
+    bookedDate: "Booked date",
+    currentStep: "Current step",
+    bookingStatus: "Booking status",
   },
   ceb: {
     plannerEyebrow: "Booking planner",
@@ -177,6 +189,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "Keep this summary ready while the host reviews final availability.",
     guestDetails: "Guest details",
     stayValue: "Stay value",
+    selected: "Selected",
+    unavailable: "Unavailable",
+    availableDate: "Available date",
+    bookedDate: "Booked date",
+    currentStep: "Current step",
+    bookingStatus: "Booking status",
   },
   tl: {
     plannerEyebrow: "Booking planner",
@@ -231,6 +249,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "Keep this summary ready while the host reviews final availability.",
     guestDetails: "Guest details",
     stayValue: "Stay value",
+    selected: "Selected",
+    unavailable: "Unavailable",
+    availableDate: "Available date",
+    bookedDate: "Booked date",
+    currentStep: "Current step",
+    bookingStatus: "Booking status",
   },
   ko: {
     plannerEyebrow: "예약 플래너",
@@ -285,6 +309,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "호스트가 최종 가능 여부를 확인하는 동안 이 요약을 보관하세요.",
     guestDetails: "게스트 정보",
     stayValue: "숙박 금액",
+    selected: "선택됨",
+    unavailable: "예약 불가",
+    availableDate: "예약 가능 날짜",
+    bookedDate: "예약된 날짜",
+    currentStep: "현재 단계",
+    bookingStatus: "예약 상태",
   },
   es: {
     plannerEyebrow: "Planificador de reserva",
@@ -339,6 +369,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "Conserva este resumen mientras el anfitrión revisa la disponibilidad final.",
     guestDetails: "Datos del huésped",
     stayValue: "Valor de estancia",
+    selected: "Seleccionado",
+    unavailable: "No disponible",
+    availableDate: "Fecha disponible",
+    bookedDate: "Fecha reservada",
+    currentStep: "Paso actual",
+    bookingStatus: "Estado de reserva",
   },
   fr: {
     plannerEyebrow: "Planificateur de réservation",
@@ -394,6 +430,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "Gardez ce résumé pendant que l’hôte vérifie la disponibilité finale.",
     guestDetails: "Informations voyageurs",
     stayValue: "Valeur du séjour",
+    selected: "Sélectionné",
+    unavailable: "Indisponible",
+    availableDate: "Date disponible",
+    bookedDate: "Date réservée",
+    currentStep: "Étape actuelle",
+    bookingStatus: "Statut de réservation",
   },
   de: {
     plannerEyebrow: "Buchungsplaner",
@@ -448,6 +490,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "Bewahre diese Übersicht auf, während der Gastgeber die finale Verfügbarkeit prüft.",
     guestDetails: "Gästedaten",
     stayValue: "Aufenthaltswert",
+    selected: "Ausgewählt",
+    unavailable: "Nicht verfügbar",
+    availableDate: "Verfügbares Datum",
+    bookedDate: "Gebuchtes Datum",
+    currentStep: "Aktueller Schritt",
+    bookingStatus: "Buchungsstatus",
   },
   pl: {
     plannerEyebrow: "Planer rezerwacji",
@@ -502,6 +550,12 @@ const bookingCopy: Record<Locale, BookingCopy> = {
       "Zachowaj to podsumowanie, gdy gospodarz sprawdza finalną dostępność.",
     guestDetails: "Dane gościa",
     stayValue: "Wartość pobytu",
+    selected: "Wybrano",
+    unavailable: "Niedostępne",
+    availableDate: "Dostępna data",
+    bookedDate: "Zajęta data",
+    currentStep: "Aktualny krok",
+    bookingStatus: "Status rezerwacji",
   },
 };
 
@@ -709,6 +763,17 @@ function createRequestCode(houseId: HouseId) {
   return `GH-${prefix}-${code}`;
 }
 
+function getStepLabel(step: BookingStep, copy: BookingCopy) {
+  const labels: Record<BookingStep, string> = {
+    dates: copy.datesStep,
+    details: copy.detailsStep,
+    review: copy.reviewStep,
+    confirmation: copy.confirmationStep,
+  };
+
+  return labels[step];
+}
+
 export function AvailabilityCalendar({
   houses,
   locale,
@@ -736,6 +801,8 @@ export function AvailabilityCalendar({
 
   const selectedHouse =
     houses.find((house) => house.id === selectedHouseId) ?? houses[0];
+
+  const safeGuestCount = Math.min(guestCount, selectedHouse.capacity);
 
   const days = useMemo(
     () => getDaysInMonth(visibleDate.getFullYear(), visibleDate.getMonth()),
@@ -778,6 +845,22 @@ export function AvailabilityCalendar({
     { id: "confirmation", label: copy.confirmationStep },
   ] satisfies { id: BookingStep; label: string }[];
 
+  const statusMessage = `${copy.currentStep}: ${getStepLabel(
+    bookingStep,
+    copy,
+  )}. ${copy.selectedHouse}: ${selectedHouse.name}. ${copy.selectedDates}: ${renderSelectedDatesForStatus()}.`;
+
+  function renderSelectedDatesForStatus() {
+    if (!hasSelectedRange || !checkIn || !checkOut) {
+      return copy.noDates;
+    }
+
+    return `${formatDate(dateFromIso(checkIn), locale)} - ${formatDate(
+      dateFromIso(checkOut),
+      locale,
+    )}`;
+  }
+
   function changeMonth(direction: "previous" | "next") {
     setVisibleDate((current) => {
       const next = new Date(current);
@@ -814,9 +897,14 @@ export function AvailabilityCalendar({
   }
 
   function selectHouse(houseId: HouseId) {
+    const nextHouse = houses.find((house) => house.id === houseId);
+
     updateHouseQuery(houseId);
     setCheckIn(undefined);
     setCheckOut(undefined);
+    setGuestCount((current) =>
+      nextHouse ? Math.min(current, nextHouse.capacity) : current,
+    );
     clearRequestState();
     setBookingStep("dates");
   }
@@ -957,6 +1045,10 @@ export function AvailabilityCalendar({
 
   return (
     <div className="booking-experience">
+      <p className="sr-only" role="status" aria-live="polite">
+        {statusMessage}
+      </p>
+
       <div className="booking-planner-card">
         <div className="booking-planner-heading">
           <div>
@@ -974,9 +1066,14 @@ export function AvailabilityCalendar({
           </button>
         </div>
 
-        <div className="booking-house-selector">
+        <div
+          aria-label={copy.selectedHouse}
+          className="booking-house-selector"
+          role="group"
+        >
           {houses.map((house) => (
             <button
+              aria-pressed={house.id === selectedHouseId}
               className={`booking-house-option ${
                 house.id === selectedHouseId
                   ? "booking-house-option-active"
@@ -992,6 +1089,7 @@ export function AvailabilityCalendar({
                 {dictionary.common.from} {house.priceFrom}/
                 {dictionary.common.night}
               </small>
+              {house.id === selectedHouseId ? <em>{copy.selected}</em> : null}
             </button>
           ))}
         </div>
@@ -1040,7 +1138,7 @@ export function AvailabilityCalendar({
             </div>
           </div>
 
-          <div className="calendar-legend">
+          <div className="calendar-legend" aria-label={copy.bookingStatus}>
             <span>
               <i className="legend-dot legend-available" />
               {dictionary.common.available}
@@ -1053,22 +1151,34 @@ export function AvailabilityCalendar({
           </div>
 
           {rangeError ? (
-            <p className="booking-range-error">{rangeError}</p>
+            <p className="booking-range-error" role="alert">
+              {rangeError}
+            </p>
           ) : null}
 
           {fieldErrors.dates ? (
-            <p className="booking-range-error">{fieldErrors.dates}</p>
+            <p className="booking-range-error" role="alert">
+              {fieldErrors.dates}
+            </p>
           ) : null}
 
-          <div className="calendar-weekdays">
+          <div className="calendar-weekdays" aria-hidden="true">
             {weekDays[locale].map((day) => (
               <span key={day}>{day}</span>
             ))}
           </div>
 
-          <div className="calendar-grid">
+          <div
+            aria-label={`${copy.chooseDates} - ${selectedHouse.name}`}
+            className="calendar-grid"
+            role="grid"
+          >
             {Array.from({ length: firstDayIndex }).map((_, index) => (
-              <span className="calendar-empty" key={`empty-${index}`} />
+              <span
+                aria-hidden="true"
+                className="calendar-empty"
+                key={`empty-${index}`}
+              />
             ))}
 
             {days.map((day) => {
@@ -1089,9 +1199,17 @@ export function AvailabilityCalendar({
                 checkIn,
                 checkOut,
               );
+              const formattedDate = formatDate(day, locale);
+              const dateStatus = isDisabled
+                ? copy.bookedDate
+                : copy.availableDate;
 
               return (
                 <button
+                  aria-label={`${formattedDate}. ${dateStatus}${
+                    isCheckIn ? `. ${copy.checkIn}` : ""
+                  }${isCheckOut ? `. ${copy.checkOut}` : ""}`}
+                  aria-selected={isCheckIn || isCheckOut || isInRange}
                   className={`calendar-day ${
                     isDisabled
                       ? "calendar-day-booked"
@@ -1102,6 +1220,7 @@ export function AvailabilityCalendar({
                   disabled={isDisabled}
                   key={isoDate}
                   onClick={() => selectDate(day)}
+                  role="gridcell"
                   type="button"
                 >
                   <span>{day.getDate()}</span>
@@ -1117,12 +1236,18 @@ export function AvailabilityCalendar({
         </div>
       </div>
 
-      <aside className="booking-summary-card">
-        <div className="booking-process-steps">
+      <aside className="booking-summary-card" aria-label={copy.staySummary}>
+        <div
+          aria-label={copy.bookingStatus}
+          className="booking-process-steps"
+          role="list"
+        >
           {processSteps.map((step, index) => (
             <span
+              aria-current={bookingStep === step.id ? "step" : undefined}
               className={`booking-process-step ${getStepStatus(step.id)}`}
               key={step.id}
+              role="listitem"
             >
               <i>{index + 1}</i>
               {step.label}
@@ -1130,7 +1255,14 @@ export function AvailabilityCalendar({
           ))}
         </div>
 
-        <div className="booking-progress-track">
+        <div
+          aria-label={`${copy.bookingStatus}: ${progressPercent}%`}
+          className="booking-progress-track"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={progressPercent}
+        >
           <span style={{ width: `${progressPercent}%` }} />
         </div>
 
@@ -1159,7 +1291,7 @@ export function AvailabilityCalendar({
                 </div>
                 <div>
                   <span>{dictionary.common.guests}</span>
-                  <strong>{guestCount}</strong>
+                  <strong>{safeGuestCount}</strong>
                 </div>
                 <div>
                   <span>{copy.nights}</span>
@@ -1215,7 +1347,7 @@ export function AvailabilityCalendar({
               </div>
               <div>
                 <span>{dictionary.common.guests}</span>
-                <strong>{guestCount}</strong>
+                <strong>{safeGuestCount}</strong>
               </div>
               <div>
                 <span>{copy.nights}</span>
@@ -1232,7 +1364,7 @@ export function AvailabilityCalendar({
                 <label>
                   <span>{dictionary.common.guests}</span>
                   <select
-                    value={guestCount}
+                    value={safeGuestCount}
                     onChange={(event) =>
                       setGuestCount(Number(event.target.value))
                     }
@@ -1255,12 +1387,19 @@ export function AvailabilityCalendar({
                   <span>{copy.guestName}</span>
                   <input
                     aria-invalid={Boolean(fieldErrors.guestName)}
+                    aria-describedby={
+                      fieldErrors.guestName ? "guest-name-error" : undefined
+                    }
+                    autoComplete="name"
                     value={guestName}
                     onChange={(event) => updateGuestName(event.target.value)}
                     placeholder={copy.guestName}
                   />
                   {fieldErrors.guestName ? (
-                    <small className="booking-field-error">
+                    <small
+                      className="booking-field-error"
+                      id="guest-name-error"
+                    >
                       {fieldErrors.guestName}
                     </small>
                   ) : null}
@@ -1270,13 +1409,20 @@ export function AvailabilityCalendar({
                   <span>{copy.guestEmail}</span>
                   <input
                     aria-invalid={Boolean(fieldErrors.guestEmail)}
+                    aria-describedby={
+                      fieldErrors.guestEmail ? "guest-email-error" : undefined
+                    }
+                    autoComplete="email"
                     type="email"
                     value={guestEmail}
                     onChange={(event) => updateGuestEmail(event.target.value)}
                     placeholder="name@email.com"
                   />
                   {fieldErrors.guestEmail ? (
-                    <small className="booking-field-error">
+                    <small
+                      className="booking-field-error"
+                      id="guest-email-error"
+                    >
                       {fieldErrors.guestEmail}
                     </small>
                   ) : null}
@@ -1285,6 +1431,7 @@ export function AvailabilityCalendar({
                 <label>
                   <span>{copy.guestPhone}</span>
                   <input
+                    autoComplete="tel"
                     value={guestPhone}
                     onChange={(event) => setGuestPhone(event.target.value)}
                     placeholder="+63..."
@@ -1317,7 +1464,7 @@ export function AvailabilityCalendar({
                   <li>{selectedHouse.name}</li>
                   <li>{renderSelectedDates()}</li>
                   <li>
-                    {guestCount} {dictionary.common.guests}
+                    {safeGuestCount} {dictionary.common.guests}
                   </li>
                   <li>{estimatedTotal}</li>
                   <li>{guestName}</li>
@@ -1386,6 +1533,16 @@ export function AvailabilityCalendar({
       </aside>
 
       <style>{`
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          clip-path: inset(50%);
+        }
+
         .booking-experience {
           display: grid;
           align-items: start;
@@ -1432,6 +1589,7 @@ export function AvailabilityCalendar({
         }
 
         .booking-house-option {
+          position: relative;
           display: grid;
           gap: 6px;
           border: 1px solid var(--border);
@@ -1476,6 +1634,21 @@ export function AvailabilityCalendar({
         .booking-house-option small {
           color: var(--muted);
           font-weight: 850;
+        }
+
+        .booking-house-option em {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          border-radius: var(--radius-pill);
+          background: var(--primary);
+          color: white;
+          font-size: 0.66rem;
+          font-style: normal;
+          font-weight: 950;
+          letter-spacing: 0.08em;
+          padding: 6px 8px;
+          text-transform: uppercase;
         }
 
         .booking-calendar-panel {
@@ -1825,6 +1998,15 @@ export function AvailabilityCalendar({
           .booking-process-steps,
           .booking-premium-grid {
             grid-template-columns: 1fr;
+          }
+
+          .booking-house-option {
+            padding-right: 92px;
+          }
+
+          .booking-summary-list > div,
+          .booking-premium-grid > div {
+            overflow-wrap: anywhere;
           }
         }
       `}</style>

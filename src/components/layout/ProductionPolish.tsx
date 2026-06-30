@@ -47,34 +47,9 @@ export function ProductionPolish() {
         cursor: pointer;
       }
 
-      :target {
-        scroll-margin-top: 120px;
-      }
-
+      :target,
       [id] {
-        scroll-margin-top: 120px;
-      }
-
-      .skip-to-content {
-        position: fixed;
-        top: 14px;
-        left: 14px;
-        z-index: 10000;
-        transform: translateY(-140%);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-pill);
-        background: var(--surface);
-        color: var(--text);
-        box-shadow: var(--shadow);
-        font-weight: 950;
-        padding: 12px 16px;
-        transition: transform 160ms ease;
-      }
-
-      .skip-to-content:focus {
-        transform: translateY(0);
-        outline: 3px solid color-mix(in srgb, var(--primary) 60%, white);
-        outline-offset: 3px;
+        scroll-margin-top: 112px;
       }
 
       a:focus-visible,
@@ -173,6 +148,137 @@ export function ProductionPolish() {
         background: var(--surface-strong);
       }
 
+      /*
+        Final visual balance polish.
+        Goal: calmer first impression, smaller premium headings,
+        and clearer space between headings and body copy.
+      */
+
+      .hero-section {
+        padding-block: clamp(44px, 5.4vw, 82px);
+      }
+
+      .page-section,
+      .section {
+        padding-block: clamp(52px, 6.6vw, 96px);
+      }
+
+      .greenhouse-home-hero {
+        padding-top: clamp(38px, 4.8vw, 66px);
+        padding-bottom: clamp(52px, 6.4vw, 88px);
+      }
+
+      .hero-grid {
+        align-items: center;
+        gap: clamp(34px, 5.4vw, 82px);
+      }
+
+      .hero-copy {
+        max-width: 720px;
+      }
+
+      body .hero-copy h1 {
+        max-width: 720px;
+        font-size: clamp(3.6rem, 6.2vw, 7.2rem);
+        line-height: 0.94;
+        letter-spacing: -0.078em;
+      }
+
+      body .page-heading h1 {
+        max-width: 900px;
+        font-size: clamp(3.2rem, 5.7vw, 6.6rem);
+        line-height: 0.96;
+        letter-spacing: -0.078em;
+      }
+
+      body .section-heading h2,
+      body .final-cta h2,
+      body .stay-path-card h2,
+      body .guide-preview-card h2,
+      body .why-compare-panel h2,
+      body .contact-channel-card h2,
+      body .contact-help-panel h2,
+      body .contact-final-cta h2,
+      body .booking-hero-copy h1,
+      body .house-detail-main-card h2,
+      body .house-detail-card h2,
+      body .house-detail-map-copy h2,
+      body .house-detail-final-cta h2,
+      body .enhanced-property-content h2 {
+        max-width: 940px;
+        font-size: clamp(2.55rem, 4.7vw, 5.3rem);
+        line-height: 1;
+        letter-spacing: -0.072em;
+      }
+
+      body .house-detail-hero-content h1 {
+        max-width: 1120px;
+        font-size: clamp(3.8rem, 7.4vw, 8.2rem);
+        line-height: 0.88;
+        letter-spacing: -0.088em;
+      }
+
+      body .hero-copy h1 + p,
+      body .page-heading h1 + p,
+      body .section-heading h2 + p,
+      body .final-cta h2 + p,
+      body .guide-preview-card h2 + p,
+      body .why-compare-panel h2 + p,
+      body .contact-channel-card h2 + p,
+      body .contact-help-panel h2 + p,
+      body .contact-final-cta h2 + p,
+      body .house-detail-hero-content h1 + p,
+      body .house-detail-main-card h2 + p,
+      body .house-detail-card h2 + p,
+      body .house-detail-map-copy h2 + p,
+      body .house-detail-final-cta h2 + p,
+      body .enhanced-property-content h2 + p {
+        margin-top: clamp(18px, 2.2vw, 30px);
+      }
+
+      body .hero-copy p,
+      body .page-heading p,
+      body .section-heading p,
+      body .final-cta p,
+      body .guide-preview-card p,
+      body .why-compare-panel p,
+      body .contact-channel-card p,
+      body .contact-help-panel p,
+      body .contact-final-cta p {
+        line-height: 1.75;
+      }
+
+      .page-heading {
+        margin-bottom: clamp(28px, 4vw, 52px);
+      }
+
+      .section-heading {
+        margin-bottom: clamp(26px, 4vw, 48px);
+      }
+
+      .final-cta {
+        padding-block: clamp(42px, 5.8vw, 76px);
+      }
+
+      .stay-path-card,
+      .guide-preview-card,
+      .contact-hero-panel,
+      .booking-hero-panel,
+      .contact-help-panel,
+      .why-compare-panel {
+        padding: clamp(28px, 4.2vw, 54px);
+      }
+
+      .house-detail-content {
+        gap: clamp(42px, 5.6vw, 68px);
+        padding-top: clamp(44px, 5.8vw, 68px);
+      }
+
+      .contact-section,
+      .contact-channel-grid {
+        margin-bottom: clamp(42px, 5.8vw, 68px);
+      }
+
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
@@ -198,6 +304,31 @@ export function ProductionPolish() {
         .section-heading-row .button {
           width: fit-content;
         }
+
+        body .hero-copy h1 {
+          font-size: clamp(3.25rem, 8.6vw, 5.9rem);
+        }
+
+        body .page-heading h1 {
+          font-size: clamp(3rem, 8vw, 5.6rem);
+        }
+
+        body .section-heading h2,
+        body .final-cta h2,
+        body .stay-path-card h2,
+        body .guide-preview-card h2,
+        body .why-compare-panel h2,
+        body .contact-channel-card h2,
+        body .contact-help-panel h2,
+        body .contact-final-cta h2,
+        body .booking-hero-copy h1,
+        body .house-detail-main-card h2,
+        body .house-detail-card h2,
+        body .house-detail-map-copy h2,
+        body .house-detail-final-cta h2,
+        body .enhanced-property-content h2 {
+          font-size: clamp(2.65rem, 7.1vw, 4.8rem);
+        }
       }
 
       @media (max-width: 760px) {
@@ -207,29 +338,69 @@ export function ProductionPolish() {
 
         .page-section,
         .section {
-          padding-block: clamp(44px, 12vw, 72px);
+          padding-block: clamp(40px, 10vw, 62px);
         }
 
         .hero-section {
-          padding-block: clamp(44px, 12vw, 84px);
+          padding-block: clamp(40px, 10vw, 68px);
+        }
+
+        .greenhouse-home-hero {
+          padding-top: clamp(32px, 9vw, 50px);
+          padding-bottom: clamp(40px, 10vw, 64px);
         }
 
         .hero-grid {
-          gap: 34px;
+          gap: 30px;
         }
 
-        .hero-copy h1,
-        .page-heading h1 {
-          font-size: clamp(3.2rem, 17vw, 5.8rem);
-          line-height: 0.9;
-          letter-spacing: -0.09em;
+        body .hero-copy h1,
+        body .page-heading h1 {
+          font-size: clamp(2.75rem, 12.6vw, 4.45rem);
+          line-height: 0.96;
+          letter-spacing: -0.078em;
         }
 
-        .section-heading h2,
-        .final-cta h2 {
-          font-size: clamp(2.4rem, 13vw, 4.6rem);
-          line-height: 0.98;
-          letter-spacing: -0.08em;
+        body .section-heading h2,
+        body .final-cta h2,
+        body .stay-path-card h2,
+        body .guide-preview-card h2,
+        body .why-compare-panel h2,
+        body .contact-channel-card h2,
+        body .contact-help-panel h2,
+        body .contact-final-cta h2,
+        body .booking-hero-copy h1,
+        body .house-detail-main-card h2,
+        body .house-detail-card h2,
+        body .house-detail-map-copy h2,
+        body .house-detail-final-cta h2,
+        body .enhanced-property-content h2 {
+          font-size: clamp(2.15rem, 9.8vw, 3.55rem);
+          line-height: 1.03;
+          letter-spacing: -0.068em;
+        }
+
+        body .house-detail-hero-content h1 {
+          font-size: clamp(3rem, 13vw, 5rem);
+          line-height: 0.94;
+        }
+
+        body .hero-copy h1 + p,
+        body .page-heading h1 + p,
+        body .section-heading h2 + p,
+        body .final-cta h2 + p,
+        body .guide-preview-card h2 + p,
+        body .why-compare-panel h2 + p,
+        body .contact-channel-card h2 + p,
+        body .contact-help-panel h2 + p,
+        body .contact-final-cta h2 + p,
+        body .house-detail-hero-content h1 + p,
+        body .house-detail-main-card h2 + p,
+        body .house-detail-card h2 + p,
+        body .house-detail-map-copy h2 + p,
+        body .house-detail-final-cta h2 + p,
+        body .enhanced-property-content h2 + p {
+          margin-top: 18px;
         }
 
         .hero-actions {
@@ -283,7 +454,7 @@ export function ProductionPolish() {
         .gallery-lightbox-content h2,
         .booking-planner-heading h2,
         .booking-summary-card h2 {
-          font-size: clamp(2rem, 11vw, 3.6rem);
+          font-size: clamp(2rem, 9vw, 3.2rem);
           line-height: 1;
         }
 
@@ -300,6 +471,15 @@ export function ProductionPolish() {
         .contact-detail-list span {
           overflow-wrap: anywhere;
         }
+
+        .stay-path-card,
+        .guide-preview-card,
+        .contact-hero-panel,
+        .booking-hero-panel,
+        .contact-help-panel,
+        .why-compare-panel {
+          padding: 24px;
+        }
       }
 
       @media (max-width: 420px) {
@@ -307,14 +487,26 @@ export function ProductionPolish() {
           width: min(100% - 18px, var(--shell-width, 1320px));
         }
 
-        .hero-copy h1,
-        .page-heading h1 {
-          font-size: clamp(2.9rem, 17vw, 4.6rem);
+        body .hero-copy h1,
+        body .page-heading h1 {
+          font-size: clamp(2.45rem, 12vw, 3.75rem);
         }
 
-        .section-heading h2,
-        .final-cta h2 {
-          font-size: clamp(2.25rem, 13vw, 3.8rem);
+        body .section-heading h2,
+        body .final-cta h2,
+        body .stay-path-card h2,
+        body .guide-preview-card h2,
+        body .why-compare-panel h2,
+        body .contact-channel-card h2,
+        body .contact-help-panel h2,
+        body .contact-final-cta h2,
+        body .booking-hero-copy h1,
+        body .house-detail-main-card h2,
+        body .house-detail-card h2,
+        body .house-detail-map-copy h2,
+        body .house-detail-final-cta h2,
+        body .enhanced-property-content h2 {
+          font-size: clamp(2rem, 9.8vw, 3.1rem);
         }
 
         .calendar-day {

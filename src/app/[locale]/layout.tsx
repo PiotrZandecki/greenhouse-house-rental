@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { SkipToContent } from "@/components/a11y/SkipToContent";
 import { LocaleChrome } from "@/components/layout/LocaleChrome";
 import { ProductionPolish } from "@/components/layout/ProductionPolish";
 import { getDictionary } from "@/data/dictionaries";
@@ -49,11 +48,10 @@ export default async function LocaleLayout({
 
   return (
     <>
-      <SkipToContent />
       <ProductionPolish />
 
       <LocaleChrome dictionary={dictionary} locale={locale}>
-        <main id="main-content">{children}</main>
+        {children}
       </LocaleChrome>
     </>
   );

@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-import type { Dictionary } from "@/data/dictionaries";
-import type { Locale } from "@/types/site";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import type { Dictionary } from "@/data/dictionaries";
+import type { Locale } from "@/types/site";
 
 type LocaleChromeProps = {
   children: React.ReactNode;
@@ -35,9 +35,6 @@ export function LocaleChrome({
 
   return (
     <div className="app-frame">
-      <a className="skip-link" href="#main-content">
-        Skip to content
-      </a>
       <SiteHeader dictionary={dictionary} locale={locale} />
       <main id="main-content">{children}</main>
       <SiteFooter dictionary={dictionary} locale={locale} />

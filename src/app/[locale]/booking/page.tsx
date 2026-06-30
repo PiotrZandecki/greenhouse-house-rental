@@ -4,11 +4,112 @@ import { AvailabilityCalendar } from "@/components/booking/AvailabilityCalendar"
 import { getDictionary } from "@/data/dictionaries";
 import { getHouses } from "@/data/houses";
 import { isLocale } from "@/lib/i18n";
+import type { Locale } from "@/types/site";
 
 type BookingPageProps = {
   params: Promise<{
     locale: string;
   }>;
+};
+
+type BookingPageCopy = {
+  stepOneTitle: string;
+  stepOneDescription: string;
+  stepTwoTitle: string;
+  stepTwoDescription: string;
+  stepThreeTitle: string;
+  stepThreeDescription: string;
+};
+
+const bookingPageCopy: Record<Locale, BookingPageCopy> = {
+  en: {
+    stepOneTitle: "Choose your dates",
+    stepOneDescription:
+      "Select your preferred house, check-in date and check-out date from the availability calendar.",
+    stepTwoTitle: "Add guest details",
+    stepTwoDescription:
+      "Enter the number of guests and the details needed to prepare your stay request.",
+    stepThreeTitle: "Review and confirm",
+    stepThreeDescription:
+      "Review the full stay summary, estimated total and guest information before confirming the request.",
+  },
+  ceb: {
+    stepOneTitle: "Pili-a ang dates",
+    stepOneDescription:
+      "Pili-a ang preferred house, check-in date ug check-out date gamit ang availability calendar.",
+    stepTwoTitle: "Ibutang ang guest details",
+    stepTwoDescription:
+      "Ibutang ang number of guests ug details nga kinahanglan para ma-prepare ang stay request.",
+    stepThreeTitle: "Review ug confirm",
+    stepThreeDescription:
+      "I-review ang full stay summary, estimated total ug guest information before i-confirm ang request.",
+  },
+  tl: {
+    stepOneTitle: "Piliin ang dates",
+    stepOneDescription:
+      "Piliin ang preferred house, check-in date at check-out date mula sa availability calendar.",
+    stepTwoTitle: "Ilagay ang guest details",
+    stepTwoDescription:
+      "Ilagay ang number of guests at details na kailangan para maihanda ang stay request.",
+    stepThreeTitle: "Review and confirm",
+    stepThreeDescription:
+      "I-review ang full stay summary, estimated total at guest information bago i-confirm ang request.",
+  },
+  ko: {
+    stepOneTitle: "날짜 선택",
+    stepOneDescription:
+      "가능 일정 캘린더에서 원하는 숙소, 체크인 날짜, 체크아웃 날짜를 선택하세요.",
+    stepTwoTitle: "게스트 정보 입력",
+    stepTwoDescription:
+      "숙박 요청을 준비하는 데 필요한 게스트 수와 정보를 입력하세요.",
+    stepThreeTitle: "검토 및 확인",
+    stepThreeDescription:
+      "숙박 요약, 예상 합계, 게스트 정보를 확인한 뒤 요청을 확정하세요.",
+  },
+  es: {
+    stepOneTitle: "Elige tus fechas",
+    stepOneDescription:
+      "Selecciona la casa, fecha de llegada y fecha de salida en el calendario de disponibilidad.",
+    stepTwoTitle: "Añade los datos del huésped",
+    stepTwoDescription:
+      "Indica el número de huéspedes y los datos necesarios para preparar tu solicitud de estancia.",
+    stepThreeTitle: "Revisa y confirma",
+    stepThreeDescription:
+      "Revisa el resumen de estancia, total estimado e información del huésped antes de confirmar la solicitud.",
+  },
+  fr: {
+    stepOneTitle: "Choisissez vos dates",
+    stepOneDescription:
+      "Sélectionnez la maison, la date d’arrivée et la date de départ dans le calendrier de disponibilité.",
+    stepTwoTitle: "Ajoutez les informations voyageurs",
+    stepTwoDescription:
+      "Indiquez le nombre de voyageurs et les informations nécessaires pour préparer votre demande de séjour.",
+    stepThreeTitle: "Vérifiez et confirmez",
+    stepThreeDescription:
+      "Vérifiez le résumé du séjour, le total estimé et les informations voyageurs avant de confirmer la demande.",
+  },
+  de: {
+    stepOneTitle: "Daten auswählen",
+    stepOneDescription:
+      "Wähle dein bevorzugtes Haus, Check-in und Check-out im Verfügbarkeitskalender.",
+    stepTwoTitle: "Gästedaten hinzufügen",
+    stepTwoDescription:
+      "Gib die Gästezahl und die Informationen ein, die zur Vorbereitung deiner Aufenthaltsanfrage benötigt werden.",
+    stepThreeTitle: "Prüfen und bestätigen",
+    stepThreeDescription:
+      "Prüfe Aufenthaltsübersicht, geschätzten Gesamtpreis und Gästedaten, bevor du die Anfrage bestätigst.",
+  },
+  pl: {
+    stepOneTitle: "Wybierz daty",
+    stepOneDescription:
+      "Wybierz preferowany dom, datę zameldowania i datę wymeldowania w kalendarzu dostępności.",
+    stepTwoTitle: "Dodaj dane gościa",
+    stepTwoDescription:
+      "Podaj liczbę gości oraz dane potrzebne do przygotowania zapytania o pobyt.",
+    stepThreeTitle: "Sprawdź i potwierdź",
+    stepThreeDescription:
+      "Sprawdź podsumowanie pobytu, szacowaną kwotę i dane gościa przed potwierdzeniem zapytania.",
+  },
 };
 
 export default async function BookingPage({ params }: BookingPageProps) {
@@ -20,22 +121,23 @@ export default async function BookingPage({ params }: BookingPageProps) {
 
   const dictionary = getDictionary(locale);
   const houses = getHouses();
+  const copy = bookingPageCopy[locale];
 
   const bookingSteps = [
     {
       number: "01",
-      title: dictionary.bookingPage.calendarTitle,
-      description: dictionary.bookingPage.calendarDescription,
+      title: copy.stepOneTitle,
+      description: copy.stepOneDescription,
     },
     {
       number: "02",
-      title: dictionary.bookingPage.selectedHouse,
-      description: dictionary.housesPage.description,
+      title: copy.stepTwoTitle,
+      description: copy.stepTwoDescription,
     },
     {
       number: "03",
-      title: dictionary.bookingPage.sendWhatsapp,
-      description: dictionary.bookingPage.inquiryDescription,
+      title: copy.stepThreeTitle,
+      description: copy.stepThreeDescription,
     },
   ];
 
@@ -66,45 +168,11 @@ export default async function BookingPage({ params }: BookingPageProps) {
           ))}
         </div>
 
-        <div className="booking-layout booking-layout-enhanced">
-          <AvailabilityCalendar
-            dictionary={dictionary}
-            houses={houses}
-            locale={locale}
-          />
-
-          <aside className="booking-aside booking-aside-enhanced">
-            <div>
-              <p className="eyebrow">{dictionary.common.availabilityGuide}</p>
-              <h2>{dictionary.bookingPage.inquiryTitle}</h2>
-              <p>{dictionary.bookingPage.inquiryDescription}</p>
-            </div>
-
-            <div className="booking-property-shortcuts">
-              {houses.map((house) => (
-                <a
-                  className="booking-property-card"
-                  href={house.whatsappUrl}
-                  key={house.id}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <span>{house.location[locale]}</span>
-                  <strong>{house.name}</strong>
-                  <small>
-                    {dictionary.common.from} {house.priceFrom}/
-                    {dictionary.common.night}
-                  </small>
-                </a>
-              ))}
-            </div>
-
-            <div className="booking-direct-note">
-              <span>WhatsApp</span>
-              <p>{dictionary.contactPage.whatsappDescription}</p>
-            </div>
-          </aside>
-        </div>
+        <AvailabilityCalendar
+          dictionary={dictionary}
+          houses={houses}
+          locale={locale}
+        />
       </div>
 
       <style>{`
@@ -215,83 +283,6 @@ export default async function BookingPage({ params }: BookingPageProps) {
         }
 
         .booking-flow-card p {
-          margin: 0;
-          color: var(--muted);
-          line-height: 1.65;
-        }
-
-        .booking-layout-enhanced {
-          position: relative;
-          z-index: 1;
-        }
-
-        .booking-aside-enhanced {
-          display: grid;
-          gap: 22px;
-        }
-
-        .booking-property-shortcuts {
-          display: grid;
-          gap: 12px;
-        }
-
-        .booking-property-card {
-          display: grid;
-          gap: 6px;
-          border: 1px solid var(--border);
-          border-radius: 22px;
-          background:
-            linear-gradient(135deg, var(--primary-soft), transparent),
-            var(--surface-strong);
-          padding: 18px;
-          transition:
-            transform 180ms ease,
-            border-color 180ms ease,
-            box-shadow 180ms ease;
-        }
-
-        .booking-property-card:hover {
-          transform: translateY(-2px);
-          border-color: color-mix(in srgb, var(--primary) 38%, var(--border));
-          box-shadow: var(--shadow-soft);
-        }
-
-        .booking-property-card span {
-          color: var(--primary);
-          font-size: 0.72rem;
-          font-weight: 950;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-        }
-
-        .booking-property-card strong {
-          font-size: 1.25rem;
-          letter-spacing: -0.04em;
-        }
-
-        .booking-property-card small {
-          color: var(--muted);
-          font-weight: 850;
-        }
-
-        .booking-direct-note {
-          border: 1px solid var(--border);
-          border-radius: 24px;
-          background: var(--background-soft);
-          padding: 20px;
-        }
-
-        .booking-direct-note span {
-          display: inline-flex;
-          margin-bottom: 8px;
-          color: var(--primary);
-          font-size: 0.78rem;
-          font-weight: 950;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-        }
-
-        .booking-direct-note p {
           margin: 0;
           color: var(--muted);
           line-height: 1.65;
